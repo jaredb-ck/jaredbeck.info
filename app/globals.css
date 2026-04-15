@@ -1,0 +1,45 @@
+/* Root globals — minimal reset only.
+   No design decisions. No colors. No typography.
+   Each version manages its own visual language entirely. */
+
+/* ─── Chrome height ──────────────────────────────────────────────
+   The beta banner (~32px) + version switcher (~56px) are position:fixed.
+   --chrome-height is the combined height and is kept as a reference for
+   components that still want to clear both bars.
+
+   2026-04-15: the version switcher is now transparent (no background),
+   so app content is intentionally allowed to extend behind it. Body only
+   pads down for the beta banner, not the switcher — the switcher's height
+   floats over the content, with its logo/label using mix-blend-mode to
+   stay legible. */
+:root {
+  --chrome-height: 88px;
+  --beta-banner-height: 32px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #191919;
+  /* Content sits below the beta banner only — the transparent version
+     switcher floats over the content above. */
+  padding-top: var(--beta-banner-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -1,0 +1,142 @@
+/* ─── Chrome veil ────────────────────────────────────────────────
+   Solid-color strip that sits behind the transparent version switcher so
+   scrolling homepage content (project rows) doesn't peek through the band
+   between the beta banner and the sticky filter bar. Matches the page bg
+   so the switcher's logo/label (mix-blend-mode: difference) still get a
+   predictable backdrop to invert against.
+
+   z-index is below the PDP panel (40) and well below the switcher (99).
+   PDP opens above the veil so it's invisible when a project is open. */
+
+.chromeVeil {
+  background: var(--bg);
+  height: 46px; /* beta-banner bottom (32) → filter-bar top (78) */
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 32px;
+  z-index: 30;
+}
+
+/* ─── Hero ───────────────────────────────────────────────────── */
+
+.hero {
+  align-items: flex-end;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 1fr auto;
+  margin-bottom: 0;
+  padding-bottom: 56px;
+}
+
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.heroEyebrow {
+  align-items: baseline;
+  display: flex;
+  gap: 24px;
+}
+
+.heroLabel {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.heroLocalTime {
+  color: rgba(255, 255, 255, 0.55);
+  flex-shrink: 0;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heroDisplay {
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  max-width: 40vw;
+}
+
+.heroMuted {
+  color: var(--muted);
+}
+
+.heroWord {
+  display: inline-block;
+  margin-right: 0.26em;
+}
+
+.heroLink {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: opacity 0.15s ease;
+}
+
+.heroLink:hover {
+  opacity: 0.6;
+}
+
+.heroLink .heroWord {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.25);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.heroRight {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 4px;
+}
+
+.heroMeta {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+}
+
+.heroMeta:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ─── Mobile (below tablet) ──────────────────────────────────── */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .heroDisplay {
+    max-width: 65vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-bottom: 40px;
+  }
+
+  .heroDisplay {
+    font-size: clamp(22px, 5.5vw, 28px);
+    max-width: 100%;
+  }
+
+  .heroRight {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}

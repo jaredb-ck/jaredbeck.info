@@ -1,0 +1,37 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  transition: color 0.12s ease;
+}
+
+.link:hover {
+  color: var(--fg);
+}
+
+.active {
+  color: var(--fg);
+}
+
+.badge {
+  color: var(--faint);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  transition: color 0.12s ease;
+}
+
+.badge:hover {
+  color: var(--fg);
+}

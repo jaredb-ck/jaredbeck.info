@@ -1,0 +1,96 @@
+.pageLabel {
+  border-bottom: 1px solid var(--rule-heavy);
+  border-top: 1px solid var(--rule-heavy);
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  margin-bottom: 56px;
+  padding: 7px 0;
+  text-transform: uppercase;
+}
+
+/* ─── Editorial statement blocks ─────────────────────────────── */
+
+.statement {
+  border-bottom: 1px solid var(--rule);
+  max-width: 680px;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+}
+
+.statementText {
+  color: var(--fg);
+  font-size: 14px;
+  line-height: 1.95;
+  opacity: 0.85;
+}
+
+/* ─── Lower two-column ───────────────────────────────────────── */
+
+.lower {
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: 64px;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 40px;
+}
+
+.lowerSection {}
+
+.lowerLabel {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Skills — two-column grid */
+.skillGrid {
+  display: grid;
+  gap: 8px 32px;
+  grid-template-columns: 1fr 1fr;
+  list-style: none;
+}
+
+.skill {
+  color: var(--fg);
+  font-size: 11px;
+  letter-spacing: 0.01em;
+  opacity: 0.85;
+}
+
+.skill::before {
+  color: var(--faint);
+  content: '— ';
+}
+
+/* Collaborators */
+.collaboratorList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.collaboratorRow {
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.collaboratorName {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.collaboratorRole {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}

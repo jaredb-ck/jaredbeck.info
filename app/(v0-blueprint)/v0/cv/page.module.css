@@ -1,0 +1,136 @@
+.pageLabel {
+  border-bottom: 1px solid var(--rule-heavy);
+  border-top: 1px solid var(--rule-heavy);
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  margin-bottom: 56px;
+  padding: 7px 0;
+  text-transform: uppercase;
+}
+
+/* ─── Sections ───────────────────────────────────────────────── */
+
+.section {
+  margin-bottom: 56px;
+}
+
+.sectionTitle {
+  border-bottom: 1px solid var(--rule-heavy);
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  margin-bottom: 0;
+  padding-bottom: 7px;
+  text-transform: uppercase;
+}
+
+/* ─── Education ──────────────────────────────────────────────── */
+
+.educationList {
+  list-style: none;
+}
+
+.educationRow {
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr 56px;
+  padding: 10px 0;
+}
+
+.eduInstitution {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.eduDegree {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.eduYear {
+  color: var(--faint);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+/* ─── Clients — receipt/ledger style ────────────────────────── */
+
+.clientList {
+  list-style: none;
+}
+
+.clientRow {
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 28px 1fr 1fr 56px;
+  padding: 10px 0;
+}
+
+.clientNum {
+  color: var(--faint);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+
+.clientName {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.clientProject {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.clientYear {
+  color: var(--faint);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+/* ─── Exhibitions ────────────────────────────────────────────── */
+
+.exhibitionList {
+  list-style: none;
+}
+
+.exhibitionRow {
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr auto 56px;
+  padding: 10px 0;
+}
+
+.exhibitionTitle {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.exhibitionVenue {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.exhibitionLocation {
+  color: var(--faint);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.exhibitionYear {
+  color: var(--faint);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-align: right;
+}

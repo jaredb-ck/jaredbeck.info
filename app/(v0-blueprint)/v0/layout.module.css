@@ -1,0 +1,43 @@
+/* v0 Blueprint — dark editorial layout.
+   Two colors: --bg (#191919) + --fg (white). Opacity variations only. */
+
+.root {
+  --bg: #191919;
+  --fg: #ffffff;
+  --rule: rgba(255, 255, 255, 0.1);
+  --rule-heavy: rgba(255, 255, 255, 0.25);
+  --muted: rgba(255, 255, 255, 0.3);
+  --faint: rgba(255, 255, 255, 0.15);
+  --placeholder: rgba(255, 255, 255, 0.06);
+  --hover-bg: rgba(255, 255, 255, 0.04);
+
+  align-items: flex-start;
+  background: var(--bg);
+  color: var(--fg);
+  display: flex;
+  font-family: var(--font-mono), 'Courier New', monospace;
+  text-transform: uppercase;
+}
+
+/* DM Sans for all headings — overrides root text-transform */
+.root h1,
+.root h2,
+.root h3 {
+  font-family: var(--font-sans), sans-serif;
+  text-transform: none;
+}
+
+/* ─── Main content ────────────────────────────────────────────── */
+
+.contentWrap {
+  flex: 1;
+  min-width: 0;
+  padding: 80px 40px 128px 40px;
+}
+
+@media (max-width: 767px) {
+  .contentWrap {
+    padding: 64px 20px 80px 20px;
+  }
+}
+

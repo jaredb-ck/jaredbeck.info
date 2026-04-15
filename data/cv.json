@@ -1,0 +1,82 @@
+{
+  "education": [
+    {
+      "institution": "Pacific Northwest College of Art",
+      "degree": "BFA, Graphic Design",
+      "year": 2013
+    },
+    {
+      "institution": "Werkplaats Typografie",
+      "degree": "Postgraduate Study, Typography",
+      "year": 2015
+    }
+  ],
+  "clients": [
+    {
+      "name": "Meridian Coffee Co.",
+      "project": "Brand Identity System",
+      "year": 2024
+    },
+    {
+      "name": "Atlas Journal",
+      "project": "Editorial Redesign",
+      "year": 2024
+    },
+    {
+      "name": "Fieldwork Campus",
+      "project": "Environmental Wayfinding",
+      "year": 2023
+    },
+    {
+      "name": "Cascadia Land Trust",
+      "project": "Annual Report & Collateral",
+      "year": 2023
+    },
+    {
+      "name": "Portland Art Museum",
+      "project": "Exhibition Graphics",
+      "year": 2022
+    },
+    {
+      "name": "Tidal Press",
+      "project": "Book Series Design",
+      "year": 2022
+    },
+    {
+      "name": "Groundwork Coffee",
+      "project": "Packaging Refresh",
+      "year": 2021
+    },
+    {
+      "name": "Summit Collective",
+      "project": "Visual Identity",
+      "year": 2021
+    }
+  ],
+  "exhibitions": [
+    {
+      "title": "Form Follows Friction",
+      "venue": "Nationale Gallery",
+      "year": 2024,
+      "location": "Norfolk, VA"
+    },
+    {
+      "title": "Type Directors Club — Certificate of Excellence",
+      "venue": "TDC70 Exhibition",
+      "year": 2024,
+      "location": "New York, NY"
+    },
+    {
+      "title": "Print Magazine Regional Design Annual",
+      "venue": "Print Magazine",
+      "year": 2023,
+      "location": "National"
+    },
+    {
+      "title": "Designed in Oregon",
+      "venue": "Oregon Design Archive",
+      "year": 2022,
+      "location": "Norfolk, VA"
+    }
+  ]
+}

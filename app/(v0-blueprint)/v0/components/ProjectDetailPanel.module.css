@@ -1,0 +1,346 @@
+/* ─── Panel overlay ──────────────────────────────────────────── */
+
+.panel {
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  overflow: hidden;
+  /* No top/side padding — the horizontal scroll (titleBlock + images) should
+     go edge-to-edge so images fill the full viewport height below the chrome
+     and the title block aligns flush with the viewport's left edge. */
+  padding: 0;
+  position: fixed;
+  right: 0;
+  /* Sit directly under the beta banner. The version switcher (32–88px) is
+     transparent, so PDP content fills that band behind it. */
+  top: var(--beta-banner-height);
+  z-index: 40;
+}
+
+.panelBg {
+  background: var(--bg);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+
+.header {
+  /* Floats over the scroll in the top-left so the scroll takes the full panel
+     height. Only contains the Home button — pagination moved to
+     .projectNavFixed at bottom-right. Top offset = 56px so the Home button
+     lands just below the 56px version switcher band (panel itself starts 32px
+     below the viewport top, so 32 + 56 = 88 viewport = under the switcher). */
+  left: 40px;
+  position: absolute;
+  top: 72px;
+  z-index: 5;
+}
+
+.back {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 100px;
+  color: #191919;
+  cursor: pointer;
+  display: flex;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  gap: 6px;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  transition: opacity 0.15s ease;
+}
+
+.back:hover {
+  opacity: 0.75;
+}
+
+.projectNav {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 100px;
+  color: #191919;
+  display: flex;
+  gap: 2px;
+  padding: 4px 6px;
+}
+
+/* Floating pagination pinned to the bottom-right corner of the panel. */
+.projectNavFixed {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 100px;
+  bottom: 32px;
+  color: #191919;
+  display: flex;
+  gap: 2px;
+  padding: 4px 6px;
+  position: absolute;
+  right: 40px;
+  z-index: 5;
+}
+
+.projectNum {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 0 4px;
+}
+
+.navArrow {
+  align-items: center;
+  background: none;
+  border: none;
+  color: #191919;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 2px 4px;
+  transition: opacity 0.15s ease;
+}
+
+.navArrow:hover:not(:disabled) {
+  opacity: 0.5;
+}
+
+.navArrow:disabled {
+  cursor: default;
+  opacity: 0.25;
+}
+
+/* ─── Title block ────────────────────────────────────────────── */
+
+.titleBlock {
+  /* The first "page" of the horizontal scroll. Width is slightly less than
+     the viewport (capped on wide monitors) so the first image of the scroll
+     row peeks in from the right edge as a visual cue that more content is
+     available. Text flush-left via left padding; top padding clears the
+     floating Home button. */
+  align-content: start;
+  align-items: flex-start;
+  align-self: stretch;
+  column-gap: 24px;
+  display: grid;
+  flex-shrink: 0;
+  grid-template-columns: 1fr auto;
+  /* Fixed peek amount regardless of viewport — always leaves 120px of the
+     first image visible on the right edge of the title page. Top padding
+     clears both the floating Home button (panel-relative 72px) and the
+     version switcher band above it. */
+  padding: 160px 80px 80px 40px;
+  row-gap: 48px;
+  width: calc(100vw - 120px);
+}
+
+.titleLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+  max-width: 52ch;
+  text-transform: none;
+}
+
+/* ─── Meta grid ──────────────────────────────────────────────── */
+
+.meta {
+  column-gap: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  row-gap: 14px;
+}
+
+.metaCol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Explicit placement: Year+Role in col 1, Medium+Client in col 2, Credits in col 3 */
+.metaColYear    { grid-column: 1; grid-row: 1; }
+.metaColMedium  { grid-column: 2; grid-row: 1; }
+.metaColRole    { grid-column: 1; grid-row: 2; }
+.metaColClient  { grid-column: 2; grid-row: 2; }
+.metaColCredits { grid-column: 3; grid-row: 1 / span 2; }
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metaLabel {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  margin-bottom: 2px;
+}
+
+.metaValue {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+.metaCredit {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.moreBtn {
+  display: none;
+}
+
+/* ─── Image scroll ───────────────────────────────────────────── */
+
+.imageScroll {
+  /* Sole content track of the panel. Absolutely filled so height is
+     determined at layout time — children with height:100% then resolve,
+     aspect-ratio computes widths, and scrollWidth > clientWidth on first
+     paint (no JS-driven race). First child is the titleBlock (100vw);
+     subsequent children are image/video wrappers at the derived widths. */
+  align-items: stretch;
+  bottom: 0;
+  display: flex;
+  gap: 1px;
+  left: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: absolute;
+  right: 0;
+  scrollbar-width: none;
+  top: 0;
+}
+
+.imageScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollImage {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.04) 0px,
+    rgba(255, 255, 255, 0.04) 1px,
+    transparent 1px,
+    transparent 10px
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  height: 100%;
+  width: auto;
+}
+
+/* ─── Scroll indicator ───────────────────────────────────────── */
+
+.scrollIndicator {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 1px;
+  bottom: 20px;
+  height: 2px;
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 120px;
+  z-index: 1;
+}
+
+.scrollThumb {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 1px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─── Tablet + small desktop ─────────────────────────────────── */
+
+@media (max-width: 1100px) {
+  .titleBlock {
+    grid-template-columns: 1fr;
+    padding: 100px 40px 60px 40px;
+    row-gap: 32px;
+  }
+
+  .meta {
+    column-gap: 32px;
+  }
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .titleBlock {
+    padding: 80px 24px 48px 20px;
+  }
+
+  .description {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    overflow: hidden;
+  }
+
+  .moreBtn {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    display: block;
+    font-family: var(--font-mono), monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 0;
+    text-transform: uppercase;
+    transition: color 0.15s ease;
+  }
+
+  .moreBtn:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .metaColCredits {
+    flex-basis: 100%;
+  }
+
+  .metaColYear,
+  .metaColMedium,
+  .metaColRole,
+  .metaColClient,
+  .metaColCredits {
+    grid-column: unset;
+    grid-row: unset;
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "bio": "I'm a graphic designer based in Norfolk, Virginia, working across brand identity, editorial, and environmental design. My practice is rooted in the belief that good design earns its complexity — that every formal choice should carry meaning, and that the best systems are ones you don't notice until they're missing. I've worked with independent businesses, cultural institutions, and publishing clients for over a decade. Before that, I studied at the Pacific Northwest College of Art and spent two years at a mid-size agency in San Francisco learning what not to do.",
+  "philosophy": "Design is a form of argument. Every layout, every typeface choice, every color decision is a claim about what matters and why. I'm most interested in the work that sits at the intersection of rigor and warmth — systems that are precise without being cold, expressive without being arbitrary. I collaborate with writers, architects, photographers, and builders. The best projects feel like joint ventures where nobody remembers who had which idea.",
+  "skills": [
+    "Brand identity",
+    "Art direction",
+    "Editorial design",
+    "Environmental / wayfinding",
+    "Typography",
+    "Print production",
+    "Motion graphics",
+    "Design systems"
+  ],
+  "collaborators": [
+    {
+      "name": "Nadia Voss",
+      "role": "Copywriter",
+      "url": ""
+    },
+    {
+      "name": "Tomás Arriaga",
+      "role": "Photographer",
+      "url": ""
+    },
+    {
+      "name": "Lena Park",
+      "role": "Web Developer",
+      "url": ""
+    },
+    {
+      "name": "Derrick Monroe",
+      "role": "Fabricator / Signage",
+      "url": ""
+    }
+  ]
+}

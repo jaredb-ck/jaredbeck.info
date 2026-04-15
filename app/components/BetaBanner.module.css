@@ -1,0 +1,80 @@
+/* LOCKED FILE — never modify except for explicit user instruction.
+   Styled neutrally so it never clashes with any version theme.
+   Dark bar ensures visibility against any background. */
+
+.banner {
+  align-items: center;
+  background: #f9b700;
+  display: flex;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
+  user-select: none;
+  z-index: 100;
+}
+
+.segment {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 10px;
+  padding: 8px 32px;
+  white-space: nowrap;
+}
+
+.text {
+  color: #000000;
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Ticker segment: text + one separator icon, tighter spacing */
+.tickerSegment {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 20px;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+
+/* Ticker by default — static only when viewport is wide enough to show all text */
+.static {
+  display: none;
+  align-items: center;
+}
+
+.ticker {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.tickerTrack {
+  display: flex;
+  animation: ticker 24s linear infinite;
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (min-width: 1600px) {
+  .banner {
+    justify-content: center;
+  }
+
+  .static {
+    display: flex;
+  }
+
+  .ticker {
+    display: none;
+  }
+}

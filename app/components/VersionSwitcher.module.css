@@ -1,0 +1,89 @@
+/* LOCKED FILE — never modify except for explicit user instruction.
+   position:fixed and z-index:99 ensure this bar is always visible above
+   every version UI. Version UIs must keep their own z-indices below 90.
+
+   2026-04-15: user removed the container background so app content can show
+   through behind the switcher. Logo and the "Version:" label carry
+   mix-blend-mode: difference so they stay legible against any content. */
+
+.switcher {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  left: 0;
+  padding: 12px 40px;
+  position: fixed;
+  right: 0;
+  top: 32px;
+  z-index: 99;
+}
+
+@media (max-width: 767px) {
+  .switcher {
+    padding: 12px 20px;
+  }
+}
+
+.logoLink {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.logo {
+  display: block;
+  height: 32px;
+  /* Invert against whatever content is behind the transparent switcher. */
+  mix-blend-mode: difference;
+  width: auto;
+}
+
+.group {
+  align-items: center;
+  display: flex;
+  gap: 13px;
+}
+
+.label {
+  /* White text + mix-blend-mode: difference inverts against any bg color,
+     so "Version:" stays readable regardless of what's behind the switcher. */
+  color: #ffffff;
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  mix-blend-mode: difference;
+  text-transform: uppercase;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.pill {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  color: rgba(255, 255, 255, 0.5);
+  display: inline-flex;
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-size: 12px;
+  gap: 4px;
+  letter-spacing: 0.08em;
+  padding: 3px 8px 3px 12px;
+  text-transform: uppercase;
+  transition: background 0.12s ease, color 0.12s ease;
+  white-space: nowrap;
+}
+
+.pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pillActive {
+  color: #ffffff;
+}
+
+.icon {
+  flex-shrink: 0;
+  opacity: 0.6;
+}

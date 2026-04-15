@@ -1,0 +1,229 @@
+[
+  {
+    "version": "v0",
+    "name": "Blueprint",
+    "date": "2026-04-13",
+    "aesthetic": "Technical drafting, grid paper, blueprint feel. Raw and legible — this is the baseline everything else departs from.",
+    "constraint": "Monospace type only. Two colors maximum. Single scrolling column. No decorative elements.",
+    "promptSummary": "Build the first version of the Living Portfolio as a fully isolated Next.js route group. Intentionally raw and simple — a technical drawing, not a finished design. Must render all content schema fields correctly.",
+    "screenshot": "",
+    "patches": [
+      {
+        "date": "2026-04-13",
+        "note": "Redesigned visual language based on inspiration references. Shifted from dark blueprint to light document/archive aesthetic. Cream background (#f4f2ed), near-black ink, typographic hero with discipline listing, numbered project list with image placeholders, receipt-style CV, document-table About layout."
+      },
+      {
+        "date": "2026-04-13",
+        "note": "Layout redesigned — editorial catalogue direction, horizontal row grid replacing single column."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Updated all location references from Portland, OR to Norfolk, VA across projects, about, and cv data."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Added individual project detail pages at /v0/projects/[id] with full case study layout."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Populated 30 placeholder projects across years 2019–2024 with realistic titles, roles, tags, and case studies."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Typeface system updated — DM Mono (all caps, monospace) as root font, DM Sans (title case) for all headings."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Implemented full dark theme from Figma — #191919 background, white foreground, opacity-based rule and muted scales."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Year section dividers added to work page and homepage, grouping projects by year with horizontal rule."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Sidebar redesigned — full viewport height, sticky, logo fixed to bottom-left corner. Real J-mark SVG logo replaces placeholder."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Beta banner updated with warning triangle SVGs either side. Version switcher restyled to match Figma spec with pill links, dropdown arrow, and external link arrow SVGs."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Both top bars (beta banner + version switcher) made sticky with correct stacking offsets. Nav removed from sidebar. Divider stroke between sidebar and content removed."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Year section headers made sticky and stacking — each year header sticks below the previous, building a visible stack as the user scrolls. Headers are anchor links that smooth-scroll to their section."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Project rows hover interaction — date column slides right 10px on hover, agency column slides left 10px, both with 300ms ease transition."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Logo moved from sidebar into version switcher bar. Sidebar removed. Content area expanded to full width."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Favicon updated to J-mark SVG via Next.js app/icon.svg convention."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Project row columns restructured — five equal columns: date (120px fixed), title, role, type, agency. Role and type values stack vertically when comma-separated. Agency right-aligned."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Agency field added to all 31 projects, alternating grow/freelance as placeholder values."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Type filter added above project list — single-select pill group with All active by default. Filters projects by medium. Shared between homepage and /v0/projects via ProjectList client component."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Filter pill styling — fully rounded corners (border-radius: 100px), active state inverts to white fill with #191919 text."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Hero copy updated — replaced discipline list with bio copy. Grow links to thisisgrow.com, Speedway Press links to speedway.press."
+      },
+      {
+        "date": "2026-04-14",
+        "note": "Hero text animated with GSAP — line-by-line reveal, words grouped by rendered vertical position, each line fades and slides up 14px with 140ms stagger between lines."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Project detail panel open animation — replaced broken FLIP morph attempt with GSAP staggered reveal: panel lifts from y:20, background fades in, then header → title block → image strip stagger in top-to-bottom."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Logo click SPA navigation — J logo in the version switcher always returns to the current version's root even when a project detail is open. Intercepts link click, pushes version root to history, dispatches synthetic popstate so the SPA handles its own close animation."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Chrome bars locked as position:fixed — beta banner z-index:100, version switcher z-index:99. Added --chrome-height CSS variable (88px) and body padding-top to compensate for bars leaving document flow. Version UI elements must stay below z-index 90. CLAUDE.md updated with z-index convention and expanded locked files list."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Change-log button text color updated to match version pill active color (#ffffff)."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Fixed close animation blink — ScrollReset was calling window.scrollTo(0,0) every time Next.js updated usePathname(), which fired when history.pushState('/v0') caused Next.js to recognise a valid route change. Fixed by removing ScrollReset from the v0 layout (not needed for a SPA) and moving history.replaceState to the start of closeProject so the URL change is hidden behind the still-visible panel."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Project preview image rows hidden by default — image row collapses to height:0 with no padding. Hovering a project row expands it to 155px with a 280ms ease transition on both height and padding-bottom."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Year section header font size increased from 12px to 14px."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Scroll anywhere on project detail page — wheel listener moved from window to the panel element with passive:false. Chrome's threaded scroll optimiser requires a non-passive listener on the nearest overflow container to guarantee event dispatch to JS, regardless of cursor position within the panel."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Scroll-in entrance animation per project row — GSAP ScrollTrigger animates each row from opacity:0 / y:14 as it enters the viewport (start: top 92%, once:true). Animation runs once on mount only; filter changes are instant to avoid ScrollTrigger.refresh() triggering a scroll-to-top."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Smooth scroll added via Lenis (lerp:0.08) — driven off GSAP's ticker so ScrollTrigger stays in sync. Lenis instance stored in a module-level singleton (smoothScroll.ts) so V0App can stop/start it while the project detail panel is open."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Project row hover animation delay — 0.12s delay added to imageRow height and padding-bottom transitions so the preview images only expand if the cursor lingers."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Hero right column replaced with contact links — email, phone, and Instagram replacing previous stats. Links styled with heroMeta class, hover opacity transition."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Spacing added between hero and project list — filterBar given margin-top:80px to create clear visual separation from the hero section."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Sticky filter bar — filter pills now stick below the chrome as you scroll through the project list. Extracted from .pageHeader into a sibling element so its sticky parent is the tall outer container. Year headers re-offset to stack below the filter bar."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Filter bar padding retained in sticky state — padding:24px 0 12px gives visual breathing room above the pills when stuck to the top. box-shadow:0 8px 0 var(--bg) seals any sub-pixel gap between the filter bar bottom and the year header background below."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Mobile sticky filter fix — ResizeObserver watches the filter bar element and updates filterBarHeight state whenever pills wrap to a new line. Year header top and scrollMarginTop values are now derived from the measured height rather than a hardcoded pixel constant."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Hero copy font weight reduced from 400 to 300 — DM Sans 300 weight added to the font load in the v0 layout."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Smooth horizontal scroll on project detail page — wheel handler replaced with GSAP-tweened scrollLeft (power3.out, duration:1.1). Delta accumulates into a clamped target; each wheel event overwrites the in-progress tween for a natural momentum feel."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Project detail header redesigned — back button replaced with white pill matching active filter style, home icon SVG replacing the arrow. Project counter replaced with white pill containing left/right chevron buttons for paging through projects and a centred XX/XX counter."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Prev/next project navigation — chevron buttons in the project counter pill page through projects in sorted order. URL updates via history.replaceState. history.replaceState moved out of the setActive functional updater to avoid triggering a Router setState during render."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Project page transition animation — clicking prev/next animates the title block and image strip out (slide + fade) before swapping content, then animates the new content in. Content is driven by a displayProject state that lags behind the incoming prop so GSAP has stable DOM targets across the swap. hasMounted pattern replaced with a project.id equality check for React 18 Strict Mode safety."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Directional project transitions — right arrow: current content exits right, new content enters from the left. Left arrow: current content exits left, new content enters from the right. Direction captured in a ref at the start of the exit animation so the async onComplete can correctly position the entering content."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Hard refresh project URL fix — /v0/projects/[id] previously served a stale standalone server-rendered page. Now renders V0App directly; getInitialActive reads the pathname on mount and opens the correct project panel with current styles."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Fixed intermittent blank content on project page switcher — replaced gsap.killTweensOf() with timeline.kill() on exit and enter timeline refs. killTweensOf() could fire a stale onComplete callback which corrupted the displayProject state; .kill() suppresses onComplete entirely."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Mobile hero headline size — clamp(22px, 5.5vw, 28px)."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Filter scroll clamping — page can no longer scroll past the filter bar's sticky threshold when a filter set has few items. stickThreshold captured once at mount. Delta approach computes exact minHeight adjustment accounting for ancestor padding-bottom (128px on .contentWrap). minHeight locked before re-render to prevent jump."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "All filter scroll-to-top fix — clearFilters and toggle-off paths no longer call lenis.resize(). Lenis has its own ResizeObserver; forced resize() on list shrink was causing Lenis to reset scroll position to the top."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "React hydration fix — getInitialActive moved from useState initialiser into useEffect. Running it during hydration returned a non-null project on the client while the server returned null, causing a tree mismatch."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "React hydration fix — formatDate now passes timeZone:'UTC' to toLocaleDateString and uses getUTCFullYear(). Without this, ISO date-only strings (e.g. 2023-12-01) parsed as UTC midnight produced different month names on server (UTC) vs client (western timezones)."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Horizontal scroll indicator added to project detail panel — thin 2px track (120px wide) centered at the bottom of the panel with a proportional thumb. Only visible when content overflows. Thumb width scales with scrollWidth/clientWidth ratio; position tracks scrollLeft 1:1."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Project navigation animation direction reversed — right arrow: new content enters from the right. Left arrow: new content enters from the left."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Scroll indicator updates immediately on project switch — added useEffect on displayProject to recalculate scrollRatio and scrollProgress after the new image list renders, so thumb size is correct before the user scrolls."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Scroll indicator thumb animates on resize — width transitions with a 0.35s cubic-bezier ease when the project changes. Position (left) has no transition so it tracks scroll 1:1 without lag."
+      }
+    ]
+  }
+]
