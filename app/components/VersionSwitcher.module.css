@@ -11,6 +11,10 @@
   display: flex;
   gap: 6px;
   left: 0;
+  /* mix-blend-mode on the fixed-position container itself — the entire
+     switcher (logo, label, pills) composites against the page content
+     behind it using the difference operator. */
+  mix-blend-mode: difference;
   padding: 12px 40px;
   position: fixed;
   right: 0;
@@ -34,8 +38,6 @@
 .logo {
   display: block;
   height: 32px;
-  /* Invert against whatever content is behind the transparent switcher. */
-  mix-blend-mode: difference;
   width: auto;
 }
 
@@ -46,13 +48,10 @@
 }
 
 .label {
-  /* White text + mix-blend-mode: difference inverts against any bg color,
-     so "Version:" stays readable regardless of what's behind the switcher. */
   color: #ffffff;
   font-family: 'DM Mono', ui-monospace, monospace;
   font-size: 12px;
   letter-spacing: 0.08em;
-  mix-blend-mode: difference;
   text-transform: uppercase;
   user-select: none;
   white-space: nowrap;

@@ -44,6 +44,7 @@ export interface Project {
   tags: string[];
   medium: string;
   client: string; // the entity the work was done for
+  url?: string; // live project URL, rendered as a link on the PDP
   description: string;
   role: string;
   credits: Credit[]; // collaborators and contributors on this project
