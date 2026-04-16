@@ -104,5 +104,263 @@
     },
     "client": "Adidas",
     "credits": []
+  },
+  {
+    "id": "ping",
+    "title": "ping.com",
+    "dateAdded": "2026-04-15",
+    "year": 2023,
+    "tags": [
+      "ui/ux",
+      "digital",
+      "platform",
+      "web"
+    ],
+    "medium": "platform, ui/ux, digital",
+    "description": "Complete website design for PING, the premium golf equipment manufacturer. A product-first commerce platform structured around the Clubs, Accessories, and Juniors categories, with detailed PDPs surfacing technical specifications, shaft and grip configuration, and customer reviews. Editorial hero moments feature PING's tour professional roster. Fully responsive across desktop and mobile. Live at https://ping.com/en-us.",
+    "role": "Art Director, Designer, UI/UX",
+    "images": [
+      {
+        "src": "hero.jpg",
+        "w": 3840,
+        "h": 2160
+      },
+      {
+        "src": "home-desktop.png",
+        "w": 1440,
+        "h": 6852
+      },
+      {
+        "src": "nav.png",
+        "w": 1440,
+        "h": 900
+      },
+      {
+        "src": "clubs.png",
+        "w": 1440,
+        "h": 852
+      },
+      {
+        "src": "clubs-alt.png",
+        "w": 1440,
+        "h": 612
+      },
+      {
+        "src": "club-category-desktop.png",
+        "w": 1440,
+        "h": 5463
+      },
+      {
+        "src": "carousel-club.jpg",
+        "w": 2880,
+        "h": 1620
+      },
+      {
+        "src": "pdp-desktop.png",
+        "w": 1440,
+        "h": 5826
+      },
+      {
+        "src": "accessories.png",
+        "w": 1440,
+        "h": 852
+      },
+      {
+        "src": "accessory-pdp.png",
+        "w": 1440,
+        "h": 898
+      },
+      {
+        "src": "juniors.png",
+        "w": 1440,
+        "h": 852
+      },
+      {
+        "src": "mobile-screens.png",
+        "w": 1928,
+        "h": 1088
+      }
+    ],
+    "videos": [
+      {
+        "src": "homepage.mp4",
+        "w": 1440,
+        "h": 1034
+      },
+      {
+        "src": "prototype.mp4",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "g430-loop.mp4",
+        "w": 1294,
+        "h": 2302
+      }
+    ],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "PING",
+    "credits": [
+      {
+        "name": "Marcus White"
+      },
+      {
+        "name": "Joe Branton"
+      }
+    ]
+  },
+  {
+    "id": "rockhall",
+    "title": "rockhall.com",
+    "dateAdded": "2026-04-15",
+    "year": 2025,
+    "tags": [
+      "ui/ux",
+      "digital",
+      "platform",
+      "web",
+      "editorial"
+    ],
+    "medium": "platform, ui/ux, digital",
+    "description": "Full website redesign for the Rock & Roll Hall of Fame — the inductees Hall-of-Fame universe, the Cleveland museum's visitor experience, and the editorial content program. The system centers on the 2025 induction class and the Watch-The-Induction livestream, with sub-systems for A–Z and Class-of inductee browsing, long-form story pages, and an RRTV motion identity that threads video reels across the site. Bold yellow-on-black display typography pairs with archival rock photography; the museum sub-brand carries a distinct blue accent system. Live at https://rockhall.com/.",
+    "role": "Art Director, Designer",
+    "images": [
+      {
+        "src": "hero.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "primary.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "home.png",
+        "w": 1440,
+        "h": 12202
+      },
+      {
+        "src": "editorial-stories.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "museum-desktop.png",
+        "w": 1440,
+        "h": 15186
+      },
+      {
+        "src": "explore-mobile.png",
+        "w": 3856,
+        "h": 2176
+      },
+      {
+        "src": "inductee-mobile.png",
+        "w": 1928,
+        "h": 1088
+      },
+      {
+        "src": "museum-mobile.png",
+        "w": 1928,
+        "h": 1088
+      },
+      {
+        "src": "recap-still.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "sonic-connections.jpg",
+        "w": 1920,
+        "h": 1080
+      }
+    ],
+    "videos": [
+      {
+        "src": "homepage.mp4",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "rrtv.mp4",
+        "w": 2732,
+        "h": 1600
+      },
+      {
+        "src": "rrtv-icon.mp4",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "ig-reel.mp4",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "sonic.mp4",
+        "w": 3000,
+        "h": 1938
+      },
+      {
+        "src": "recap.mp4",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "posters.mp4",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "two-up.mp4",
+        "w": 902,
+        "h": 792
+      },
+      {
+        "src": "class-list.mp4",
+        "w": 3600,
+        "h": 2160
+      },
+      {
+        "src": "sequence.mp4",
+        "w": 1440,
+        "h": 900
+      },
+      {
+        "src": "anim-a.mp4",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "anim-b.mp4",
+        "w": 1080,
+        "h": 1350
+      }
+    ],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Rock & Roll Hall of Fame",
+    "credits": [
+      {
+        "name": "Molly Douglas"
+      },
+      {
+        "name": "Aidan Molloy"
+      },
+      {
+        "name": "Matthew Kuntz"
+      },
+      {
+        "name": "Jax Jackson"
+      }
+    ]
   }
 ]
