@@ -158,14 +158,6 @@
 }
 
 .previewImage {
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.04) 0px,
-    rgba(255, 255, 255, 0.04) 1px,
-    transparent 1px,
-    transparent 10px
-  );
-  border: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
 }
 

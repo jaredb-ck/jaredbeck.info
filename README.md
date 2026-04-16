@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Living Portfolio
 
-## Getting Started
+A graphic-design portfolio site where **the UI is in permanent beta** — rebuilt
+iteratively with AI — while the content stays stable across every version.
+Each version is a fully isolated Next.js route group with its own layout,
+components, and animation language. The changelog of versions is itself a
+portfolio piece.
 
-First, run the development server:
+Full architectural rules, locked files, and ground rules live in
+[`CLAUDE.md`](./CLAUDE.md). Read that first.
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site redirects to the latest version (currently `v0` — Blueprint).
+Other routes: `/v0/projects/[id]`, `/v0/about`, `/v0/cv`, `/changelog`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Adding a new project
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Never edit `data/projects.json` by hand with raw assets. Use the inbox flow:
 
-## Learn More
+1. Drop a folder into `/inbox/`:
+   ```
+   /inbox/
+     /project-name/
+       image1.jpg
+       image2.jpg
+       campaign-cut.mp4
+       notes.txt   ← title, year, role, client, brief (plain text, no strict format)
+   ```
+2. Run the dimension extractor to get ready-to-paste `images` / `videos` arrays:
+   ```bash
+   node scripts/ingest-dimensions.mjs "inbox/project-name"
+   ```
+3. Tell Claude **"Process the inbox"** — it'll read the folder, analyse images
+   visually, move processed assets to `/public/images/[id]/` (and videos to
+   `/public/videos/[id]/`), append a full schema-valid entry to
+   `data/projects.json`, and flag anything uncertain as `[NEEDS REVIEW]`.
+4. Clear `/inbox/` when done.
 
-To learn more about Next.js, take a look at the following resources:
+Source assets are **never cropped or resized** — every image/video carries its
+intrinsic `{ w, h }` in the schema, and every UI version renders at the
+native aspect ratio. See [`prompts/process-inbox.md`](./prompts/process-inbox.md).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Next.js** (App Router, TypeScript, Turbopack)
+- **GSAP** + `@gsap/react` for motion, Lenis for smooth scroll
+- **CSS Modules** scoped per version, no Tailwind
+- **Local JSON** content layer (`/data/*.json`), shared TS interfaces in `/types/index.ts`
 
-## Deploy on Vercel
+## Locked files
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+A set of files is permanent and never modified during version updates — the
+root layout, beta banner, version switcher, changelog page and styles, all
+shared types, and every past version route group. See `## Locked Files` in
+`CLAUDE.md`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+Vercel, zero-config. Video assets larger than ~100 MB need an external host
+(Vercel Blob, Cloudflare R2, Mux, or an unlisted Vimeo/YouTube) — Vercel's
+static asset budget caps around that size and GitHub rejects single files
+over 100 MB outright.

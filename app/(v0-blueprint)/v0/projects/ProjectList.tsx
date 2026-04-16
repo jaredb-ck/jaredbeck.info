@@ -6,7 +6,6 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { Project, ImageAsset } from '@/types'
-import { PREVIEW_SIZES, previewCount, hasRealImages } from '../lib/preview'
 import { getLenisInstance } from '../lib/smoothScroll'
 import styles from './page.module.css'
 
@@ -21,31 +20,22 @@ const ROW_IMAGE_WIDTH = 150
 const ROW_IMAGE_MAX_HEIGHT = 200
 // Padding-bottom inside .projectRow:hover .imageRow — kept in sync with CSS.
 const ROW_PADDING_BOTTOM = 24
-
-// Display dimensions for the i-th preview slot. Real assets use ROW_IMAGE_WIDTH
-// at their natural aspect, height-capped at ROW_IMAGE_MAX_HEIGHT (with width
-// reduced proportionally to keep aspect intact). Placeholder slots fall back
-// to the decorative PREVIEW_SIZES cycle.
-function slotDims(i: number, asset: ImageAsset | null): { width: number; height: number } {
-  if (asset && asset.w > 0 && asset.h > 0) {
-    const naturalHeight = ROW_IMAGE_WIDTH * (asset.h / asset.w)
-    if (naturalHeight <= ROW_IMAGE_MAX_HEIGHT) {
-      return { width: ROW_IMAGE_WIDTH, height: Math.round(naturalHeight) }
-    }
-    // Too tall: derive from the cap so the image gets narrower instead of cropped.
-    return {
-      width: Math.round(ROW_IMAGE_MAX_HEIGHT * (asset.w / asset.h)),
-      height: ROW_IMAGE_MAX_HEIGHT,
-    }
-  }
-  const ps = PREVIEW_SIZES[i % PREVIEW_SIZES.length]
-  // Decorative fallback — derive height from declared ratio for the row-fit calc.
-  const [rw, rh] = ps.ratio.split('/').map(s => Number(s.trim()))
-  return { width: ps.width, height: Math.round(ps.width * (rh / rw)) }
-}
-// Fallback row height when nothing in the row tells us otherwise (placeholder
-// projects with no real assets). Matches the original .imageRow hover height.
+// Fallback hover row height for a project that has no images (empty state).
 const ROW_DEFAULT_HEIGHT = 155
+
+// Rendered dimensions for an image in the preview row: uniform width, height
+// derived from the asset's natural aspect ratio, capped at the row max so
+// portrait shots get narrower instead of clipped.
+function slotDims(asset: ImageAsset): { width: number; height: number } {
+  const naturalHeight = ROW_IMAGE_WIDTH * (asset.h / asset.w)
+  if (naturalHeight <= ROW_IMAGE_MAX_HEIGHT) {
+    return { width: ROW_IMAGE_WIDTH, height: Math.round(naturalHeight) }
+  }
+  return {
+    width: Math.round(ROW_IMAGE_MAX_HEIGHT * (asset.w / asset.h)),
+    height: ROW_IMAGE_MAX_HEIGHT,
+  }
+}
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -63,21 +53,15 @@ interface Props {
   onProjectClick: (project: Project) => void
 }
 
-// Convenience wrapper used by fitSlots and the row render.
-function slotWidth(i: number, asset: ImageAsset | null): number {
-  return slotDims(i, asset).width
-}
-
 // Maximum preview slots that fit edge-to-edge in `width` pixels with a 6px gap.
-// `assets` is the project's image list (or null array) so per-project natural
-// widths drive the count — adidas's mostly-vertical 9:16 frames pack denser
-// than the decorative widths would suggest.
-function fitSlots(width: number, assets: (ImageAsset | null)[]): number {
+// Widths come from each project's own image aspect ratios — portrait-heavy
+// projects pack denser than landscape-heavy ones.
+function fitSlots(width: number, assets: ImageAsset[]): number {
   const gap = 6
   let used = 0
   let n = 0
-  while (n < 1000) {
-    const w = slotWidth(n, assets[n] ?? null)
+  while (n < assets.length) {
+    const w = slotDims(assets[n]).width
     const next = used + (n > 0 ? gap : 0) + w
     if (next > width) break
     used = next
@@ -308,13 +292,12 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
                 style={{ scrollMarginTop: `${78 + filterBarHeight + (index + 1) * 48}px` }}
               >
                 {byYear[year].map((project) => {
-                  const useReal = hasRealImages(project.id) && project.images.length > 0
-                  // Tallest slot drives the row's hover height. With slotDims
-                  // capping at ROW_IMAGE_MAX_HEIGHT, this maxes out at 200 for
-                  // any portrait-heavy project.
-                  const rowHeight = useReal
+                  // Tallest image at the uniform width drives the row's hover
+                  // height, capped at ROW_IMAGE_MAX_HEIGHT via slotDims. Empty
+                  // projects (no images yet) fall back to the default row height.
+                  const rowHeight = project.images.length > 0
                     ? Math.max(
-                        ...project.images.map((a, i) => slotDims(i, a).height),
+                        ...project.images.map(a => slotDims(a).height),
                         ROW_DEFAULT_HEIGHT,
                       )
                     : ROW_DEFAULT_HEIGHT
@@ -352,45 +335,31 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
                     {/* ── Image preview row ──────────────── */}
                     <div className={styles.imageRow} aria-hidden="true">
                       {(() => {
-                        // Match the PDP's image count for this project, then cap at
-                        // however many slots fit in the current row width using each
-                        // image's natural width. Before the viewport is measured
-                        // (SSR / first paint), fall back to the PDP count.
-                        const pdpCount = useReal ? project.images.length : previewCount(project.id)
-                        const projectAssets: (ImageAsset | null)[] = useReal
-                          ? project.images
-                          : Array.from({ length: pdpCount }, () => null)
+                        // Cap the rendered count at whatever fits in the row
+                        // width. Before the viewport is measured (SSR / first
+                        // paint), fall back to showing the full image list.
+                        const imageCount = project.images.length
                         const slots = rowWidth !== null
-                          ? Math.min(pdpCount, fitSlots(rowWidth, projectAssets))
-                          : pdpCount
+                          ? Math.min(imageCount, fitSlots(rowWidth, project.images))
+                          : imageCount
                         return Array.from({ length: slots }, (_, i) => {
-                          const asset = useReal ? project.images[i] : null
-                          // Decorative size for placeholder rows; natural ratio for real.
-                          const decorative = PREVIEW_SIZES[i % PREVIEW_SIZES.length]
-                          const width = slotWidth(i, asset)
-                          const aspectRatio = asset && asset.w > 0 && asset.h > 0
-                            ? `${asset.w} / ${asset.h}`
-                            : decorative.ratio
+                          const asset = project.images[i]
+                          const { width } = slotDims(asset)
+                          const aspectRatio = `${asset.w} / ${asset.h}`
                           return (
                             <div
                               key={i}
                               data-img-index={i}
                               className={styles.previewImage}
-                              style={
-                                asset
-                                  ? { width, aspectRatio, position: 'relative', overflow: 'hidden' }
-                                  : { width, aspectRatio }
-                              }
+                              style={{ width, aspectRatio, position: 'relative', overflow: 'hidden' }}
                             >
-                              {asset && (
-                                <Image
-                                  src={`/images/${project.id}/${asset.src}`}
-                                  alt=""
-                                  fill
-                                  sizes={`${width}px`}
-                                  style={{ objectFit: 'contain' }}
-                                />
-                              )}
+                              <Image
+                                src={`/images/${project.id}/${asset.src}`}
+                                alt=""
+                                fill
+                                sizes={`${width}px`}
+                                style={{ objectFit: 'contain' }}
+                              />
                             </div>
                           )
                         })

@@ -5,7 +5,6 @@ import { flushSync } from 'react-dom'
 import Image from 'next/image'
 import gsap from 'gsap'
 import type { Project, ImageAsset, VideoAsset } from '@/types'
-import { DETAIL_SIZES, previewCount, hasRealImages } from '../lib/preview'
 import styles from './ProjectDetailPanel.module.css'
 
 interface Props {
@@ -65,18 +64,15 @@ export default function ProjectDetailPanel({
   const [displayProject, setDisplayProject] = useState(project)
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const useReal = hasRealImages(displayProject.id) && displayProject.images.length > 0
-
   // Build the ordered list of scroll slots. First video gets inserted at the
   // 6th position (index 5) so it lands mid-scroll rather than at the end;
-  // any additional videos fall through to the tail. Placeholder projects
-  // continue to render decorative boxes.
+  // any additional videos fall through to the tail.
   type Slot =
     | { kind: 'image'; asset: ImageAsset }
     | { kind: 'video'; asset: VideoAsset }
   const VIDEO_SLOT = 5
   const slots: Slot[] = []
-  if (useReal) {
+  {
     const imgs = displayProject.images
     const vids = displayProject.videos
     imgs.forEach((img, i) => {
@@ -94,7 +90,7 @@ export default function ProjectDetailPanel({
       slots.push({ kind: 'video', asset: vids[v] })
     }
   }
-  const count = useReal ? slots.length : previewCount(displayProject.id)
+  const count = slots.length
 
   // Lazy-load: only mount <Image> for wrappers that have entered (or are
   // within rootMargin of) the horizontal scrollRef viewport. First two are
@@ -316,7 +312,6 @@ export default function ProjectDetailPanel({
   // (Native loading="lazy" measures against the document and would treat
   // every image as "visible" since they all sit within the panel's bounds.)
   useEffect(() => {
-    if (!useReal) return
     const root = scrollRef.current
     if (!root) return
 
@@ -345,7 +340,7 @@ export default function ProjectDetailPanel({
 
     wrappers.forEach(w => observer.observe(w))
     return () => observer.disconnect()
-  }, [displayProject.id, useReal, count])
+  }, [displayProject.id, count])
 
   // Enter: fires when displayProject is swapped in
   useEffect(() => {
@@ -383,12 +378,51 @@ export default function ProjectDetailPanel({
           <div className={styles.titleLeft}>
             <h1 className={styles.title}>{displayProject.title}</h1>
             <p className={styles.description}>{displayProject.description}</p>
-            <button
-              className={styles.moreBtn}
-              onClick={() => setIsExpanded(v => !v)}
-            >
-              {isExpanded ? 'Less' : 'More'}
-            </button>
+            {(() => {
+              // Only surface the case study section if at least one field is
+              // actually populated — placeholder-only or entirely-empty case
+              // studies shouldn't show the More button at all.
+              const cs = displayProject.caseStudy
+              const hasContent = !!(
+                cs?.problem?.trim() ||
+                cs?.process?.trim() ||
+                cs?.outcome?.trim()
+              )
+              if (!hasContent) return null
+              return (
+                <>
+                  <button
+                    className={styles.moreBtn}
+                    onClick={() => setIsExpanded(v => !v)}
+                    aria-expanded={isExpanded}
+                  >
+                    {isExpanded ? 'Less' : 'More'}
+                  </button>
+                  {isExpanded && (
+                    <div className={styles.caseStudy}>
+                      {cs.problem?.trim() && (
+                        <div className={styles.caseStudySection}>
+                          <span className={styles.metaLabel}>Problem</span>
+                          <p className={styles.caseStudyBody}>{cs.problem}</p>
+                        </div>
+                      )}
+                      {cs.process?.trim() && (
+                        <div className={styles.caseStudySection}>
+                          <span className={styles.metaLabel}>Process</span>
+                          <p className={styles.caseStudyBody}>{cs.process}</p>
+                        </div>
+                      )}
+                      {cs.outcome?.trim() && (
+                        <div className={styles.caseStudySection}>
+                          <span className={styles.metaLabel}>Outcome</span>
+                          <p className={styles.caseStudyBody}>{cs.outcome}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </>
+              )
+            })()}
           </div>
           <div className={styles.meta}>
             <div className={`${styles.metaCol} ${styles.metaColYear}`}>
@@ -429,34 +463,27 @@ export default function ProjectDetailPanel({
           </div>
         </div>
 
-        {Array.from({ length: count }, (_, i) => {
-          const slot: Slot | null = useReal ? slots[i] ?? null : null
-          const imageAsset: ImageAsset | null = slot?.kind === 'image' ? slot.asset : null
-          const videoAsset: VideoAsset | null = slot?.kind === 'video' ? slot.asset : null
-          const asset = imageAsset ?? videoAsset
-          // Use the asset's intrinsic ratio when available so portraits stay
-          // portrait and landscapes stay landscape — never crop. Fall back to
-          // the decorative DETAIL_SIZES cycle for placeholder boxes.
-          const aspectRatio = asset && asset.w > 0 && asset.h > 0
-            ? `${asset.w} / ${asset.h}`
-            : DETAIL_SIZES[i % DETAIL_SIZES.length].ratio
+        {slots.map((slot, i) => {
+          const imageAsset: ImageAsset | null = slot.kind === 'image' ? slot.asset : null
+          const videoAsset: VideoAsset | null = slot.kind === 'video' ? slot.asset : null
+          const asset = imageAsset ?? videoAsset!
+          // Every asset has intrinsic pixel dimensions — the old decorative
+          // aspect-ratio fallback is gone now that every project is ingested
+          // with real w/h.
+          const aspectRatio = `${asset.w} / ${asset.h}`
           // Priority window = first 2 + last 2 slots. Eager-load covers the
           // two possible arrival positions: scrollLeft=0 (fresh open / next)
           // and scrollLeft=maxScroll (prev). Anything in between is
           // IntersectionObserver-driven lazy load.
           const PRIORITY_EDGE = 2
           const isPriority = i < PRIORITY_EDGE || i >= count - PRIORITY_EDGE
-          const shouldLoad = !!asset && (visibleIndices.has(i) || isPriority)
+          const shouldLoad = visibleIndices.has(i) || isPriority
           return (
             <div
               key={i}
               data-scroll-img={i}
               className={styles.scrollImage}
-              style={
-                asset
-                  ? { aspectRatio, position: 'relative', overflow: 'hidden' }
-                  : { aspectRatio }
-              }
+              style={{ aspectRatio, position: 'relative', overflow: 'hidden' }}
             >
               {shouldLoad && imageAsset && (
                 <Image

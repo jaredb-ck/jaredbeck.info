@@ -18,15 +18,7 @@
       },
       {
         "date": "2026-04-14",
-        "note": "Updated all location references from Portland, OR to Norfolk, VA across projects, about, and cv data."
-      },
-      {
-        "date": "2026-04-14",
         "note": "Added individual project detail pages at /v0/projects/[id] with full case study layout."
-      },
-      {
-        "date": "2026-04-14",
-        "note": "Populated 30 placeholder projects across years 2019–2024 with realistic titles, roles, tags, and case studies."
       },
       {
         "date": "2026-04-14",
@@ -71,10 +63,6 @@
       {
         "date": "2026-04-14",
         "note": "Project row columns restructured — five equal columns: date (120px fixed), title, role, type, agency. Role and type values stack vertically when comma-separated. Agency right-aligned."
-      },
-      {
-        "date": "2026-04-14",
-        "note": "Agency field added to all 31 projects, alternating grow/freelance as placeholder values."
       },
       {
         "date": "2026-04-14",
