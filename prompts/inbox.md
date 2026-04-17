@@ -25,13 +25,18 @@ Each project should conform to this shape:
   "role": "e.g. Art Director / Designer / Collaborator",
   "images": [
     {
-      "file": "filename.webp",
-      "alt": "Description of image",
-      "role": "hero | supplementary",
-      "width": 1200,
-      "height": 800,
+      "src": "filename.webp",
+      "w": 1920,
+      "h": 1080,
       "originalSize": "4.2MB",
       "compressedSize": "180KB"
+    }
+  ],
+  "videos": [
+    {
+      "src": "filename.mp4",
+      "w": 1920,
+      "h": 1080
     }
   ],
   "caseStudy": {
@@ -46,7 +51,7 @@ Each project should conform to this shape:
 ### Step 1 — Inventory
 Scan the provided asset folder. List every file with:
 - Filename
-- Format (jpg, jpeg, png, tiff, gif, pdf, etc.)
+- Format (jpg, jpeg, png, tiff, gif, pdf, mp4, etc.)
 - Dimensions and aspect ratio
 - File size
 - Any date metadata available (EXIF or filename)
@@ -103,8 +108,13 @@ Once groupings are approved, generate for each project:
 - **description** — write a neutral 1-2 sentence description of
   what the work appears to be
 - **role** — leave blank and flag as [NEEDS REVIEW]
-- **images** — list all files in the group; designate the strongest
-  image as "hero", rest as "supplementary"
+- **images** — list all image files in the group; read intrinsic
+  pixel dimensions using:
+    sips -g pixelWidth -g pixelHeight [filename]
+  Designate the strongest image as "hero", rest as "supplementary"
+- **videos** — list all video files in the group; read intrinsic
+  pixel dimensions using:
+    mdls -name kMDItemPixelWidth -name kMDItemPixelHeight [filename]
 - **caseStudy** — leave all fields blank; I will fill these in
 
 ### Step 5 — Compress and Optimize All Images
@@ -190,6 +200,8 @@ running it — this makes it reusable for future ingestion sessions:
 - Detect transparency in PNG files — use lossless WebP for those
 - Strip all EXIF metadata on output
 - Do not enlarge images smaller than the max width
+- Do not compress video files — move as-is to
+  /public/videos/[project-id]/
 
 **Size thresholds — flag and ask before proceeding if exceeded:**
 - Hero images: flag if still over 500KB after compression
@@ -203,9 +215,12 @@ running it — this makes it reusable for future ingestion sessions:
 Record compression results in scripts/compression-logs/last-run.json
 for reference.
 
-### Step 6 — Move Compressed Assets
+### Step 6 — Move Assets
 Move all compressed .webp files to:
   /public/images/[project-id]/
+
+Move all video files as-is to:
+  /public/videos/[project-id]/
 
 Do not move original source files. Leave them untouched in the
 source folder.
@@ -214,10 +229,10 @@ source folder.
 Produce two files:
 
 1. **draft-projects.json** — the full structured JSON array using
-   the compressed .webp filenames, ready to copy into
-   /data/projects.json after review. Include originalSize,
-   compressedSize, width, and height in each image entry. Flag
-   every field needing input with [NEEDS REVIEW].
+   { "src", "w", "h" } for all image and video entries, ready to
+   copy into /data/projects.json after review. Include originalSize
+   and compressedSize on image entries. Flag every field needing
+   input with [NEEDS REVIEW].
 
 2. **ingestion-report.md** — a human-readable summary including:
    - Total assets processed
@@ -237,6 +252,8 @@ Produce two files:
 ## Notes
 - Do not rename original source files — only compressed outputs
   get renamed to the [project-id]-01.webp convention
+- All image entries use { "src", "w", "h" } — never use
+  "file", "width", or "height" as field names
 - If an image appears to be a mockup or presentation of another
   piece, keep them in the same project group
 - Prefer grouping conservatively — smaller certain groups over
@@ -246,3 +263,5 @@ Produce two files:
   needed
 - The compression script is saved to scripts/compress-images.js
   and can be rerun independently in future sessions
+- Sentinel w: 0, h: 0 is reserved for placeholder projects only —
+  never write zeros for assets that have actually been processed

@@ -143,9 +143,13 @@
   display: flex;
   gap: 6px;
   height: 0;
+  opacity: 0;
   overflow: hidden;
   padding-bottom: 0;
-  transition: height 0.28s ease 0.12s, padding-bottom 0.28s ease 0.12s;
+  transition:
+    height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.12s,
+    padding-bottom 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.12s,
+    opacity 0.35s ease 0.3s;
 }
 
 .projectRow:hover .imageRow {
@@ -154,6 +158,7 @@
      (var − 24px). Fallback 179px = 155px image area + 24px padding to match the
      prior placeholder spacing. */
   height: var(--image-row-height, 179px);
+  opacity: 1;
   padding-bottom: 24px;
 }
 
@@ -227,7 +232,7 @@
     column-gap: 16px;
     flex-wrap: wrap;
     padding-bottom: 14px;
-    row-gap: 6px;
+    row-gap: 12px;
   }
 
   .colTitle {
@@ -243,26 +248,24 @@
   }
 
   .colMeta {
-    align-items: baseline;
+    align-items: flex-start;
     display: flex;
     flex: 1 1 0;
-    flex-wrap: wrap;
-    gap: 0 16px;
+    justify-content: space-between;
     order: 2;
   }
 
   .colRole,
   .colMedium {
-    flex: 0 0 auto;
-    flex-direction: row;
+    flex: 1 1 0;
+    flex-direction: column;
     font-size: 11px;
-    gap: 0 6px;
+    gap: 4px;
   }
 
   .colClient {
-    flex: 1 0 auto;
+    flex: 1 1 0;
     font-size: 11px;
-    margin-left: auto;
     text-align: right;
     transform: none !important;
   }

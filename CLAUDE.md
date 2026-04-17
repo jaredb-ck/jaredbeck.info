@@ -278,6 +278,11 @@ touches a locked file, ask before proceeding.
 - Any past version route group (e.g. /(v0-blueprint)) once a
   newer version exists — preserved as archive
 - Any version.config.ts file within any version route group
+- /app/components/Preloader/ — all files within this directory
+  are permanently locked
+- /app/components/Preloader/Preloader.module.css — visual
+  identity locked, never modified by version updates, patches,
+  or cleanup passes
 
 ## Chrome z-index convention
 

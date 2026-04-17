@@ -73,36 +73,71 @@
   padding: 4px 6px;
 }
 
-/* Floating pagination pinned to the bottom-right corner of the panel. */
+/* Floating pagination pinned to the bottom-right corner of the panel.
+   In its default state it's a pill (border-radius: 100px). When the menu
+   opens, it becomes a rounded rectangle (12px) with the list above the bar. */
 .projectNavFixed {
-  align-items: center;
   background: #ffffff;
   border-radius: 100px;
   bottom: 32px;
-  color: #191919;
+  color: #0c0c0c;
   display: flex;
-  gap: 2px;
-  padding: 4px 6px;
+  flex-direction: column;
+  padding: 4px;
   position: absolute;
   right: 40px;
   z-index: 5;
 }
 
+/* border-radius is animated by GSAP between 100px (pill) and 12px (menu) */
+
+/* The pill bar — prev arrow, center pill, next arrow. Always visible. */
+.pillContent {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+}
+
+/* Gray center pill — contains the list/close icon and the counter. */
+.centerPill {
+  align-items: center;
+  background: #e4e4e4;
+  border: none;
+  border-radius: 100px;
+  color: #0c0c0c;
+  cursor: pointer;
+  display: flex;
+  flex: 1 0 0;
+  gap: 4px;
+  justify-content: space-between;
+  padding: 4px 8px;
+  transition: background-color 0.12s ease;
+}
+
+.centerPill:hover {
+  background: #d9d9d9;
+}
+
 .projectNum {
+  display: flex;
+  font-family: var(--font-mono), monospace;
   font-size: 11px;
+  gap: 2px;
   letter-spacing: 0.08em;
-  padding: 0 4px;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .navArrow {
   align-items: center;
   background: none;
   border: none;
-  color: #191919;
+  color: #0c0c0c;
   cursor: pointer;
   display: flex;
+  flex-shrink: 0;
   justify-content: center;
-  padding: 2px 4px;
+  padding: 4px;
   transition: opacity 0.15s ease;
 }
 
@@ -129,14 +164,19 @@
   column-gap: 24px;
   display: grid;
   flex-shrink: 0;
-  grid-template-columns: 1fr auto;
-  /* Fixed peek amount regardless of viewport — always leaves 120px of the
+  /* auto auto instead of 1fr auto: the hero (title + description) column no
+     longer stretches to fill remaining space, so the meta column sits
+     directly next to it with just the 24px column-gap between them. */
+  grid-template-columns: auto auto;
+  /* Fixed peek amount regardless of viewport — always leaves 360px of the
      first image visible on the right edge of the title page. Top padding
      clears both the floating Home button (panel-relative 72px) and the
      version switcher band above it. */
   padding: 160px 80px 80px 40px;
-  row-gap: 48px;
-  width: calc(100vw - 120px);
+  /* Title sits on its own grid row spanning both columns; row 2 has the
+     description column and the meta column side-by-side. */
+  row-gap: 96px;
+  width: calc(100vw - 360px);
 }
 
 .titleLeft {
@@ -145,12 +185,62 @@
   gap: 16px;
 }
 
+/* Eyebrow + title grouped together with 16px internal gap (matching the
+   homepage hero spacing). The outer grid's row-gap (56px) applies between
+   this group and the meta/description row below. */
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* Live URL button — sits in the title row, right column, bottom-aligned
+   with the title. */
+.urlButton {
+  align-items: center;
+  align-self: end;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 100px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  gap: 6px;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: start;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  transition: opacity 0.15s ease;
+  white-space: nowrap;
+}
+
+.urlButton:hover {
+  opacity: 0.75;
+}
+
+.clientEyebrow {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .title {
   font-size: clamp(20px, 2.5vw, 32px);
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.05;
 }
+
+/* Row 2 layout: meta on the left, description on the right. */
+.titleLeft { grid-column: 2; grid-row: 2; }
+.meta      { grid-column: 1; grid-row: 2; }
 
 .description {
   color: rgba(255, 255, 255, 0.75);
@@ -167,8 +257,8 @@
 .meta {
   column-gap: 80px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  row-gap: 14px;
+  grid-template-columns: auto auto;
+  row-gap: 40px;
 }
 
 .metaCol {
@@ -182,8 +272,7 @@
 .metaColYear    { grid-column: 1; grid-row: 1; }
 .metaColMedium  { grid-column: 2; grid-row: 1; }
 .metaColRole    { grid-column: 1; grid-row: 2; }
-.metaColClient  { grid-column: 2; grid-row: 2; }
-.metaColCredits { grid-column: 3; grid-row: 1 / span 2; }
+.metaColCredits { grid-column: 2; grid-row: 2; }
 
 .metaItem {
   display: flex;
@@ -308,6 +397,79 @@
   transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* ─── Project menu ──────────────────────────────────────────── */
+
+.projectMenu {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 340px;
+  min-height: 0;
+  overflow-y: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.projectMenu::-webkit-scrollbar {
+  display: none;
+}
+
+.menuItem {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 12px;
+  color: #0c0c0c;
+  cursor: pointer;
+  display: flex;
+  gap: 42px;
+  padding: 8px 16px;
+  text-align: left;
+  transition: background-color 0.1s ease;
+  width: 100%;
+}
+
+.menuItem:hover {
+  background: #f0f0f0;
+}
+
+.menuItemActive {
+  background: #e7e7e7;
+}
+
+.menuItemActive:hover {
+  background: #e0e0e0;
+}
+
+.menuDate {
+  color: #0c0c0c;
+  flex-shrink: 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  opacity: 0.3;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.menuProjectTitle {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.menuBackdrop {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 4;
+}
+
 /* ─── Tablet + small desktop ─────────────────────────────────── */
 
 @media (max-width: 1100px) {
@@ -317,23 +479,82 @@
     row-gap: 32px;
   }
 
-  .meta {
-    column-gap: 32px;
+  /* Stack: titleGroup (eyebrow + title) → URL → meta → description. */
+  .titleGroup  { grid-column: 1; grid-row: 1; }
+  .urlButton   { grid-column: 1; grid-row: 2; align-self: start; }
+  .meta        { grid-column: 1; grid-row: 3; }
+  .titleLeft   { grid-column: 1; grid-row: 4; }
+
+}
+
+/* ─── Landscape mobile and smaller ───────────────────────────────
+   At ≤900px the horizontal scroll model is abandoned in favour of a
+   vertical document flow: the title block stacks on top, then every
+   image/video below it at full viewport width, at its natural aspect
+   ratio. The panel itself becomes the scroll container. */
+
+@media (max-width: 900px) {
+  /* imageScroll stays absolute-filling the panel but becomes a vertical
+     scroll container. The panel keeps overflow:hidden — all scroll happens
+     on imageScroll. Works now that the non-passive wheel listener is
+     dynamically detached and html overflow is forced to auto at this width. */
+  .imageScroll {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
+
+  .scrollImage {
+    flex-shrink: 0;
+    height: auto;
+    width: 100%;
+  }
+
+  .header {
+    left: 40px;
+  }
+
+  .titleBlock {
+    padding: 120px 40px 48px 40px;
+    width: 100%;
+  }
+
+  .scrollIndicator {
+    display: none;
+  }
+
+  .projectNavFixed {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+
+/* ─── Landscape mobile and smaller ─────────────────────────────── */
+
+@media (max-width: 900px) {
+  .meta {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    row-gap: 24px;
+  }
+
+  .metaColYear    { grid-column: 1; grid-row: 1; }
+  .metaColMedium  { grid-column: 2; grid-row: 1; }
+  .metaColRole    { grid-column: 1; grid-row: 2; }
+  .metaColCredits { grid-column: 2; grid-row: 2; }
 }
 
 /* ─── Mobile ─────────────────────────────────────────────────── */
 
 @media (max-width: 767px) {
-  .titleBlock {
-    padding: 80px 24px 48px 20px;
+  .header {
+    left: 20px;
   }
 
-  .description {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    display: -webkit-box;
-    overflow: hidden;
+  .titleBlock {
+    padding: 120px 24px 48px 20px;
   }
 
   .moreBtn {
@@ -355,22 +576,4 @@
     color: rgba(255, 255, 255, 0.7);
   }
 
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .metaColCredits {
-    flex-basis: 100%;
-  }
-
-  .metaColYear,
-  .metaColMedium,
-  .metaColRole,
-  .metaColClient,
-  .metaColCredits {
-    grid-column: unset;
-    grid-row: unset;
-  }
 }

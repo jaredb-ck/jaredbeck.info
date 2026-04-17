@@ -1,31 +1,42 @@
 'use client'
 
-import { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
 import { flushSync } from 'react-dom'
 import Image from 'next/image'
 import gsap from 'gsap'
 import type { Project, ImageAsset, VideoAsset } from '@/types'
+import { videoCache } from '@/app/components/Preloader/usePreloader'
 import styles from './ProjectDetailPanel.module.css'
 
 interface Props {
   project: Project
   index: number
   totalCount: number
+  projects: Project[]
   onBack: () => void
   onOpenComplete: () => void
   onPrev: () => void
   onNext: () => void
+  onGoToProject: (index: number) => void
   direction: 'prev' | 'next' | null
+}
+
+function formatMenuDate(dateStr: string): string {
+  const d = new Date(dateStr)
+  const month = d.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
+  return `${month} ${d.getUTCFullYear()}`
 }
 
 export default function ProjectDetailPanel({
   project,
   index,
   totalCount,
+  projects,
   onBack,
   onOpenComplete,
   onPrev,
   onNext,
+  onGoToProject,
   direction,
 }: Props) {
   const scrollRef      = useRef<HTMLDivElement>(null)
@@ -48,6 +59,11 @@ export default function ProjectDetailPanel({
   const overscrollRef   = useRef(0)      // signed accumulator: +right, -left
   const armPrevRef      = useRef(false)  // disarmed on fresh project until user scrolls right
   const navFiredRef     = useRef(false)  // latch so one gesture can't fire nav twice
+  // True when nav was initiated by scroll overscroll (versus a pagination click).
+  // Scroll-triggered prev lands the new project at its end; clicks always
+  // land at the start. Set in the wheel handler, read + cleared in the
+  // [project] effect.
+  const scrollTriggeredNavRef = useRef(false)
 
   // Pixels of sustained overshoot past an edge before nav fires
   const OVERSCROLL_THRESHOLD = 800
@@ -59,35 +75,148 @@ export default function ProjectDetailPanel({
     totalCountRef.current = totalCount
   })
 
+  // ─── Project menu state ────────────────────────────────────────
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const pillRef = useRef<HTMLDivElement>(null)
+  const menuOpenRef = useRef(false)
+  const menuAnimRef = useRef<gsap.core.Timeline | null>(null)
+
+  useEffect(() => { menuOpenRef.current = menuOpen }, [menuOpen])
+
+  const openMenu = useCallback(() => {
+    setMenuOpen(true)
+  }, [])
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false)
+  }, [])
+
+  // Cache the pill's collapsed width so the close animation doesn't
+  // need to do any measurement dance (which causes flicker).
+  const collapsedWidthRef = useRef(0)
+  const hasAnimatedRef = useRef(false)
+
+  // Animate menu on open/close — useLayoutEffect so the first frame
+  // of the animation is painted (no single-frame flash between state
+  // change and animation start).
+  useLayoutEffect(() => {
+    const menu = menuRef.current
+    const pill = pillRef.current
+    if (!menu || !pill) return
+
+    // Skip the close branch on initial mount and during project transitions —
+    // menu is already hidden via inline style={{ display: 'none' }}, and
+    // project transitions call setMenuOpen(false) which shouldn't trigger
+    // the close animation.
+    if (!menuOpen && !hasAnimatedRef.current) return
+    if (!menuOpen && isTransitioning.current) {
+      gsap.set(menu, { display: 'none', clearProps: 'height,autoAlpha' })
+      gsap.set(pill, { clearProps: 'width,borderRadius,overflow,paddingTop' })
+      return
+    }
+    hasAnimatedRef.current = true
+
+    menuAnimRef.current?.kill()
+
+    if (menuOpen) {
+      // Capture collapsed pill width before expanding
+      collapsedWidthRef.current = pill.offsetWidth
+
+      // Clip the container during animation so content doesn't spill
+      gsap.set(pill, { overflow: 'hidden' })
+      // Briefly show menu to measure expanded pill width
+      gsap.set(menu, { display: 'flex', visibility: 'hidden' })
+      const expandedW = pill.offsetWidth
+      const expandedH = menu.offsetHeight
+
+      // Set start state: menu at zero height, pill at collapsed width
+      gsap.set(menu, { visibility: 'visible', autoAlpha: 0, height: 0 })
+      gsap.set(pill, { width: collapsedWidthRef.current })
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // Clear GSAP inline styles — remove overflow: hidden from
+          // the container so the menu's CSS overflow-y: auto can scroll
+          gsap.set(menu, { clearProps: 'height,visibility,autoAlpha' })
+          gsap.set(menu, { display: 'flex', opacity: 1, visibility: 'visible' })
+          pill.style.removeProperty('overflow')
+          gsap.set(pill, { clearProps: 'width' })
+          const activeItem = menu.querySelector('[data-menu-item-active]')
+          if (activeItem) activeItem.scrollIntoView({ block: 'nearest' })
+        },
+      })
+      tl.to(pill, { width: expandedW, borderRadius: 12, duration: 0.35, ease: 'power2.out' }, 0)
+      tl.to(menu, { autoAlpha: 1, height: expandedH, duration: 0.35, ease: 'power2.out' }, 0.04)
+      menuAnimRef.current = tl
+    } else {
+      menu.scrollTop = 0
+      const currentW = pill.offsetWidth
+      const targetW = collapsedWidthRef.current || currentW
+
+      // Lock the pill width and clip during close
+      gsap.set(pill, { width: currentW, overflow: 'hidden' })
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          gsap.set(menu, { display: 'none', clearProps: 'height,autoAlpha' })
+          gsap.set(pill, { clearProps: 'width,borderRadius,overflow,paddingTop' })
+        },
+      })
+      tl.to(menu, { autoAlpha: 0, height: 0, duration: 0.3, ease: 'power2.inOut' }, 0)
+      tl.to(pill, { width: targetW, borderRadius: 100, paddingTop: 0, duration: 0.3, ease: 'power2.inOut' }, 0)
+      menuAnimRef.current = tl
+    }
+  }, [menuOpen])
+
+  // Escape key closes menu
+  useEffect(() => {
+    if (!menuOpen) return
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeMenu() }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [menuOpen, closeMenu])
+
   // displayProject lags behind the prop — content renders from here
   // while the header (nav counter) updates immediately from index/project
   const [displayProject, setDisplayProject] = useState(project)
   const [isExpanded, setIsExpanded] = useState(false)
 
-  // Build the ordered list of scroll slots. First video gets inserted at the
-  // 6th position (index 5) so it lands mid-scroll rather than at the end;
-  // any additional videos fall through to the tail.
+  // Build the ordered list of scroll slots. Opening sequence: first image,
+  // then the first video. Remaining videos are spaced evenly across the
+  // remaining image stream so they never cluster at the start or end.
   type Slot =
     | { kind: 'image'; asset: ImageAsset }
     | { kind: 'video'; asset: VideoAsset }
-  const VIDEO_SLOT = 5
+  const LEAD_IMAGES = 1
   const slots: Slot[] = []
   {
     const imgs = displayProject.images
     const vids = displayProject.videos
-    imgs.forEach((img, i) => {
-      if (i === VIDEO_SLOT && vids.length > 0) {
-        slots.push({ kind: 'video', asset: vids[0] })
-      }
-      slots.push({ kind: 'image', asset: img })
-    })
-    // Video slot falls off the end — append so we never lose the video.
-    if (vids.length > 0 && imgs.length <= VIDEO_SLOT) {
+    // Lead-in: first image, then the first video.
+    for (let li = 0; li < Math.min(LEAD_IMAGES, imgs.length); li++) {
+      slots.push({ kind: 'image', asset: imgs[li] })
+    }
+    if (vids.length > 0) {
       slots.push({ kind: 'video', asset: vids[0] })
     }
-    // Any extra videos append at the end in order.
-    for (let v = 1; v < vids.length; v++) {
-      slots.push({ kind: 'video', asset: vids[v] })
+    // Distribute remaining videos evenly across the remaining image stream.
+    const remainImgs = imgs.slice(LEAD_IMAGES)
+    const remainVids = vids.slice(1)
+    if (remainVids.length === 0) {
+      for (const img of remainImgs) slots.push({ kind: 'image', asset: img })
+    } else {
+      const stride = Math.ceil(remainImgs.length / (remainVids.length + 1))
+      let vi = 0
+      for (let idx = 0; idx < remainImgs.length; idx++) {
+        slots.push({ kind: 'image', asset: remainImgs[idx] })
+        if (vi < remainVids.length && (idx + 1) % stride === 0) {
+          slots.push({ kind: 'video', asset: remainVids[vi++] })
+        }
+      }
+      while (vi < remainVids.length) {
+        slots.push({ kind: 'video', asset: remainVids[vi++] })
+      }
     }
   }
   const count = slots.length
@@ -164,12 +293,34 @@ export default function ProjectDetailPanel({
     // on the panel). Just refresh the indicator on mount + on resize.
     writeIndicator()
     const onResize = () => writeIndicator()
-    window.addEventListener('resize', onResize)
+
+    // Lenis sets html { overflow: hidden } at init and doesn't restore it
+    // when stopped. On mobile, that blocks ALL scroll — even inside a
+    // fixed-position panel with overflow-y: auto. Force it back to auto
+    // when the panel mounts at mobile width.
+    const MOBILE_BREAKPOINT = 900
+    const isMobile = () => window.innerWidth <= MOBILE_BREAKPOINT
+    const htmlEl = document.documentElement
+    let originalHtmlOverflow = ''
+    const syncHtmlOverflow = () => {
+      if (isMobile()) {
+        if (!originalHtmlOverflow) originalHtmlOverflow = htmlEl.style.overflow
+        htmlEl.style.overflow = 'auto'
+      } else if (originalHtmlOverflow !== '') {
+        htmlEl.style.overflow = originalHtmlOverflow
+        originalHtmlOverflow = ''
+      }
+    }
+    syncHtmlOverflow()
 
     targetXRef.current = el.scrollLeft
     el.addEventListener('scroll', updateIndicator, { passive: true })
 
     const handleWheel = (e: WheelEvent) => {
+      // At ≤900px the layout is a native vertical scroll — let the browser
+      // handle it. Don't preventDefault, don't hijack for horizontal.
+      if (isMobile()) return
+      if (menuOpenRef.current) { e.stopPropagation(); return }
       e.preventDefault()
       if (navFiredRef.current || isTransitioning.current) return
 
@@ -199,8 +350,9 @@ export default function ProjectDetailPanel({
           overscrollRef.current > OVERSCROLL_THRESHOLD &&
           indexRef.current < totalCountRef.current - 1
         ) {
-          navFiredRef.current   = true
-          overscrollRef.current = 0
+          navFiredRef.current        = true
+          overscrollRef.current      = 0
+          scrollTriggeredNavRef.current = true
           onNextRef.current()
         }
       } else if (refused < 0 && armPrevRef.current) {
@@ -209,8 +361,9 @@ export default function ProjectDetailPanel({
           -overscrollRef.current > OVERSCROLL_THRESHOLD &&
           indexRef.current > 0
         ) {
-          navFiredRef.current   = true
-          overscrollRef.current = 0
+          navFiredRef.current        = true
+          overscrollRef.current      = 0
+          scrollTriggeredNavRef.current = true
           onPrevRef.current()
         }
       } else {
@@ -221,13 +374,61 @@ export default function ProjectDetailPanel({
       targetXRef.current = clampedTarget
       gsap.to(el, { scrollLeft: targetXRef.current, duration: 1.1, ease: 'power3.out', overwrite: true })
     }
-    panel.addEventListener('wheel', handleWheel, { passive: false })
+    // Dynamically attach/detach the non-passive wheel handler based on
+    // viewport width. At ≤900px the layout is vertical native scroll — a
+    // non-passive wheel listener blocks the compositor thread even when the
+    // handler doesn't call preventDefault, killing scroll on resize.
+    //
+    // At mobile we also need to stop wheel events from bubbling to Lenis's
+    // non-passive listener on window. Lenis.stop() leaves its listeners
+    // attached — they don't call preventDefault when stopped, but the
+    // passive:false registration still stalls the compositor. Calling
+    // stopPropagation on the panel keeps the event local so the browser's
+    // default scroll action fires on imageScroll unblocked.
+    let wheelAttached = false
+    let mobileWheelAttached = false
+    const stopBubble = (e: WheelEvent) => { e.stopPropagation() }
+    const syncWheel = () => {
+      if (!isMobile()) {
+        // Desktop: hijack wheel for horizontal scroll
+        if (!wheelAttached) {
+          panel.addEventListener('wheel', handleWheel, { passive: false })
+          wheelAttached = true
+        }
+        if (mobileWheelAttached) {
+          panel.removeEventListener('wheel', stopBubble)
+          mobileWheelAttached = false
+        }
+      } else {
+        // Mobile: just block bubbling so Lenis can't stall the compositor
+        if (wheelAttached) {
+          panel.removeEventListener('wheel', handleWheel)
+          wheelAttached = false
+        }
+        if (!mobileWheelAttached) {
+          panel.addEventListener('wheel', stopBubble, { passive: true })
+          mobileWheelAttached = true
+        }
+      }
+    }
+    syncWheel()
+    const onResizeFull = () => {
+      onResize()
+      syncWheel()
+      syncHtmlOverflow()
+    }
+    window.addEventListener('resize', onResizeFull)
 
     return () => {
-      window.removeEventListener('resize', onResize)
+      window.removeEventListener('resize', onResizeFull)
       el.removeEventListener('scroll', updateIndicator)
       panel.removeEventListener('wheel', handleWheel)
+      panel.removeEventListener('wheel', stopBubble)
       gsap.killTweensOf(el)
+      // Restore html overflow so Lenis can take over again on close
+      if (originalHtmlOverflow !== '') {
+        htmlEl.style.overflow = originalHtmlOverflow
+      }
     }
   }, [])
 
@@ -251,9 +452,15 @@ export default function ProjectDetailPanel({
     gsap.killTweensOf(scrollEl, 'scrollLeft')
     isTransitioning.current = true
     setIsExpanded(false)
+    setMenuOpen(false)
 
-    // Capture direction so the async onComplete can use it for the enter position
+    // Capture direction so the async onComplete can use it for the enter position.
     directionRef.current = direction
+    // Capture + reset the scroll-trigger flag. Only a scroll-overscroll-driven
+    // prev should land the new project at its end — clicking the prev
+    // pagination button should always start at the beginning.
+    const wasScrollTriggered = scrollTriggeredNavRef.current
+    scrollTriggeredNavRef.current = false
     // next: new content enters from right (exits left, enters from right)
     // prev / null: new content enters from left (exits right, enters from left)
     const exitX  = direction === 'next' ? -40 :  40
@@ -267,12 +474,18 @@ export default function ProjectDetailPanel({
         // scrollWidth before we set scrollLeft — this is what avoids the
         // pre-paint flash the user saw on both directions.
         flushSync(() => setDisplayProject(project))
-        // next → land at the start (scrollLeft = 0).
-        // prev → land at the end (scrollLeft = maxScroll of the new project).
+        // next (or any click) → land at the start (scrollLeft = 0).
+        // scroll-triggered prev → land at the end (scrollLeft = maxScroll).
         const scrollMax = scrollEl.scrollWidth - scrollEl.clientWidth
-        const target    = directionRef.current === 'prev' ? Math.max(0, scrollMax) : 0
+        const landAtEnd = directionRef.current === 'prev' && wasScrollTriggered
+        const target    = landAtEnd ? Math.max(0, scrollMax) : 0
         scrollEl.scrollLeft = target
         targetXRef.current  = target
+        // At mobile, imageScroll is the vertical scroll container
+        // (overflow-y: scroll). Reset both scrollTop (vertical/mobile)
+        // and the panel's scrollTop to catch either layout.
+        scrollEl.scrollTop = 0
+        if (panelRef.current) panelRef.current.scrollTop = 0
       },
     })
     exitTlRef.current = tl
@@ -375,8 +588,26 @@ export default function ProjectDetailPanel({
       <div ref={scrollRef} className={styles.imageScroll}>
         {/* First "page" of the horizontal scroll: title + description + meta */}
         <div ref={titleRef} data-detail-title className={`${styles.titleBlock}${isExpanded ? ` ${styles.titleBlockExpanded}` : ''}`}>
-          <div className={styles.titleLeft}>
+          <div className={styles.titleGroup}>
+            {displayProject.client && (
+              <span className={styles.clientEyebrow}>{displayProject.client}</span>
+            )}
             <h1 className={styles.title}>{displayProject.title}</h1>
+          </div>
+          {displayProject.url && (
+            <a
+              href={displayProject.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.urlButton}
+            >
+              Visit the live site
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M9.12254 6.17037H5.16274L5.17158 5.17158H10.8284V10.8284L9.82964 10.8373V6.87747L5.52513 11.182L4.81802 10.4749L9.12254 6.17037Z" fill="currentColor"/>
+              </svg>
+            </a>
+          )}
+          <div className={styles.titleLeft}>
             <p className={styles.description}>{displayProject.description}</p>
             {(() => {
               // Only surface the case study section if at least one field is
@@ -441,12 +672,6 @@ export default function ProjectDetailPanel({
                 <span key={r.trim()} className={styles.metaValue}>{r.trim()}</span>
               ))}
             </div>
-            {displayProject.client && (
-              <div className={`${styles.metaCol} ${styles.metaColClient}`}>
-                <span className={styles.metaLabel}>Client</span>
-                <span className={styles.metaValue}>{displayProject.client}</span>
-              </div>
-            )}
             <div className={`${styles.metaCol} ${styles.metaColCredits}`}>
               <span className={styles.metaLabel}>Credits</span>
               {displayProject.credits.length > 0 ? (
@@ -480,7 +705,7 @@ export default function ProjectDetailPanel({
           const shouldLoad = visibleIndices.has(i) || isPriority
           return (
             <div
-              key={i}
+              key={`${displayProject.id}-${i}`}
               data-scroll-img={i}
               className={styles.scrollImage}
               style={{ aspectRatio, position: 'relative', overflow: 'hidden' }}
@@ -497,7 +722,7 @@ export default function ProjectDetailPanel({
               )}
               {shouldLoad && videoAsset && (
                 <video
-                  src={`/videos/${displayProject.id}/${videoAsset.src}`}
+                  src={videoCache.get(`/videos/${displayProject.id}/${videoAsset.src}`) ?? `/videos/${displayProject.id}/${videoAsset.src}`}
                   autoPlay
                   loop
                   muted
@@ -519,32 +744,71 @@ export default function ProjectDetailPanel({
         <div ref={thumbRef} className={styles.scrollThumb} />
       </div>
 
-      {/* Pagination pinned to the bottom-right of the panel. Floats above the
-          horizontal scroll so it's always reachable regardless of position. */}
-      <div className={styles.projectNavFixed}>
-        <button
-          className={styles.navArrow}
-          onClick={onPrev}
-          disabled={index === 0}
-          aria-label="Previous project"
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M7.5 9.5L4 6L7.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
-        <span className={styles.projectNum}>
-          {String(index + 1).padStart(2, '0')} / {String(totalCount).padStart(2, '0')}
-        </span>
-        <button
-          className={styles.navArrow}
-          onClick={onNext}
-          disabled={index === totalCount - 1}
-          aria-label="Next project"
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M4.5 2.5L8 6L4.5 9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
+      {/* Invisible backdrop to catch outside clicks when menu is open */}
+      {menuOpen && (
+        <div className={styles.menuBackdrop} onClick={closeMenu} />
+      )}
+
+      {/* Pagination — unified container that expands from pill to menu.
+          The pill bar is always visible; the project list appears above it. */}
+      <div
+        ref={pillRef}
+        className={styles.projectNavFixed}
+      >
+        {/* Project list — always in DOM, toggled via GSAP */}
+        <div ref={menuRef} className={styles.projectMenu} style={{ display: 'none' }}>
+          {projects.map((p, i) => (
+            <button
+              key={p.id}
+              data-menu-item
+              {...(i === index ? { 'data-menu-item-active': '' } : {})}
+              className={`${styles.menuItem}${i === index ? ` ${styles.menuItemActive}` : ''}`}
+              onClick={() => { onGoToProject(i); setMenuOpen(false) }}
+            >
+              <span className={styles.menuDate}>{String(i + 1).padStart(2, '0')}. {formatMenuDate(p.dateAdded)}</span>
+              <span className={styles.menuProjectTitle}>{p.title}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Pill bar — always visible */}
+        <div className={styles.pillContent}>
+          <button
+            className={styles.navArrow}
+            onClick={onPrev}
+            disabled={index === 0}
+            aria-label="Previous project"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          <button className={styles.centerPill} onClick={menuOpen ? closeMenu : openMenu}>
+            {/* List icon (closed) / Close icon (open) */}
+            {menuOpen ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M4 7H20M4 12H20M4 17H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            )}
+            <span className={styles.projectNum}>
+              {String(index + 1).padStart(2, '0')} / {String(totalCount).padStart(2, '0')}
+            </span>
+          </button>
+          <button
+            className={styles.navArrow}
+            onClick={onNext}
+            disabled={index === totalCount - 1}
+            aria-label="Next project"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   )

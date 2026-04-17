@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
@@ -14,9 +14,20 @@ export default function BlueprintShell({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
+  const [preloaderDone, setPreloaderDone] = useState(false)
+
+  // Wait for the preloader to finish before running entrance animations.
+  // Future versions should listen for 'preloader:complete' the same way.
+  useEffect(() => {
+    const handler = () => setPreloaderDone(true)
+    window.addEventListener('preloader:complete', handler)
+    return () => window.removeEventListener('preloader:complete', handler)
+  }, [])
 
   useGSAP(
     () => {
+      if (!preloaderDone) return
+
       const rows = ref.current?.querySelectorAll('[data-row]') ?? []
 
       if (rows.length > 0) {
@@ -38,7 +49,7 @@ export default function BlueprintShell({
         })
       }
     },
-    { scope: ref, dependencies: [pathname], revertOnUpdate: true }
+    { scope: ref, dependencies: [pathname, preloaderDone], revertOnUpdate: true }
   )
 
   return <div ref={ref}>{children}</div>

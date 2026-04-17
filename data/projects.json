@@ -2,7 +2,7 @@
   {
     "id": "adidas-thrift-and-ride",
     "title": "Thrift & Ride",
-    "dateAdded": "2026-04-15",
+    "dateAdded": "2021-06-28",
     "year": 2021,
     "tags": [
       "art direction",
@@ -108,27 +108,21 @@
   {
     "id": "ping",
     "title": "ping.com",
-    "dateAdded": "2026-04-15",
+    "dateAdded": "2023-06-01",
     "year": 2023,
     "tags": [
       "ui/ux",
       "digital",
-      "platform",
       "web"
     ],
-    "medium": "platform, ui/ux, digital",
-    "description": "Complete website design for PING, the premium golf equipment manufacturer. A product-first commerce platform structured around the Clubs, Accessories, and Juniors categories, with detailed PDPs surfacing technical specifications, shaft and grip configuration, and customer reviews. Editorial hero moments feature PING's tour professional roster. Fully responsive across desktop and mobile. Live at https://ping.com/en-us.",
+    "medium": "digital, ui/ux",
+    "description": "Complete website design for PING, the premium golf equipment manufacturer. A product-first commerce platform structured around the Clubs, Accessories, and Juniors categories, with detailed PDPs surfacing technical specifications, shaft and grip configuration, and customer reviews. Editorial hero moments feature PING's tour professional roster. Fully responsive across desktop and mobile.",
     "role": "Art Director, Designer, UI/UX",
     "images": [
       {
         "src": "hero.jpg",
         "w": 3840,
         "h": 2160
-      },
-      {
-        "src": "home-desktop.png",
-        "w": 1440,
-        "h": 6852
       },
       {
         "src": "nav.png",
@@ -146,19 +140,9 @@
         "h": 612
       },
       {
-        "src": "club-category-desktop.png",
-        "w": 1440,
-        "h": 5463
-      },
-      {
         "src": "carousel-club.jpg",
         "w": 2880,
         "h": 1620
-      },
-      {
-        "src": "pdp-desktop.png",
-        "w": 1440,
-        "h": 5826
       },
       {
         "src": "accessories.png",
@@ -211,22 +195,22 @@
       {
         "name": "Joe Branton"
       }
-    ]
+    ],
+    "url": "https://ping.com/en-us"
   },
   {
     "id": "rockhall",
     "title": "rockhall.com",
-    "dateAdded": "2026-04-15",
+    "dateAdded": "2025-01-01",
     "year": 2025,
     "tags": [
       "ui/ux",
       "digital",
-      "platform",
       "web",
       "editorial"
     ],
-    "medium": "platform, ui/ux, digital",
-    "description": "Full website redesign for the Rock & Roll Hall of Fame — the inductees Hall-of-Fame universe, the Cleveland museum's visitor experience, and the editorial content program. The system centers on the 2025 induction class and the Watch-The-Induction livestream, with sub-systems for A–Z and Class-of inductee browsing, long-form story pages, and an RRTV motion identity that threads video reels across the site. Bold yellow-on-black display typography pairs with archival rock photography; the museum sub-brand carries a distinct blue accent system. Live at https://rockhall.com/.",
+    "medium": "digital, ui/ux",
+    "description": "Full website redesign for the Rock & Roll Hall of Fame — the inductees Hall-of-Fame universe, the Cleveland museum's visitor experience, and the editorial content program. The system centers on the 2025 induction class and the Watch-The-Induction livestream, with sub-systems for A–Z and Class-of inductee browsing, long-form story pages, and an RRTV motion identity that threads video reels across the site. Bold yellow-on-black display typography pairs with archival rock photography; the museum sub-brand carries a distinct blue accent system.",
     "role": "Art Director, Designer",
     "images": [
       {
@@ -240,19 +224,9 @@
         "h": 1080
       },
       {
-        "src": "home.png",
-        "w": 1440,
-        "h": 12202
-      },
-      {
         "src": "editorial-stories.png",
         "w": 1080,
         "h": 1350
-      },
-      {
-        "src": "museum-desktop.png",
-        "w": 1440,
-        "h": 15186
       },
       {
         "src": "explore-mobile.png",
@@ -360,6 +334,852 @@
       },
       {
         "name": "Jax Jackson"
+      }
+    ],
+    "url": "https://rockhall.com/"
+  },
+  {
+    "id": "color-study-branding",
+    "title": "Color Study Branding",
+    "dateAdded": "2025-11-01",
+    "year": 2025,
+    "tags": [
+      "branding",
+      "logo",
+      "motion"
+    ],
+    "medium": "identity, branding",
+    "description": "Brand identity system for Color Study Film Studio, a production house with the tagline 'A Window on the World.' The identity centers on a geometric 'CS' monogram — two rounded pill forms arranged to suggest a film frame or window — paired with a bold sans-serif 'Color Study.' wordmark. The system includes logo construction guidelines, lockup variations, a 3D chrome logo rendering, branded merchandise (five-panel cap, director's chair), a retro CRT manifesto screen, a cinematic credits sequence, and atmospheric shadow-study photography that reinforces the studio's focus on light and color in filmmaking.",
+    "role": "Art Director, Designer",
+    "images": [
+      {
+        "src": "cover.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "logo-dark.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "logo-construction.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "logo-lockups.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "storyboard.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "crt-manifesto.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "merch-cap.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "shadow-study-light.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "shadow-study-warm.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "logo-chrome.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "directors-chair.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "credits-screen.png",
+        "w": 1080,
+        "h": 1350
+      }
+    ],
+    "videos": [
+      {
+        "src": "brand-anim-01.mp4",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "brand-anim-02.mp4",
+        "w": 864,
+        "h": 1080
+      },
+      {
+        "src": "brand-anim-03.mp4",
+        "w": 864,
+        "h": 1080
+      },
+      {
+        "src": "multi-panel.mp4",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "showreel.mp4",
+        "w": 3840,
+        "h": 2160
+      },
+      {
+        "src": "window-light.mp4",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "renaissance-final.mov",
+        "w": 2880,
+        "h": 2160
+      }
+    ],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Color Study Film Studio",
+    "credits": []
+  },
+  {
+    "id": "speed-shapes-branding",
+    "title": "Speed Shapes Branding",
+    "dateAdded": "2025-10-01",
+    "year": 2025,
+    "tags": [
+      "branding",
+      "logo",
+      "surf",
+      "merch"
+    ],
+    "medium": "identity, branding",
+    "description": "Brand identity system for Speed Shapes Manufacturing, a surfboard shaper based in Virginia Beach, VA. The identity is built around a dynamic flame-inspired 'S' mark enclosed in a circle, paired with bold graffiti-style 'SPEEDSHAPES' lettering. The visual language draws from surf culture, psychedelic color palettes (neon pinks, greens, yellows), and organic flame and wave patterns. The system spans logo variations, custom wordmark treatments, surf photography, surfboard graphics applied to shaped boards, branded apparel (tees, hoodies, long-sleeves), and social media assets.",
+    "role": "Art Director, Designer",
+    "images": [
+      {
+        "src": "cover.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "surf-diptych.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "board-green.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "board-sunset.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "logo-icon-neon.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "logo-pattern.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "action-diptych.png",
+        "w": 1928,
+        "h": 1088
+      },
+      {
+        "src": "wordmark-variations.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "merch-tee-front.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "merch-tee-back.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "social-icons.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "merch-apparel.png",
+        "w": 1920,
+        "h": 1080
+      }
+    ],
+    "videos": [
+      {
+        "src": "brand-anim-02.mp4",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "brand-anim-01.mp4",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "brand-anim-04.mp4",
+        "w": 1080,
+        "h": 1350
+      }
+    ],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Speed Shapes Manufacturing",
+    "credits": []
+  },
+  {
+    "id": "bandupgotti-branding",
+    "title": "BandUp Gotti Branding",
+    "dateAdded": "2025-05-01",
+    "year": 2025,
+    "tags": [
+      "branding",
+      "logo",
+      "music",
+      "merch"
+    ],
+    "medium": "branding, art direction",
+    "description": "Brand and logo design for rapper and musician BandUp Gotti. The identity is built around a custom icon that fuses a globe, bull horns, and the omega symbol — evoking world domination and seizing the day. The mark is paired with 'BANDUP GOTTI' set in Goldman, a sans-serif with subtle tapering and spur details. The system includes an icon characteristics breakdown, typography specimen, logo lockup variations (horizontal and stacked), CD packaging with blurred black-and-white artist photography, a branded pattern used as a photo frame, and a merch tee mockup.",
+    "role": "Designer",
+    "images": [
+      {
+        "src": "cover.jpg",
+        "w": 2160,
+        "h": 2700
+      },
+      {
+        "src": "typography.jpg",
+        "w": 2160,
+        "h": 2700
+      },
+      {
+        "src": "type-detail.jpg",
+        "w": 2160,
+        "h": 2700
+      },
+      {
+        "src": "logo-portrait.jpg",
+        "w": 2160,
+        "h": 2700
+      },
+      {
+        "src": "logo-breakdown.jpg",
+        "w": 2160,
+        "h": 2700
+      },
+      {
+        "src": "logo-lockups.jpg",
+        "w": 2160,
+        "h": 2700
+      },
+      {
+        "src": "artist-portrait.jpg",
+        "w": 2160,
+        "h": 2700
+      },
+      {
+        "src": "merch-tee.jpg",
+        "w": 3840,
+        "h": 2160
+      },
+      {
+        "src": "cd-packaging.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "logo-detail.jpg",
+        "w": 1920,
+        "h": 1080
+      }
+    ],
+    "videos": [
+      {
+        "src": "brand-anim.mov",
+        "w": 1080,
+        "h": 1350
+      }
+    ],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "BandUp Gotti",
+    "credits": [
+      {
+        "name": "Create with the Perfect Play"
+      }
+    ]
+  },
+  {
+    "id": "frank-and-pattys-marketing",
+    "title": "Frank & Patty's Marketing",
+    "dateAdded": "2025-06-01",
+    "year": 2025,
+    "tags": [
+      "design",
+      "marketing",
+      "merch"
+    ],
+    "medium": "design, marketing",
+    "description": "Design and graphic art for Frank & Patty's, a bar and grill in Virginia Beach, VA ('Not a Bar & Grill — Burgers, Hotdogs, Cocktails, Beer' at 510 17th 1/2 St A). The work spans illustrated merchandise — a black hoodie featuring a character graphic with the tagline 'Get Full at the 1/2,' white tees with 'Roll Through!' and 'Pull Up!' bar-stool illustrations in a red-and-green checkerboard palette — newspaper-style flyer art ('For a Good Time Call'), retro diner-inspired poster graphics ('Get Stuffed!'), Patty's Pilsner beer can label design, and social media photography capturing the bar's community and launch events.",
+    "role": "Designer",
+    "images": [
+      {
+        "src": "social-bar.jpg",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "merch-hoodie.jpg",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "flyer-call.jpg",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "flyer-stuffed.jpg",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "pilsner-can.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "merch-tees.png",
+        "w": 2160,
+        "h": 1350
+      },
+      {
+        "src": "social-party-01.jpg",
+        "w": 1080,
+        "h": 1080
+      },
+      {
+        "src": "social-party-02.jpg",
+        "w": 1080,
+        "h": 1080
+      },
+      {
+        "src": "social-pilsner.jpg",
+        "w": 1080,
+        "h": 1350
+      }
+    ],
+    "videos": [],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Frank & Patty's",
+    "credits": []
+  },
+  {
+    "id": "onlyyou-marketing",
+    "title": "Only You Marketing",
+    "dateAdded": "2024-04-01",
+    "year": 2024,
+    "tags": [
+      "design",
+      "marketing",
+      "merch"
+    ],
+    "medium": "design, marketing",
+    "description": "Design and graphic art for Only You Bar & Lounge, a bar, lounge, cafe, record shop, and wine bar at Park Place in Norfolk, VA. The work includes a wide range of illustrated event posters for live music nights — hand-drawn and digitally composed flyers for acts including Cosmo Baker, Matthew Law, Esentrik, No Visa & Friends, Funk Freaks, Sasha Marie, and Hakana. Branded merchandise spans a black tee with pixel-art retro graphics, a black hoodie with a vinyl-record swirl motif, and white tees with hand-illustrated floral and character art. Additional deliverables include ASCII-style weekly event schedule graphics, a wheatpaste street flyer campaign ('For a Good Time Call 888-80-ONLY YOU'), and social media photography documenting the venue's community events, staff, and atmosphere.",
+    "role": "Designer",
+    "images": [
+      {
+        "src": "event-schedule.jpg",
+        "w": 2160,
+        "h": 2700
+      },
+      {
+        "src": "social-group.jpg",
+        "w": 1080,
+        "h": 1080
+      },
+      {
+        "src": "merch-tee-pixel.jpg",
+        "w": 2160,
+        "h": 2700
+      },
+      {
+        "src": "merch-hoodie.jpg",
+        "w": 2160,
+        "h": 2700
+      },
+      {
+        "src": "social-bartender.jpg",
+        "w": 1080,
+        "h": 1080
+      },
+      {
+        "src": "poster-diptych-01.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "poster-interlinked.jpg",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "social-hoodie.jpg",
+        "w": 1080,
+        "h": 1080
+      },
+      {
+        "src": "poster-diptych-02.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "poster-diptych-03.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "social-patron.jpg",
+        "w": 1080,
+        "h": 1080
+      },
+      {
+        "src": "poster-novisa.jpg",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "poster-funkfreaks.jpg",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "social-wheatpaste.jpg",
+        "w": 1080,
+        "h": 1080
+      },
+      {
+        "src": "merch-tees-illustrated.jpg",
+        "w": 3254,
+        "h": 2700
+      }
+    ],
+    "videos": [
+      {
+        "src": "event-reel.mp4",
+        "w": 1080,
+        "h": 1350
+      }
+    ],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Only You Bar & Lounge",
+    "credits": []
+  },
+  {
+    "id": "symmetry-glassing-branding",
+    "title": "Symmetry Glassing Branding",
+    "dateAdded": "2026-03-01",
+    "year": 2026,
+    "tags": [
+      "branding",
+      "logo",
+      "surf"
+    ],
+    "medium": "branding, identity",
+    "description": "Brand and identity design for Symmetry Glassing, a surfboard glassing and finishing service based in Portland, ME. The identity centers on a dynamic swirl mark — an abstract 'S' form evoking water, wave energy, and the rotational motion of the glassing process. The system includes a standalone logo mark, two logo lockup arrangements with the 'SYMMETRY' wordmark set in Tay Basal (slanted and upright), four makers-mark variations for board stamps and trade use, a typography specimen (Tay Basal display and Akkurat-Bold secondary), Instagram icon variations in positive and negative, workshop photography of the finishing process, and a surfer-lifestyle image composited with the logo.",
+    "role": "Designer",
+    "images": [
+      {
+        "src": "cover.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "logo-lockups.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "makers-marks.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "typography.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "board-stamp.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "social-icons.png",
+        "w": 1920,
+        "h": 1019
+      },
+      {
+        "src": "surfers-logo-overlay.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "workshop.png",
+        "w": 1080,
+        "h": 1350
+      }
+    ],
+    "videos": [
+      {
+        "src": "brand-anim-01.mp4",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "brand-anim-02.mp4",
+        "w": 1080,
+        "h": 1350
+      }
+    ],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Symmetry Glassing",
+    "credits": [
+      {
+        "name": "Aidan Molloy"
+      }
+    ]
+  },
+  {
+    "id": "aunties-marketing",
+    "title": "Aunties Marketing",
+    "dateAdded": "2021-03-01",
+    "year": 2021,
+    "tags": [
+      "design",
+      "branding",
+      "marketing",
+      "merch"
+    ],
+    "medium": "design, branding",
+    "description": "Various design and graphic art assets for Auntie's Tiki, a Filipino tiki bar and sari-sari at 4314 Colley Avenue in Norfolk, VA. The work includes illustrated cocktail-to-go labels (Mai Tai, Hurricane, Jungle Bird, Pain Killer) in bold neon colorways, a 'Nieves Fernandez' commemorative tee design with archival imagery, a sari-sari tee with illustrated goddess figure and Filipino iconography, a 'Banana Sauce' banana ketchup label, social media graphics layered over vintage family photography (soft open announcements, help wanted, Mother's Day), a wall mural for the restaurant interior, and food and product photography.",
+    "role": "Designer, Graphic Artist",
+    "images": [
+      {
+        "src": "cover.png",
+        "w": 1920,
+        "h": 1228
+      },
+      {
+        "src": "cocktail-labels.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "food-spread.jpg",
+        "w": 1440,
+        "h": 960
+      },
+      {
+        "src": "merch-tee-nieves.png",
+        "w": 1920,
+        "h": 1089
+      },
+      {
+        "src": "tee-photo-closeup.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "merch-tee-sari.jpg",
+        "w": 1920,
+        "h": 1089
+      },
+      {
+        "src": "tee-photo-storefront.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "banana-sauce-label.jpg",
+        "w": 975,
+        "h": 1275
+      },
+      {
+        "src": "sauce-bottles.jpg",
+        "w": 2048,
+        "h": 2036
+      },
+      {
+        "src": "social-carousel.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "wall-mural.jpg",
+        "w": 1512,
+        "h": 1889
+      },
+      {
+        "src": "social-help-wanted.png",
+        "w": 1080,
+        "h": 1080
+      },
+      {
+        "src": "food-plating.jpg",
+        "w": 960,
+        "h": 1440
+      },
+      {
+        "src": "social-mothers-day.png",
+        "w": 1080,
+        "h": 1351
+      },
+      {
+        "src": "social-listen-up.png",
+        "w": 1080,
+        "h": 1080
+      }
+    ],
+    "videos": [
+      {
+        "src": "logo-anim.mp4",
+        "w": 360,
+        "h": 640
+      }
+    ],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Auntie's Tiki",
+    "credits": []
+  },
+  {
+    "id": "norfolkcurrents-branding",
+    "title": "Norfolk Currents Branding",
+    "dateAdded": "2022-10-01",
+    "year": 2022,
+    "tags": [
+      "branding",
+      "design",
+      "logo",
+      "editorial"
+    ],
+    "medium": "branding, identity",
+    "description": "Branding, design, and strategy for Norfolk Currents, a community-driven media publication covering Norfolk, VA. The identity pairs a bold condensed sans-serif 'NORFOLK' with a custom blackletter-inflected 'Currents' wordmark featuring wave-form letterforms and a teal accent palette (Ever Green, Tidal Teal, Sea Foam). The system includes a logo construction breakdown, multiple lockup arrangements (main, horizontal, abbreviated NFK), an NFK logo mark, color palette specification (Wet Ink, White, Notebook, three greens), logo variations across light, dark, and colored backgrounds, editorial article cards with teal overlays on documentary photography, social media presence (Instagram grid, story highlights), and branded merchandise (dark and white tees, five-panel cap).",
+    "role": "Designer",
+    "images": [
+      {
+        "src": "logo-construction.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "logo-lockups-light.png",
+        "w": 976,
+        "h": 1080
+      },
+      {
+        "src": "logo-variations.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "logo-lockups-dark.png",
+        "w": 976,
+        "h": 1080
+      },
+      {
+        "src": "waterside-aerial.jpeg",
+        "w": 1200,
+        "h": 900
+      },
+      {
+        "src": "color-palette.png",
+        "w": 1920,
+        "h": 1396
+      },
+      {
+        "src": "editorial-cards.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "social-screens.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "norfolk-flooding.jpeg",
+        "w": 1140,
+        "h": 641
+      },
+      {
+        "src": "merch-tees-dark.png",
+        "w": 976,
+        "h": 1080
+      },
+      {
+        "src": "merch-tees-white.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "merch-cap.jpg",
+        "w": 1941,
+        "h": 1288
+      }
+    ],
+    "videos": [],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Norfolk Currents",
+    "credits": []
+  },
+  {
+    "id": "visit-virginiabeach-campaign",
+    "title": "Visit Virginia Beach Campaign",
+    "dateAdded": "2022-02-01",
+    "year": 2022,
+    "tags": [
+      "design",
+      "campaign",
+      "art direction"
+    ],
+    "medium": "design, campaign",
+    "description": "Design and motion work for the City of Virginia Beach spring and summer tourism campaign. The campaign centers on handwritten personal invitations from local Virginia Beach figures — restaurant owners, run club founders, performance artists, surfers, and shop owners — paired with documentary-style photography of their spaces and communities. The tagline structure follows an 'Open ___' format (Open Arms / Open Tables, Open Stages / Open Minds, Open Trails / Open Hearts, Open Waves / Open Hearts) with the Virginia Beach 'Live the Life' mark. Deliverables include billboard designs (Lamar outdoor), social media cards for Instagram, a beach-themed outdoor print ad ('An Invitation to Make a Splash'), and billboard photo mockups.",
+    "role": "Designer",
+    "images": [
+      {
+        "src": "cover.png",
+        "w": 1080,
+        "h": 1348
+      },
+      {
+        "src": "billboard-photo.png",
+        "w": 5884,
+        "h": 3923
+      },
+      {
+        "src": "billboard-mockup.png",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "handwritten-notes.png",
+        "w": 1296,
+        "h": 979
+      },
+      {
+        "src": "social-open-arms.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "social-open-tables.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "social-open-stages.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "social-open-trails.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "social-open-waves.png",
+        "w": 1080,
+        "h": 1350
+      },
+      {
+        "src": "beach-outdoor-ad.png",
+        "w": 595,
+        "h": 842
+      }
+    ],
+    "videos": [
+      {
+        "src": "alex.mp4",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "sam.mp4",
+        "w": 1920,
+        "h": 1080
+      }
+    ],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "City of Virginia Beach",
+    "credits": [
+      {
+        "name": "Malik Emmanuel"
+      },
+      {
+        "name": "iamOTHER"
+      },
+      {
+        "name": "City of Virginia Beach"
       }
     ]
   }

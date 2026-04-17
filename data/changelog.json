@@ -211,6 +211,58 @@
       {
         "date": "2026-04-15",
         "note": "Scroll indicator thumb animates on resize — width transitions with a 0.35s cubic-bezier ease when the project changes. Position (left) has no transition so it tracks scroll 1:1 without lag."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "VersionSwitcher mix-blend-mode moved from individual child elements (.logo, .label) to the parent .switcher container so the entire bar composites uniformly against page content."
+      },
+      {
+        "date": "2026-04-15",
+        "note": "Optional url field added to Project TypeScript interface — rendered as a 'Visit the live site' pill link on the PDP title block."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "Ingested 5 new projects via inbox workflow — Color Study Branding, Speed Shapes Branding, BandUp Gotti Branding, Frank & Patty's Marketing, Only You Marketing. All assets renamed descriptively, pixel dimensions baked into schema entries."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "Ingested Symmetry Glassing Branding via inbox workflow — 8 images, 2 videos. Collaborator: Aidan Molloy."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "Project dateAdded values corrected — Color Study (Nov 2025), Speed Shapes (Oct 2025), BandUp Gotti (May 2025), Frank & Patty's (Jun 2025), Only You (Apr 2024). Portfolio now sorts newest-first: Symmetry Glassing → Color Study → Speed Shapes → Frank & Patty's → BandUp Gotti → Rock Hall → Only You → PING → Thrift & Ride."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "Duplicate video removed from Speed Shapes (brand-anim-02 and brand-anim-03 were identical). Asset ordering adjusted across Speed Shapes and Color Study — surfboard photos moved earlier, shadow studies placed adjacent, directors chair and credits screen moved to end."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "Image/video interleave algorithm rewritten — LEAD_IMAGES reduced from 2 to 1 so the first video appears second in the scroll row. Proportional interleave replaced with stride-based distribution that spaces remaining videos evenly across the image stream, preventing early video clustering."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "Project menu added to PDP pagination pill — clicking the center counter expands the pill into a rounded-rectangle menu listing all projects by date and title. Active project highlighted. GSAP-animated open/close with synchronized width, height, and border-radius transitions. Escape key and backdrop click to dismiss."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "Tags and medium values consolidated across all projects — 24 unique tags reduced to 16 (identity→branding, apparel→merch, film→motion, graphic art→design, platform→web, social/poster/event→marketing). 12 medium values reduced to 9."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "Homepage hero type size set to fixed 22px (was clamp 20–32px). Mobile breakpoint adjusted to clamp(16px, 4.5vw, 22px). Max-width set to 520px across all breakpoints to maintain 3-line text wrapping."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "Mobile PDP meta grid changed from single-column stack to 2×2 layout — Year and Medium on row 1, Role and Credits on row 2."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "PDP pagination pill centered horizontally on landscape mobile and below (max-width: 900px)."
+      },
+      {
+        "date": "2026-04-16",
+        "note": "Mobile project row spacing — row-gap between title and tags increased from 6px to 12px."
       }
     ]
   }

@@ -1,10 +1,10 @@
-// ROOT LAYOUT — LOCKED FILE. Never modify this file.
-// Contains only two permanent elements: BetaBanner and VersionSwitcher.
-// These live outside and above all version UIs, forever.
+// ROOT LAYOUT — LOCKED FILE. Never modify this file except to mount
+// permanent infrastructure (BetaBanner, VersionSwitcher, Preloader).
 
 import type { Metadata } from 'next'
 import BetaBanner from './components/BetaBanner'
 import VersionSwitcher from './components/VersionSwitcher'
+import PreloaderWrapper from './components/Preloader/PreloaderWrapper'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -20,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <PreloaderWrapper />
         <BetaBanner />
         <VersionSwitcher />
         {children}

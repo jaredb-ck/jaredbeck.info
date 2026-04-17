@@ -94,6 +94,15 @@ export default function V0App({
     setActive({ project, index: newIndex })
   }, [active, projects])
 
+  const goToProject = useCallback((targetIndex: number) => {
+    if (!active || targetIndex === active.index) return
+    if (targetIndex < 0 || targetIndex >= projects.length) return
+    const project = projects[targetIndex]
+    history.replaceState({}, '', `/v0/projects/${project.id}`)
+    setNavDirection(targetIndex < active.index ? 'prev' : 'next')
+    setActive({ project, index: targetIndex })
+  }, [active, projects])
+
   const onOpenComplete = useCallback(() => {
     isAnimating.current = false
   }, [])
@@ -173,10 +182,12 @@ export default function V0App({
             project={active.project}
             index={active.index}
             totalCount={projects.length}
+            projects={projects}
             onBack={closeProject}
             onOpenComplete={onOpenComplete}
             onPrev={goToPrev}
             onNext={goToNext}
+            onGoToProject={goToProject}
             direction={navDirection}
           />
         </div>
