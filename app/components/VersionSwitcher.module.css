@@ -25,6 +25,7 @@
 @media (max-width: 767px) {
   .switcher {
     padding: 12px 20px;
+    top: var(--beta-banner-height);
   }
 }
 
@@ -38,7 +39,30 @@
 .logo {
   display: block;
   height: 32px;
-  width: auto;
+  width: 32px;
+}
+
+.logoRingStatic {
+  transition: opacity 0.25s ease;
+}
+
+.logoLink:hover .logoRingStatic {
+  opacity: 0;
+}
+
+.logoRingSpin {
+  animation: logoSpin 1.2s linear infinite;
+  opacity: 0;
+  transform-origin: 100px 100px;
+  transition: opacity 0.25s ease;
+}
+
+.logoLink:hover .logoRingSpin {
+  opacity: 1;
+}
+
+@keyframes logoSpin {
+  to { transform: rotate(360deg); }
 }
 
 .group {

@@ -65,6 +65,25 @@
   100% { transform: translateX(-50%); }
 }
 
+/* On mobile, reduce to match version switcher's text weight */
+@media (max-width: 480px) {
+  .text {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .tickerSegment {
+    gap: 14px;
+    padding: 4px 8px;
+  }
+
+  /* Scale the 16px icons down to 10px */
+  .tickerSegment img {
+    height: 10px;
+    width: 10px;
+  }
+}
+
 @media (min-width: 1600px) {
   .banner {
     justify-content: center;

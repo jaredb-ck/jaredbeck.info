@@ -10,11 +10,11 @@
 
 .chromeVeil {
   background: var(--bg);
-  height: 46px; /* beta-banner bottom (32) → filter-bar top (78) */
+  height: calc(var(--chrome-offset) - var(--beta-banner-height));
   left: 0;
   position: fixed;
   right: 0;
-  top: 32px;
+  top: var(--beta-banner-height);
   z-index: 30;
 }
 

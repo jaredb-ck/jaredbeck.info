@@ -23,27 +23,49 @@
 .filterBar {
   align-items: center;
   background: var(--bg);
-  box-shadow: 0 8px 0 var(--bg);
+  box-shadow: 0 8px 0 var(--bg), 0 -4px 0 var(--bg);
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
   margin-top: 80px;
   padding: 24px 0 12px;
   position: sticky;
-  top: 78px;
+  top: var(--chrome-offset, 78px);
   z-index: 8;
 }
 
 .filterGroup {
   align-items: center;
   display: flex;
+  flex: 1;
   flex-wrap: wrap;
   gap: 6px;
 }
 
+.projectCount {
+  color: var(--muted);
+  flex-shrink: 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.projectCountMobile {
+  bottom: 10px;
+  color: var(--muted);
+  display: none;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  position: absolute;
+  right: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .filterPill {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--rule);
   border-radius: 100px;
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
@@ -56,7 +78,7 @@
 }
 
 .filterPill:hover {
-  border-color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.4);
   color: #ffffff;
 }
 
@@ -78,13 +100,14 @@
 /* ─── Year headers ───────────────────────────────────────────── */
 
 .yearHeader {
-  align-items: center;
+  align-items: flex-end;
   background: var(--bg);
   display: flex;
-  gap: 24px;
+  gap: 0;
   height: 48px;
   margin-top: 40px;
   position: sticky;
+  /* position: sticky acts as the containing block for absolute children */
   /* top is set via inline style per-header for stacking */
   z-index: 10;
 }
@@ -98,16 +121,22 @@
 }
 
 .yearLabel {
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  border-top: 1px solid var(--rule);
+  border-radius: 4px 4px 0 0;
   color: var(--fg);
   flex-shrink: 0;
   font-size: 14px;
   letter-spacing: 0.04em;
+  padding: 8px 24px;
 }
 
 .yearRule {
   background: var(--rule);
   flex: 1;
   height: 1px;
+  align-self: flex-end;
 }
 
 /* ─── Year group ─────────────────────────────────────────────── */
@@ -143,13 +172,14 @@
   display: flex;
   gap: 6px;
   height: 0;
+  margin-left: 1px;
   opacity: 0;
   overflow: hidden;
   padding-bottom: 0;
   transition:
-    height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.12s,
-    padding-bottom 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.12s,
-    opacity 0.35s ease 0.3s;
+    height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s,
+    padding-bottom 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s,
+    opacity 0.35s ease 0.4s;
 }
 
 .projectRow:hover .imageRow {
@@ -223,7 +253,39 @@
 
 /* ─── Mobile (below tablet) ──────────────────────────────────── */
 
+@media (max-width: 1100px) {
+  .projectCount {
+    display: none;
+  }
+
+  .projectCountMobile {
+    display: block;
+  }
+}
+
 @media (max-width: 767px) {
+  .filterBar {
+    margin-top: 40px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filterGroup {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .filterGroup::-webkit-scrollbar {
+    display: none;
+  }
+
+  .yearHeader {
+    position: static;
+    z-index: auto;
+  }
+
   .projectRow {
     padding: 14px 0 0;
   }
@@ -272,5 +334,17 @@
 
   .imageRow {
     display: none;
+  }
+
+  /* Increase touch targets on mobile */
+  .filterPill {
+    flex-shrink: 0;
+    min-height: 36px;
+    padding: 8px 16px;
+    white-space: nowrap;
+  }
+
+  .projectRow {
+    min-height: 36px;
   }
 }

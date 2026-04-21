@@ -15,10 +15,24 @@
 :root {
   --chrome-height: 88px;
   --beta-banner-height: 32px;
+  --chrome-offset: 78px;
+}
+
+@media (max-width: 480px) {
+  :root {
+    --beta-banner-height: 24px;
+    --chrome-offset: 64px;
+  }
 }
 
 html {
-  scroll-behavior: smooth;
+  overscroll-behavior: none;
+}
+
+@supports (height: 100dvh) {
+  body {
+    min-height: 100dvh;
+  }
 }
 
 *, *::before, *::after {
@@ -34,6 +48,7 @@ body {
   background: #191919;
   /* Content sits below the beta banner only — the transparent version
      switcher floats over the content above. */
+  overscroll-behavior: none;
   padding-top: var(--beta-banner-height);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -43,3 +58,4 @@ a {
   color: inherit;
   text-decoration: none;
 }
+

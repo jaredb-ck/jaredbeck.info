@@ -31,13 +31,14 @@
 /* ─── Header ─────────────────────────────────────────────────── */
 
 .header {
-  /* Floats over the scroll in the top-left so the scroll takes the full panel
-     height. Only contains the Home button — pagination moved to
-     .projectNavFixed at bottom-right. Top offset = 56px so the Home button
-     lands just below the 56px version switcher band (panel itself starts 32px
-     below the viewport top, so 32 + 56 = 88 viewport = under the switcher). */
+  /* Floats over the scroll so it takes the full panel height.
+     Contains the Home button (left) and optional View Project button (right). */
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
   left: 40px;
   position: absolute;
+  right: 40px;
   top: 72px;
   z-index: 5;
 }
@@ -61,16 +62,6 @@
 
 .back:hover {
   opacity: 0.75;
-}
-
-.projectNav {
-  align-items: center;
-  background: #ffffff;
-  border-radius: 100px;
-  color: #191919;
-  display: flex;
-  gap: 2px;
-  padding: 4px 6px;
 }
 
 /* Floating pagination pinned to the bottom-right corner of the panel.
@@ -200,21 +191,18 @@
    with the title. */
 .urlButton {
   align-items: center;
-  align-self: end;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #ffffff;
+  border: 1px solid #ffffff;
   border-radius: 100px;
-  color: #ffffff;
+  color: #191919;
   cursor: pointer;
   display: inline-flex;
   font-family: var(--font-mono), monospace;
   font-size: 11px;
   gap: 6px;
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: start;
   letter-spacing: 0.08em;
   padding: 4px 10px;
+  text-decoration: none;
   text-transform: uppercase;
   transition: opacity 0.15s ease;
   white-space: nowrap;
@@ -368,9 +356,24 @@
 }
 
 .scrollImage {
+  animation: shimmer 1.5s ease-in-out infinite;
+  background: linear-gradient(
+    90deg,
+    #1a1a1a 0%,
+    #222 40%,
+    #2a2a2a 50%,
+    #222 60%,
+    #1a1a1a 100%
+  );
+  background-size: 200% 100%;
   flex-shrink: 0;
   height: 100%;
   width: auto;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 /* ─── Scroll indicator ───────────────────────────────────────── */
@@ -381,6 +384,7 @@
   bottom: 20px;
   height: 2px;
   left: 50%;
+  mix-blend-mode: difference;
   pointer-events: none;
   position: absolute;
   transform: translateX(-50%);
@@ -399,19 +403,49 @@
 
 /* ─── Project menu ──────────────────────────────────────────── */
 
+.menuWrap {
+  height: 340px;
+  min-height: 0;
+  position: relative;
+}
+
 .projectMenu {
+  -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 340px;
-  min-height: 0;
+  height: 100%;
   overflow-y: auto;
+  overscroll-behavior-y: contain;
   padding-bottom: 8px;
+  padding-right: 20px;
   scrollbar-width: none;
+  touch-action: pan-y;
 }
 
 .projectMenu::-webkit-scrollbar {
   display: none;
+}
+
+.menuScrollTrack {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 1px;
+  bottom: 12px;
+  pointer-events: none;
+  position: absolute;
+  right: 4px;
+  top: 12px;
+  width: 2px;
+}
+
+.menuScrollThumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 1px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: height 0.2s ease;
+  width: 100%;
 }
 
 .menuItem {
@@ -481,9 +515,8 @@
 
   /* Stack: titleGroup (eyebrow + title) → URL → meta → description. */
   .titleGroup  { grid-column: 1; grid-row: 1; }
-  .urlButton   { grid-column: 1; grid-row: 2; align-self: start; }
-  .meta        { grid-column: 1; grid-row: 3; }
-  .titleLeft   { grid-column: 1; grid-row: 4; }
+  .meta        { grid-column: 1; grid-row: 2; }
+  .titleLeft   { grid-column: 1; grid-row: 3; }
 
 }
 
@@ -508,7 +541,13 @@
   .scrollImage {
     flex-shrink: 0;
     height: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease;
     width: 100%;
+  }
+
+  .scrollImageVisible {
+    opacity: 1;
   }
 
   .header {
@@ -551,6 +590,8 @@
 @media (max-width: 767px) {
   .header {
     left: 20px;
+    right: 20px;
+    top: 60px;
   }
 
   .titleBlock {
@@ -574,6 +615,34 @@
 
   .moreBtn:hover {
     color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Increase touch targets to 44px minimum on mobile */
+  .back {
+    min-height: 36px;
+    min-width: 44px;
+    padding: 8px 14px;
+  }
+
+  .navArrow {
+    min-height: 36px;
+    min-width: 44px;
+    padding: 10px;
+  }
+
+  .centerPill {
+    min-height: 36px;
+    padding: 8px 12px;
+  }
+
+  .menuItem {
+    min-height: 36px;
+    padding: 10px 16px;
+  }
+
+  .urlButton {
+    min-height: 36px;
+    padding: 8px 14px;
   }
 
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo, useRef, useEffect } from 'react'
+import { Fragment, useState, useMemo, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
@@ -70,6 +70,10 @@ function fitSlots(width: number, assets: ImageAsset[]): number {
   return n
 }
 
+function getChromeOffset() {
+  return parseInt(getComputedStyle(document.documentElement).getPropertyValue('--chrome-offset')) || 78
+}
+
 export default function ProjectList({ projects, title, onProjectClick }: Props) {
   const [activeFilters, setActiveFilters] = useState<Set<string>>(new Set())
   const [filterBarHeight, setFilterBarHeight] = useState(60)
@@ -88,7 +92,7 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
     if (el) {
       stickThresholdRef.current = Math.max(
         0,
-        el.getBoundingClientRect().top + window.scrollY - 78
+        el.getBoundingClientRect().top + window.scrollY - getChromeOffset()
       )
     }
   }, [])
@@ -131,7 +135,7 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
     }
 
     const stickThreshold = listRef.current
-      ? Math.max(0, listRef.current.offsetTop - filterBarHeightRef.current - 78)
+      ? Math.max(0, listRef.current.offsetTop - filterBarHeightRef.current - getChromeOffset())
       : stickThresholdRef.current
     stickThresholdRef.current = stickThreshold
 
@@ -177,7 +181,7 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
       const listEl = listRef.current
       if (listEl) {
         // Derive threshold from the static list element — immune to sticky offsetTop quirks
-        const threshold = Math.max(0, listEl.offsetTop - filterBarHeightRef.current - 78)
+        const threshold = Math.max(0, listEl.offsetTop - filterBarHeightRef.current - getChromeOffset())
         stickThresholdRef.current = threshold
 
         // Snap scroll to threshold NOW (synchronous, before re-render) so the
@@ -222,6 +226,7 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
     [byYear]
   )
 
+  // Scroll-trigger entrance on initial mount
   useGSAP(() => {
     const rows = gsap.utils.toArray<HTMLElement>('[data-project-row]', listRef.current)
     if (!rows.length) return
@@ -243,6 +248,23 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
     })
   }, { scope: listRef })
 
+  // Staggered reveal when filter selection changes
+  const prevFilterRef = useRef(activeFilters)
+  useEffect(() => {
+    if (prevFilterRef.current === activeFilters) return
+    prevFilterRef.current = activeFilters
+
+    const headers = gsap.utils.toArray<HTMLElement>('[data-year-header]', listRef.current)
+    const rows = gsap.utils.toArray<HTMLElement>('[data-project-row]', listRef.current)
+    const all = [...headers, ...rows]
+    if (!all.length) return
+
+    gsap.fromTo(all,
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.55, stagger: 0.05, ease: 'power2.out' },
+    )
+  }, [activeFilters])
+
   return (
     <>
       {title && (
@@ -252,7 +274,7 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
       )}
 
       <div ref={filterBarRef} className={styles.filterBar}>
-        <div className={styles.filterGroup}>
+        <div className={styles.filterGroup} data-lenis-prevent-touch>
           <button
             onClick={clearFilters}
             className={`${styles.filterPill}${activeFilters.size === 0 ? ` ${styles.filterPillActive}` : ''}`}
@@ -269,6 +291,9 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
             </button>
           ))}
         </div>
+        <span className={styles.projectCount}>
+          {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
+        </span>
       </div>
 
       <div ref={listRef} className={styles.list}>
@@ -276,20 +301,26 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
           <p className={styles.filterEmpty}>No projects match the selected filters.</p>
         ) : (
           years.map((year, index) => (
-            <React.Fragment key={year}>
+            <Fragment key={year}>
               <a
                 href={`#year-${year}`}
                 className={styles.yearHeader}
-                style={{ top: `calc(78px + ${filterBarHeight}px + ${index} * 48px)` }}
+                data-year-header
+                style={{ top: `calc(var(--chrome-offset, 78px) + ${filterBarHeight}px + ${index} * 48px)` }}
               >
                 <span className={styles.yearLabel}>{year}</span>
                 <div className={styles.yearRule} aria-hidden="true" />
+                {index === 0 && (
+                  <span className={styles.projectCountMobile}>
+                    {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
+                  </span>
+                )}
               </a>
 
               <div
                 className={styles.yearGroup}
                 id={`year-${year}`}
-                style={{ scrollMarginTop: `${78 + filterBarHeight + (index + 1) * 48}px` }}
+                style={{ scrollMarginTop: `calc(var(--chrome-offset, 78px) + ${filterBarHeight}px + ${(index + 1) * 48}px)` }}
               >
                 {byYear[year].map((project) => {
                   // Tallest image at the uniform width drives the row's hover
@@ -369,7 +400,7 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
                   )
                 })}
               </div>
-            </React.Fragment>
+            </Fragment>
           ))
         )}
       </div>

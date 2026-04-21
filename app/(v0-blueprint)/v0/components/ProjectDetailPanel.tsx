@@ -5,7 +5,7 @@ import { flushSync } from 'react-dom'
 import Image from 'next/image'
 import gsap from 'gsap'
 import type { Project, ImageAsset, VideoAsset } from '@/types'
-import { videoCache } from '@/app/components/Preloader/usePreloader'
+import { videoCache, demandLoadVideo } from '@/app/components/Preloader/usePreloader'
 import styles from './ProjectDetailPanel.module.css'
 
 interface Props {
@@ -25,6 +25,44 @@ function formatMenuDate(dateStr: string): string {
   const d = new Date(dateStr)
   const month = d.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
   return `${month} ${d.getUTCFullYear()}`
+}
+
+/**
+ * Tier 3 on-demand video loader. Checks the video cache first,
+ * then fetches the full file as a blob if not cached. Shows a
+ * dark placeholder until the video is ready to play.
+ */
+function LazyVideo({ src }: { src: string }) {
+  const [videoSrc, setVideoSrc] = useState<string | null>(
+    () => videoCache.get(src) ?? null
+  )
+
+  useEffect(() => {
+    if (videoSrc) return
+    let cancelled = false
+    demandLoadVideo(src).then((blobUrl) => {
+      if (cancelled) return
+      setVideoSrc(blobUrl ?? src)
+    })
+    return () => { cancelled = true }
+  }, [src, videoSrc])
+
+  if (!videoSrc) {
+    // Empty placeholder — the parent .scrollImage shimmer shows through
+    return <div style={{ width: '100%', height: '100%' }} />
+  }
+
+  return (
+    <video
+      src={videoSrc}
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#000' }}
+    />
+  )
 }
 
 export default function ProjectDetailPanel({
@@ -78,6 +116,8 @@ export default function ProjectDetailPanel({
   // ─── Project menu state ────────────────────────────────────────
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const menuScrollRef = useRef<HTMLDivElement>(null)
+  const menuThumbRef = useRef<HTMLDivElement>(null)
   const pillRef = useRef<HTMLDivElement>(null)
   const menuOpenRef = useRef(false)
   const menuAnimRef = useRef<gsap.core.Timeline | null>(null)
@@ -226,7 +266,8 @@ export default function ProjectDetailPanel({
   // always mounted so the panel never opens to an empty cover.
   const [visibleIndices, setVisibleIndices] = useState<Set<number>>(() => new Set([0, 1]))
 
-  // Open animation — panel rises up, content staggers in top-to-bottom
+  // Set initial invisible state — the parent V0App drives the entrance animation
+  // on a coordinated timeline with the homepage recession.
   useLayoutEffect(() => {
     const panelEl = panelRef.current
     if (!panelEl) return
@@ -234,26 +275,15 @@ export default function ProjectDetailPanel({
     const panelBg  = panelEl.querySelector<HTMLElement>('[data-panel-bg]')
     const headerEl = panelEl.querySelector<HTMLElement>('[data-detail-header]')
     const titleEl  = titleRef.current
-    const scrollEl = scrollRef.current
-    const imgEls   = scrollEl
-      ? Array.from(scrollEl.querySelectorAll<HTMLElement>('[data-scroll-img]'))
+    const imgEls   = scrollRef.current
+      ? Array.from(scrollRef.current.querySelectorAll<HTMLElement>('[data-scroll-img]'))
       : []
 
+    gsap.set(panelEl,  { scale: 1.015, autoAlpha: 0 })
     if (panelBg)  gsap.set(panelBg,  { autoAlpha: 0 })
-    if (headerEl) gsap.set(headerEl, { autoAlpha: 0, y: 10 })
-    if (titleEl)  gsap.set(titleEl,  { autoAlpha: 0, y: 10 })
-    gsap.set(imgEls, { autoAlpha: 0, y: 10 })
-    gsap.set(panelEl, { y: 20 })
-
-    const tl = gsap.timeline({ onComplete: onOpenComplete })
-
-    tl.to(panelEl,  { y: 0,                          duration: 0.55, ease: 'expo.out'   }, 0)
-    if (panelBg)  tl.to(panelBg,  { autoAlpha: 1,   duration: 0.4,  ease: 'power2.out' }, 0)
-    if (headerEl) tl.to(headerEl, { autoAlpha: 1, y: 0, duration: 0.3,  ease: 'power2.out' }, 0.15)
-    if (titleEl)  tl.to(titleEl,  { autoAlpha: 1, y: 0, duration: 0.3,  ease: 'power2.out' }, 0.22)
-    if (imgEls.length > 0) {
-      tl.to(imgEls, { autoAlpha: 1, y: 0, duration: 0.35, stagger: 0.025, ease: 'power2.out' }, 0.3)
-    }
+    if (headerEl) gsap.set(headerEl, { autoAlpha: 0, y: 8 })
+    if (titleEl)  gsap.set(titleEl,  { autoAlpha: 0, y: 8 })
+    gsap.set(imgEls, { autoAlpha: 0, y: 6 })
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Image scroll height + wheel redirect + scroll indicator
@@ -388,6 +418,12 @@ export default function ProjectDetailPanel({
     let wheelAttached = false
     let mobileWheelAttached = false
     const stopBubble = (e: WheelEvent) => { e.stopPropagation() }
+    // Same as stopBubble but for touch events — Lenis.stop() leaves its
+    // non-passive touchmove listener on window, which stalls the compositor
+    // even when Lenis isn't calling preventDefault. Stopping propagation
+    // on the panel keeps touch events local so native scroll works.
+    const stopTouchBubble = (e: TouchEvent) => { e.stopPropagation() }
+    let touchAttached = false
     const syncWheel = () => {
       if (!isMobile()) {
         // Desktop: hijack wheel for horizontal scroll
@@ -410,6 +446,13 @@ export default function ProjectDetailPanel({
           mobileWheelAttached = true
         }
       }
+      // Block touch event bubbling at all widths — PDP is a fixed overlay
+      // with Lenis stopped, so touch events should never reach Lenis.
+      if (!touchAttached) {
+        panel.addEventListener('touchstart', stopTouchBubble, { passive: true })
+        panel.addEventListener('touchmove', stopTouchBubble, { passive: true })
+        touchAttached = true
+      }
     }
     syncWheel()
     const onResizeFull = () => {
@@ -424,6 +467,8 @@ export default function ProjectDetailPanel({
       el.removeEventListener('scroll', updateIndicator)
       panel.removeEventListener('wheel', handleWheel)
       panel.removeEventListener('wheel', stopBubble)
+      panel.removeEventListener('touchstart', stopTouchBubble)
+      panel.removeEventListener('touchmove', stopTouchBubble)
       gsap.killTweensOf(el)
       // Restore html overflow so Lenis can take over again on close
       if (originalHtmlOverflow !== '') {
@@ -583,6 +628,19 @@ export default function ProjectDetailPanel({
           </svg>
           Home
         </button>
+        {displayProject.url && (
+          <a
+            href={displayProject.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.urlButton}
+          >
+            View project
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M9.12254 6.17037H5.16274L5.17158 5.17158H10.8284V10.8284L9.82964 10.8373V6.87747L5.52513 11.182L4.81802 10.4749L9.12254 6.17037Z" fill="currentColor"/>
+            </svg>
+          </a>
+        )}
       </header>
 
       <div ref={scrollRef} className={styles.imageScroll}>
@@ -594,19 +652,6 @@ export default function ProjectDetailPanel({
             )}
             <h1 className={styles.title}>{displayProject.title}</h1>
           </div>
-          {displayProject.url && (
-            <a
-              href={displayProject.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.urlButton}
-            >
-              Visit the live site
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M9.12254 6.17037H5.16274L5.17158 5.17158H10.8284V10.8284L9.82964 10.8373V6.87747L5.52513 11.182L4.81802 10.4749L9.12254 6.17037Z" fill="currentColor"/>
-              </svg>
-            </a>
-          )}
           <div className={styles.titleLeft}>
             <p className={styles.description}>{displayProject.description}</p>
             {(() => {
@@ -707,7 +752,7 @@ export default function ProjectDetailPanel({
             <div
               key={`${displayProject.id}-${i}`}
               data-scroll-img={i}
-              className={styles.scrollImage}
+              className={`${styles.scrollImage}${shouldLoad ? ` ${styles.scrollImageVisible}` : ''}`}
               style={{ aspectRatio, position: 'relative', overflow: 'hidden' }}
             >
               {shouldLoad && imageAsset && (
@@ -721,14 +766,8 @@ export default function ProjectDetailPanel({
                 />
               )}
               {shouldLoad && videoAsset && (
-                <video
-                  src={videoCache.get(`/videos/${displayProject.id}/${videoAsset.src}`) ?? `/videos/${displayProject.id}/${videoAsset.src}`}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#000' }}
+                <LazyVideo
+                  src={`/videos/${displayProject.id}/${videoAsset.src}`}
                 />
               )}
             </div>
@@ -756,19 +795,41 @@ export default function ProjectDetailPanel({
         className={styles.projectNavFixed}
       >
         {/* Project list — always in DOM, toggled via GSAP */}
-        <div ref={menuRef} className={styles.projectMenu} style={{ display: 'none' }}>
-          {projects.map((p, i) => (
-            <button
-              key={p.id}
-              data-menu-item
-              {...(i === index ? { 'data-menu-item-active': '' } : {})}
-              className={`${styles.menuItem}${i === index ? ` ${styles.menuItemActive}` : ''}`}
-              onClick={() => { onGoToProject(i); setMenuOpen(false) }}
-            >
-              <span className={styles.menuDate}>{String(i + 1).padStart(2, '0')}. {formatMenuDate(p.dateAdded)}</span>
-              <span className={styles.menuProjectTitle}>{p.title}</span>
-            </button>
-          ))}
+        <div ref={menuRef} className={styles.menuWrap} style={{ display: 'none' }}>
+          <div
+            ref={menuScrollRef}
+            className={styles.projectMenu}
+            onScroll={() => {
+              const el = menuScrollRef.current
+              const thumb = menuThumbRef.current
+              const track = thumb?.parentElement
+              if (!el || !thumb || !track) return
+              const trackH = track.clientHeight
+              const ratio = el.clientHeight / el.scrollHeight
+              if (ratio >= 1) { thumb.style.height = '0'; return }
+              const thumbH = Math.max(12, ratio * trackH)
+              const scrollMax = el.scrollHeight - el.clientHeight
+              const progress = scrollMax > 0 ? el.scrollTop / scrollMax : 0
+              thumb.style.height = `${thumbH}px`
+              thumb.style.top = `${progress * (trackH - thumbH)}px`
+            }}
+          >
+            {projects.map((p, i) => (
+              <button
+                key={p.id}
+                data-menu-item
+                {...(i === index ? { 'data-menu-item-active': '' } : {})}
+                className={`${styles.menuItem}${i === index ? ` ${styles.menuItemActive}` : ''}`}
+                onClick={() => { onGoToProject(i); setMenuOpen(false) }}
+              >
+                <span className={styles.menuDate}>{String(i + 1).padStart(2, '0')}. {formatMenuDate(p.dateAdded)}</span>
+                <span className={styles.menuProjectTitle}>{p.title}</span>
+              </button>
+            ))}
+          </div>
+          <div className={styles.menuScrollTrack}>
+            <div ref={menuThumbRef} className={styles.menuScrollThumb} />
+          </div>
         </div>
 
         {/* Pill bar — always visible */}

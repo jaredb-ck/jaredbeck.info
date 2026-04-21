@@ -10,8 +10,14 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    const isMobile = window.matchMedia('(pointer: coarse) and (hover: none)').matches
     const lenis = new Lenis({
-      lerp: 0.08, // lower = smoother / slower
+      lerp: 0.08,
+      ...(isMobile && {
+        syncTouch: true,
+        syncTouchLerp: 0.14,
+        touchInertiaExponent: 1.75,
+      }),
     })
 
     setLenisInstance(lenis)
