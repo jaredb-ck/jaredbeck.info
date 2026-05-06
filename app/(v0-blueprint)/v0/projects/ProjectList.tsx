@@ -274,6 +274,9 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
       )}
 
       <div ref={filterBarRef} className={styles.filterBar}>
+        <span className={styles.projectCountMobile}>
+          {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
+        </span>
         <div className={styles.filterGroup} data-lenis-prevent-touch>
           <button
             onClick={clearFilters}
@@ -310,11 +313,6 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
               >
                 <span className={styles.yearLabel}>{year}</span>
                 <div className={styles.yearRule} aria-hidden="true" />
-                {index === 0 && (
-                  <span className={styles.projectCountMobile}>
-                    {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
-                  </span>
-                )}
               </a>
 
               <div

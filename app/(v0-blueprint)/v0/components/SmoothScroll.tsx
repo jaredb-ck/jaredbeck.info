@@ -16,7 +16,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       ...(isMobile && {
         syncTouch: true,
         syncTouchLerp: 0.14,
-        touchInertiaExponent: 1.75,
+        touchInertiaMultiplier: 100,
+        touchInertiaExponent: 1.8,
       }),
     })
 

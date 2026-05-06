@@ -37,7 +37,8 @@
 
 @media (max-width: 767px) {
   .contentWrap {
-    padding: 64px 20px 40px 20px;
+    --gutter: 20px;
+    padding: 64px 0 40px 0;
   }
 }
 

@@ -43,7 +43,7 @@
 }
 
 .projectCount {
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.55);
   flex-shrink: 0;
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -52,13 +52,10 @@
 }
 
 .projectCountMobile {
-  bottom: 10px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.55);
   display: none;
   font-size: 11px;
   letter-spacing: 0.08em;
-  position: absolute;
-  right: 0;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -260,19 +257,30 @@
 
   .projectCountMobile {
     display: block;
+    padding-left: var(--gutter, 20px);
+    padding-right: var(--gutter, 20px);
+    width: 100%;
+  }
+
+  .filterBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 }
 
 @media (max-width: 767px) {
   .filterBar {
     margin-top: 40px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
   }
 
   .filterGroup {
     flex-wrap: nowrap;
+    max-width: 100%;
     overflow-x: auto;
+    padding-left: var(--gutter, 20px);
+    padding-right: var(--gutter, 20px);
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
@@ -281,13 +289,20 @@
     display: none;
   }
 
+  .filterEmpty {
+    padding-left: var(--gutter, 20px);
+    padding-right: var(--gutter, 20px);
+  }
+
   .yearHeader {
+    padding-left: var(--gutter, 20px);
+    padding-right: var(--gutter, 20px);
     position: static;
     z-index: auto;
   }
 
   .projectRow {
-    padding: 14px 0 0;
+    padding: 14px var(--gutter, 20px) 0;
   }
 
   .rowData {

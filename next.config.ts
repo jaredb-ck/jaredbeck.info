@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ['192.168.51.130'],
+  allowedDevOrigins: ['192.168.51.132'],
   images: {
     // Serve WebP only — no AVIF. This ensures the preloader caches the same
     // format the browser will request at render time (consistent cache hits).

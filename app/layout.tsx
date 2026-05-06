@@ -4,7 +4,7 @@
 import type { Metadata } from 'next'
 import BetaBanner from './components/BetaBanner'
 import VersionSwitcher from './components/VersionSwitcher'
-import PreloaderWrapper from './components/Preloader/PreloaderWrapper'
+import Preloader from './components/Preloader/Preloader'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <PreloaderWrapper />
+        <Preloader />
         <BetaBanner />
         <VersionSwitcher />
         {children}

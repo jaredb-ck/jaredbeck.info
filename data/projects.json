@@ -46,8 +46,8 @@
       },
       {
         "src": "warehouse-arrival.jpg",
-        "w": 3840,
-        "h": 2160
+        "w": 1920,
+        "h": 1080
       },
       {
         "src": "boarding-alt.jpg",
@@ -160,7 +160,7 @@
         "h": 852
       },
       {
-        "src": "mobile-screens.png",
+        "src": "mobile-screens.jpg",
         "w": 1928,
         "h": 1088
       }
@@ -214,7 +214,7 @@
     "role": "Art Director, Designer",
     "images": [
       {
-        "src": "hero.png",
+        "src": "hero.jpg",
         "w": 1920,
         "h": 1080
       },
@@ -229,12 +229,12 @@
         "h": 1350
       },
       {
-        "src": "explore-mobile.png",
+        "src": "explore-mobile.jpg",
         "w": 3856,
         "h": 2176
       },
       {
-        "src": "inductee-mobile.png",
+        "src": "inductee-mobile.jpg",
         "w": 1928,
         "h": 1088
       },
@@ -244,7 +244,7 @@
         "h": 1088
       },
       {
-        "src": "recap-still.png",
+        "src": "recap-still.jpg",
         "w": 1080,
         "h": 1350
       },
@@ -334,6 +334,9 @@
       },
       {
         "name": "Jax Jackson"
+      },
+      {
+        "name": "Joe Branton"
       }
     ],
     "url": "https://rockhall.com/"
@@ -358,32 +361,32 @@
         "h": 1080
       },
       {
-        "src": "logo-dark.png",
+        "src": "logo-dark.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "logo-construction.png",
+        "src": "logo-construction.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "logo-lockups.png",
+        "src": "logo-lockups.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "storyboard.png",
+        "src": "storyboard.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "crt-manifesto.png",
+        "src": "crt-manifesto.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "merch-cap.png",
+        "src": "merch-cap.jpg",
         "w": 1080,
         "h": 1350
       },
@@ -403,12 +406,12 @@
         "h": 1350
       },
       {
-        "src": "directors-chair.png",
+        "src": "directors-chair.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "credits-screen.png",
+        "src": "credits-screen.jpg",
         "w": 1080,
         "h": 1350
       }
@@ -445,7 +448,7 @@
         "h": 1080
       },
       {
-        "src": "renaissance-final.mov",
+        "src": "renaissance-final.mp4",
         "w": 2880,
         "h": 2160
       }
@@ -474,27 +477,27 @@
     "role": "Art Director, Designer",
     "images": [
       {
-        "src": "cover.png",
+        "src": "cover.jpg",
         "w": 1920,
         "h": 1080
       },
       {
-        "src": "surf-diptych.png",
+        "src": "surf-diptych.jpg",
         "w": 1920,
         "h": 1080
       },
       {
-        "src": "board-green.png",
+        "src": "board-green.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "board-sunset.png",
+        "src": "board-sunset.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "logo-icon-neon.png",
+        "src": "logo-icon-neon.jpg",
         "w": 1920,
         "h": 1080
       },
@@ -504,7 +507,7 @@
         "h": 1080
       },
       {
-        "src": "action-diptych.png",
+        "src": "action-diptych.jpg",
         "w": 1928,
         "h": 1088
       },
@@ -514,12 +517,12 @@
         "h": 1080
       },
       {
-        "src": "merch-tee-front.png",
+        "src": "merch-tee-front.jpg",
         "w": 1920,
         "h": 1080
       },
       {
-        "src": "merch-tee-back.png",
+        "src": "merch-tee-back.jpg",
         "w": 1920,
         "h": 1080
       },
@@ -529,7 +532,7 @@
         "h": 1080
       },
       {
-        "src": "merch-apparel.png",
+        "src": "merch-apparel.jpg",
         "w": 1920,
         "h": 1080
       }
@@ -627,7 +630,7 @@
     ],
     "videos": [
       {
-        "src": "brand-anim.mov",
+        "src": "brand-anim.mp4",
         "w": 1080,
         "h": 1350
       }
@@ -679,12 +682,12 @@
         "h": 1350
       },
       {
-        "src": "pilsner-can.png",
+        "src": "pilsner-can.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "merch-tees.png",
+        "src": "merch-tees.jpg",
         "w": 2160,
         "h": 1350
       },
@@ -833,7 +836,7 @@
     "role": "Designer",
     "images": [
       {
-        "src": "cover.png",
+        "src": "cover.jpg",
         "w": 1920,
         "h": 1080
       },
@@ -853,7 +856,7 @@
         "h": 1350
       },
       {
-        "src": "board-stamp.png",
+        "src": "board-stamp.jpg",
         "w": 1920,
         "h": 1080
       },
@@ -863,12 +866,12 @@
         "h": 1019
       },
       {
-        "src": "surfers-logo-overlay.png",
+        "src": "surfers-logo-overlay.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "workshop.png",
+        "src": "workshop.jpg",
         "w": 1080,
         "h": 1350
       }
@@ -928,12 +931,12 @@
         "h": 960
       },
       {
-        "src": "merch-tee-nieves.png",
+        "src": "merch-tee-nieves.jpg",
         "w": 1920,
         "h": 1089
       },
       {
-        "src": "tee-photo-closeup.png",
+        "src": "tee-photo-closeup.jpg",
         "w": 1080,
         "h": 1350
       },
@@ -943,7 +946,7 @@
         "h": 1089
       },
       {
-        "src": "tee-photo-storefront.png",
+        "src": "tee-photo-storefront.jpg",
         "w": 1080,
         "h": 1350
       },
@@ -954,8 +957,8 @@
       },
       {
         "src": "sauce-bottles.jpg",
-        "w": 2048,
-        "h": 2036
+        "w": 1600,
+        "h": 1591
       },
       {
         "src": "social-carousel.jpg",
@@ -968,7 +971,7 @@
         "h": 1889
       },
       {
-        "src": "social-help-wanted.png",
+        "src": "social-help-wanted.jpg",
         "w": 1080,
         "h": 1080
       },
@@ -978,12 +981,12 @@
         "h": 1440
       },
       {
-        "src": "social-mothers-day.png",
+        "src": "social-mothers-day.jpg",
         "w": 1080,
         "h": 1351
       },
       {
-        "src": "social-listen-up.png",
+        "src": "social-listen-up.jpg",
         "w": 1080,
         "h": 1080
       }
@@ -1054,7 +1057,7 @@
         "h": 1080
       },
       {
-        "src": "social-screens.png",
+        "src": "social-screens.jpg",
         "w": 1920,
         "h": 1080
       },
@@ -1103,17 +1106,17 @@
     "role": "Designer",
     "images": [
       {
-        "src": "cover.png",
+        "src": "cover.jpg",
         "w": 1080,
         "h": 1348
       },
       {
-        "src": "billboard-photo.png",
-        "w": 5884,
-        "h": 3923
+        "src": "billboard-photo.jpg",
+        "w": 3000,
+        "h": 2000
       },
       {
-        "src": "billboard-mockup.png",
+        "src": "billboard-mockup.jpg",
         "w": 1920,
         "h": 1080
       },
@@ -1123,22 +1126,22 @@
         "h": 979
       },
       {
-        "src": "social-open-arms.png",
+        "src": "social-open-arms.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "social-open-tables.png",
+        "src": "social-open-tables.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "social-open-stages.png",
+        "src": "social-open-stages.jpg",
         "w": 1080,
         "h": 1350
       },
       {
-        "src": "social-open-trails.png",
+        "src": "social-open-trails.jpg",
         "w": 1080,
         "h": 1350
       },
@@ -1180,6 +1183,335 @@
       },
       {
         "name": "City of Virginia Beach"
+      }
+    ]
+  },
+  {
+    "id": "project-fiorina-genai-app",
+    "title": "Project Fiorina",
+    "dateAdded": "2024-01-01",
+    "year": 2024,
+    "tags": [
+      "ui/ux",
+      "digital",
+      "design"
+    ],
+    "medium": "ui/ux, digital",
+    "description": "Gen AI product exploration for Google AI/UX. A generative image creation and editing app featuring text-to-image prompting, style exploration (trending categories, recently used, top categories), area selection and object removal tools, stylize controls with intensity sliders (Realistic, Charcoal, Pixar), color and lighting adjustments, a project history timeline with restore and export actions, and a Material Design 3 theming system built with Material Theme Builder. The UI follows a dark mode-first approach with purple accent tones across the full creation-to-export workflow.",
+    "role": "Designer, UI/UX",
+    "images": [
+      {
+        "src": "cover.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "design-system.jpg",
+        "w": 1060,
+        "h": 1080
+      },
+      {
+        "src": "style-exploration.jpg",
+        "w": 2684,
+        "h": 1080
+      },
+      {
+        "src": "search-results.jpg",
+        "w": 1648,
+        "h": 1080
+      },
+      {
+        "src": "prompt-flow.jpg",
+        "w": 1648,
+        "h": 1080
+      },
+      {
+        "src": "photo-selection.jpg",
+        "w": 1130,
+        "h": 1080
+      },
+      {
+        "src": "area-selection.jpg",
+        "w": 1648,
+        "h": 1080
+      },
+      {
+        "src": "stylize-controls.jpg",
+        "w": 1648,
+        "h": 1080
+      },
+      {
+        "src": "theme-builder.jpg",
+        "w": 1060,
+        "h": 1087
+      },
+      {
+        "src": "history-export.jpg",
+        "w": 1648,
+        "h": 1080
+      },
+      {
+        "src": "ux-flow.jpg",
+        "w": 1920,
+        "h": 814
+      }
+    ],
+    "videos": [],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Google AI/UX",
+    "credits": [
+      {
+        "name": "Marcus White"
+      },
+      {
+        "name": "Jax Jackson"
+      }
+    ]
+  },
+  {
+    "id": "creatorlabs-platform",
+    "title": "Creator Labs",
+    "dateAdded": "2023-02-01",
+    "year": 2023,
+    "tags": [
+      "ui/ux",
+      "digital",
+      "web",
+      "editorial"
+    ],
+    "medium": "ui/ux, digital",
+    "description": "Website design for Creator Labs, a visual arts incubator by Google Pixel and SN37 that supports rising talents in the creation of new work about important cultural narratives. The platform showcases seasonal cohorts of photographers and filmmakers — all work captured, documented, and created on Pixel. The site features artist profile pages with editorial photography, season archives with artist rosters and curatorial statements, and a responsive mobile experience. Featured artists include Mayan Toledano documenting LGBTQ+ communities in Mexico City.",
+    "role": "Designer [NEEDS REVIEW]",
+    "images": [
+      {
+        "src": "cover.jpg",
+        "w": 1440,
+        "h": 900
+      },
+      {
+        "src": "artist-makeup.jpg",
+        "w": 1921,
+        "h": 1081
+      },
+      {
+        "src": "mobile-screens.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "artist-portrait.jpg",
+        "w": 1436,
+        "h": 1081
+      },
+      {
+        "src": "artist-page.jpg",
+        "w": 1440,
+        "h": 900
+      },
+      {
+        "src": "mobile-artist.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "artist-fashion.jpg",
+        "w": 1081,
+        "h": 1378
+      },
+      {
+        "src": "artist-kitchen.jpg",
+        "w": 1591,
+        "h": 1081
+      }
+    ],
+    "videos": [
+      {
+        "src": "section-02-left.mp4",
+        "w": 900,
+        "h": 792
+      },
+      {
+        "src": "section-02-right.mp4",
+        "w": 900,
+        "h": 792
+      },
+      {
+        "src": "section-04-full.mp4",
+        "w": 1920,
+        "h": 1200
+      },
+      {
+        "src": "section-06-left.mp4",
+        "w": 900,
+        "h": 792
+      },
+      {
+        "src": "section-06-right.mp4",
+        "w": 900,
+        "h": 792
+      },
+      {
+        "src": "section-08-left.mp4",
+        "w": 1545,
+        "h": 1360
+      },
+      {
+        "src": "section-08-right.mp4",
+        "w": 900,
+        "h": 792
+      }
+    ],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Google Pixel",
+    "credits": [],
+    "url": "https://creatorlabs.google"
+  },
+  {
+    "id": "talisker-interactive-video",
+    "title": "Talisker Interactive Experience",
+    "dateAdded": "2024-01-01",
+    "year": 2024,
+    "tags": [
+      "ui/ux",
+      "digital",
+      "web"
+    ],
+    "medium": "ui/ux, digital",
+    "description": "Interactive video experience for Talisker single malt Scotch whisky. An immersive web platform that lets users explore the Isle of Skye through interactive panoramic landscapes — each whisky expression (Talisker Skye, Talisker Storm, Talisker 10 Year Old, Talisker x Parley Wilder Seas) is tied to a distinct location on the island with GPS coordinates, clickable discovery points, tasting notes, photographer quotes, recipes, and field guides. The Wilder Seas section highlights the Parley partnership protecting wild sea forests, with links to Scotland, Chile, and Africa documentary films. Typography pairs a hand-drawn script display with bold condensed sans-serif caps.",
+    "role": "Designer [NEEDS REVIEW]",
+    "images": [
+      {
+        "src": "cover.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "intro-warmer.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "storm-product.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "quiraing-modal.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "underwater-bottle.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "skye-product.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "ten-year-product.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "wilder-seas.jpg",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "intro-wilder.jpg",
+        "w": 1920,
+        "h": 1080
+      }
+    ],
+    "videos": [],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Talisker",
+    "credits": [],
+    "url": "https://player.vimeo.com/video/808722797?h=1d37f755b8"
+  },
+  {
+    "id": "norfolk-botanical-garden-signage",
+    "title": "NBG Digital Signage",
+    "dateAdded": "2024-04-01",
+    "year": 2024,
+    "tags": [
+      "ui/ux",
+      "digital",
+      "design"
+    ],
+    "medium": "digital, ui/ux",
+    "description": "Digital signage system for Norfolk Botanical Gardens. Interactive touchscreen kiosks placed throughout the park for wayfinding, experiential learning, and education. The Rainforest Biome (The Verdant Vault) experience lets visitors explore plant species like Jade Vine, Ant Plant, and Vanilla Orchid through tap-to-discover interactions, photo carousels, and bilingual content (English/Espanol). Plant detail screens cover overview, characteristics, animal encounters, super powers, conservation status, and actionable steps. Lobby displays show park conditions including weather, trolley schedules, and upcoming events.",
+    "role": "Designer, UI/UX",
+    "images": [
+      {
+        "src": "cover.jpg",
+        "w": 1200,
+        "h": 896
+      },
+      {
+        "src": "attract-loop.jpg",
+        "w": 1366,
+        "h": 1024
+      },
+      {
+        "src": "lobby-display-flora.png",
+        "w": 1376,
+        "h": 714
+      },
+      {
+        "src": "select-screen.jpg",
+        "w": 1366,
+        "h": 1024
+      },
+      {
+        "src": "lobby-display-info.jpg",
+        "w": 1376,
+        "h": 768
+      },
+      {
+        "src": "discover-by-image.jpg",
+        "w": 1366,
+        "h": 1024
+      },
+      {
+        "src": "plant-detail-screens-01.webp",
+        "w": 1920,
+        "h": 1080
+      },
+      {
+        "src": "plant-detail-screens-02.webp",
+        "w": 1920,
+        "h": 1080
+      }
+    ],
+    "videos": [],
+    "caseStudy": {
+      "problem": "",
+      "process": "",
+      "outcome": ""
+    },
+    "client": "Norfolk Botanical Gardens",
+    "credits": [
+      {
+        "name": "Molly Douglas"
+      },
+      {
+        "name": "Aidan Molloy"
       }
     ]
   }

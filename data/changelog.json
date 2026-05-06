@@ -1,7 +1,7 @@
 [
   {
     "version": "v0",
-    "name": "Blueprint",
+    "name": "Baseline",
     "date": "2026-04-13",
     "aesthetic": "Technical drafting, grid paper, blueprint feel. Raw and legible — this is the baseline everything else departs from.",
     "constraint": "Monospace type only. Two colors maximum. Single scrolling column. No decorative elements.",

@@ -1,10 +1,13 @@
 import projectsData from '@/data/projects.json'
 import type { Project } from '@/types'
 
-export interface AssetEntry {
-  url: string
-  kind: 'image' | 'video'
-  isHero: boolean
+export interface TieredManifest {
+  /** Tier 1: hero images only — preloaded before site is shown */
+  heroes: string[]
+  /** Tier 2: supplementary images — loaded in background */
+  supplementary: string[]
+  /** Tier 2: video preview URLs (first 5MB via Range fetch) */
+  videoPreviews: string[]
 }
 
 /**
@@ -16,40 +19,37 @@ function getNextImageUrl(src: string, width: number): string {
 }
 
 /**
- * Builds a deduplicated list of all asset URLs from projects.json.
+ * Builds a tiered asset manifest from projects.json.
  *
- * Images are returned as /_next/image optimised URLs (matching what
- * next/image will request at render time) so the browser cache hit
- * is guaranteed. Hero images (first per project) get both a desktop
- * (1920) and mobile (1200) variant. Supplementary images get 1200.
- *
- * Videos are returned as raw paths — they bypass next/image.
+ * Tier 1 (heroes): first image per project at 1920 + 1200 widths
+ * Tier 2 (supplementary): remaining images at 1200 width
+ * Tier 2 (videoPreviews): raw video URLs for Range-fetch preview
  */
-export function buildAssetManifest(): AssetEntry[] {
+export function buildTieredManifest(): TieredManifest {
   const seen = new Set<string>()
-  const entries: AssetEntry[] = []
+  const heroes: string[] = []
+  const supplementary: string[] = []
+  const videoPreviews: string[] = []
 
   const projects = projectsData as Project[]
 
   for (const project of projects) {
     project.images.forEach((img, i) => {
       const raw = `/images/${project.id}/${img.src}`
-      const isHero = i === 0
 
-      if (isHero) {
-        // Desktop + mobile sizes for hero images
+      if (i === 0) {
         for (const w of [1920, 1200]) {
           const url = getNextImageUrl(raw, w)
           if (!seen.has(url)) {
             seen.add(url)
-            entries.push({ url, kind: 'image', isHero: true })
+            heroes.push(url)
           }
         }
       } else {
         const url = getNextImageUrl(raw, 1200)
         if (!seen.has(url)) {
           seen.add(url)
-          entries.push({ url, kind: 'image', isHero: false })
+          supplementary.push(url)
         }
       }
     })
@@ -58,10 +58,10 @@ export function buildAssetManifest(): AssetEntry[] {
       const url = `/videos/${project.id}/${vid.src}`
       if (!seen.has(url)) {
         seen.add(url)
-        entries.push({ url, kind: 'video', isHero: false })
+        videoPreviews.push(url)
       }
     }
   }
 
-  return entries
+  return { heroes, supplementary, videoPreviews }
 }

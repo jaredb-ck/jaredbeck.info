@@ -9,6 +9,12 @@ Read this file at the start of every session. These are the ground
 rules, architecture decisions, and build instructions for this
 project. Never deviate from them unless I explicitly ask you to.
 
+When starting a new version session, read only:
+- This file
+- The active design brief in /inspiration/[version]/
+- The content schema in /data
+- Nothing else — do not read inside past version route groups
+
 ---
 
 ## Core Concept
@@ -27,11 +33,18 @@ Every future UI version must render all fields correctly. Schema
 should include:
 
 - projects[] — id, title, dateAdded, year, tags[], medium,
-  description, role, images[], caseStudy{ problem, process, outcome }
+  description, role, images[], videos[], caseStudy{ problem,
+  process, outcome }
 - about — bio, philosophy, skills[], collaborators[]
 - cv — education[], clients[], exhibitions[]
 - changelog[] — version, name, date, aesthetic, constraint,
   promptSummary, screenshot, patches[]
+
+Image and video asset shape — always use this exact structure:
+  { "src": "filename.webp", "w": 1920, "h": 1080 }
+
+Never use "file", "width", or "height" as field names.
+Sentinel w: 0, h: 0 is reserved for placeholder projects only.
 
 Populate the schema with placeholder/sample content so the UI has
 something real to render against.
@@ -51,18 +64,32 @@ Directory structure:
   /(v0-blueprint)/
     layout.tsx        ← v0's root layout, fonts, GSAP config
     page.tsx
-    projects/page.tsx
+    projects/[slug]/page.tsx
     about/page.tsx
     cv/page.tsx
+    components/       ← v0's own components, never shared
+    lib/              ← v0's own utilities, never shared
+    version.config.ts ← v0's metadata, aesthetic, constraint
   /(v1-name)/
-    layout.tsx        ← v1's completely independent root layout
+    layout.tsx        ← completely independent from v0
     page.tsx
-    projects/page.tsx
+    projects/[slug]/page.tsx
     about/page.tsx
     cv/page.tsx
+    components/
+    lib/
+    version.config.ts
   /changelog/
     page.tsx          ← permanent, outside all version groups
-  layout.tsx          ← root layout: beta banner + version switcher only
+  layout.tsx          ← root layout: beta banner, version
+                         switcher, and Preloader only
+
+/app/components/      ← permanent infrastructure only
+  Preloader/
+    Preloader.tsx           ← locked
+    Preloader.module.css    ← locked permanently
+    usePreloader.ts         ← locked
+    assetManifest.ts        ← locked
 
 /data/                ← shared content, never version-specific
   projects.json
@@ -70,47 +97,68 @@ Directory structure:
   cv.json
   changelog.json
 
-/inbox/               ← temporary drop zone for new project assets
+/inbox/               ← temporary drop zone for new assets
   /project-name/
     image1.jpg
     notes.txt
 
-/prompts/             ← prompt toolkit, for reference only
+/inspiration/         ← visual references per version
+  /v0-blueprint/
+  /v1-name/
+  /general/
+
+/prompts/             ← prompt toolkit, reference only
+  pre-build-check.md
   inbox.md
-  cleanup.md
   process-inbox.md
+  cleanup.md
+  inspiration.md
+  preloader.md
+  page-transitions.md
+
+/scripts/             ← build tools
+  compress-images.js
+  compression-logs/
 
 /types/               ← shared TypeScript interfaces only
 
-/public/images/       ← processed assets, organized by project id
-  /project-id/
+/public/
+  /images/            ← processed images, by project id
+    /project-id/
+  /videos/            ← processed videos, by project id
+    /project-id/
 
 Each version is completely isolated. Switching versions loads the
 entirety of that version's app shell — it is not a theme swap.
 It is a full environment change.
 
+Past version route groups are sealed black boxes once merged
+to main. Never read inside them for patterns, components, or
+references when building new versions. Every new version is
+built from scratch.
+
 ---
 
 ## Phase 3: Root Layout (Permanent Infrastructure)
 
-The root layout at /app/layout.tsx contains only two permanent
+The root layout at /app/layout.tsx contains only three permanent
 elements that live outside and above all version UIs:
 
 1. Beta banner — a persistent bar at the very top of every page
    that reads: "This portfolio is in permanent beta. The UI changes
-   periodically — content stays." Styled neutrally so it never
-   clashes with any version theme. Never modified.
+   periodically — content stays." Styled neutrally. Never modified.
 
-2. Version switcher — a small persistent component that lets users
-   navigate between available versions. It reads the versions array
-   from changelog.json automatically — no hardcoded version list.
-   Adding a new version to the schema surfaces it in the switcher
-   without any extra work.
+2. Version switcher — reads the versions array from changelog.json
+   automatically. No hardcoded version list. Adding a new version
+   to the schema surfaces it in the switcher without extra work.
+
+3. Preloader — permanent infrastructure with its own fixed visual
+   identity. Mounts above all content. Locks until all hero images
+   are loaded, then loads supplementary assets in background.
+   Never reskinned by version changes.
 
 Switching versions is a full route group load, not an invisible
-route change. The transition should be a deliberate designed moment
-— a brief loading state, version number display, or similar signal
-that communicates "you are now entering v2."
+route change. The transition should be a deliberate designed moment.
 
 ---
 
@@ -121,9 +169,10 @@ raw and simple — this is the baseline everything else departs from.
 
 Design brief for v0:
 - Aesthetic: technical drafting, grid paper, blueprint feel
-- Structure: single scrolling column, no frills
+- Structure: editorial catalogue layout — horizontal rows, not
+  single column. Tabular, print-inspired, spread-based.
 - Typography: monospace only
-- Color: 2 colors maximum
+- Color: 2 colors maximum — off-white background, near-black text
 - Must render all content schema fields correctly
 - Include a visible version badge (v0: Blueprint) and a link to
   the changelog
@@ -163,43 +212,47 @@ Folder structure:
     image1.jpg
     image2.jpg
     cover.png
-    notes.txt           ← optional, plain text, Claude will read
-                           this to pre-fill schema fields
+    notes.txt           ← optional, plain text, read to pre-fill
+                           schema fields
 
-Notes.txt format (no strict structure required — write naturally):
+Notes.txt format (no strict structure required):
 
-  Title: Meridian Brand Identity
+  Title: Project Name
   Year: 2024
   Role: Art Director
-  Client: Meridian Coffee Co.
-  Brief: Full brand identity system for a specialty coffee roaster.
-  Included wordmark, packaging, and collateral.
+  Client: Client Name
+  Brief: Short description of the project and outcome.
+  Awards:
+  Collaborators:
+  URL:
+
+Asset size limits — enforced on every ingestion:
+- Hero images: maximum 800KB after compression
+- Supplementary images: maximum 400KB after compression
+- Videos: .mp4 only, maximum 15MB per file
+- .mov, .avi, .wmv files are rejected — flag and do not process
 
 When told "Process the inbox", Claude Code will:
 1. Read each subfolder as a distinct project
-2. Read notes.txt if present and use it to pre-fill schema fields
-3. Analyze all image assets visually — generate tags, medium,
-   and a short description
-4. Move processed images to /public/images/[project-id]/ and
-   videos to /public/videos/[project-id]/
-5. Read intrinsic pixel dimensions (w, h) for every image and
-   video and store each as { src, w, h } so UIs render at the
-   native aspect ratio without cropping or layout shift. Never
-   re-encode or resize source files in this step.
-6. Append new entries to /data/projects.json — never modify
-   existing entries
-7. Set dateAdded to today's date automatically
-8. Flag any uncertain fields with [NEEDS REVIEW]
-9. Produce an ingestion-report.md summarizing what was processed
-10. Remind me to clear the /inbox folder when complete
+2. Read notes.txt if present to pre-fill schema fields
+3. Analyze all image assets — generate tags, medium, description
+4. Read intrinsic dimensions using sips for images, mdls for video
+5. Compress images using sharp — hero max 800KB, supp max 400KB
+6. Convert images to .webp, move to /public/images/[project-id]/
+7. Move .mp4 videos to /public/videos/[project-id]/
+8. Append new entries to /data/projects.json — never modify
+   existing entries. Use { "src", "w", "h" } shape always.
+9. Set dateAdded to today's date automatically
+10. Flag uncertain fields with [NEEDS REVIEW]
+11. Produce an ingestion-report.md
+12. Remind to clear /inbox when complete
 
 Inbox rules:
-- One subfolder per project — never mix projects in one folder
-- /inbox is gitignored — raw assets are never committed to git
-- Processed assets live permanently in /public/images/[project-id]/
-- projects.json is the source of truth — inbox is the entry point
-- New entries are appended with today's date as dateAdded
-- The portfolio always sorts newest first — no manual ordering needed
+- One subfolder per project — never mix projects
+- /inbox is gitignored — raw assets never committed
+- projects.json is the source of truth
+- New entries always appended with today's date as dateAdded
+- Portfolio always sorts newest first — no manual ordering needed
 
 ---
 
@@ -208,13 +261,13 @@ Inbox rules:
 These apply to every session, every version, forever.
 
 1. Content schema is never broken — all fields must render in
-   every version, even if a field is currently unpopulated.
+   every version, even if currently unpopulated.
 
 2. Every version is preserved and accessible as a distinct route
    group — past versions are archive, not dead code.
 
-3. Each new version has a named design constraint defined before
-   any building begins.
+3. Each new version has a named design constraint defined and
+   approved before any building begins.
 
 4. AI collaboration is visible, not hidden — prompts, constraints,
    and process are documented in the changelog.
@@ -222,26 +275,23 @@ These apply to every session, every version, forever.
 5. The site is always live and always in progress.
 
 6. Projects always display in order of dateAdded, most recent
-   first. This sort order lives in data logic, not UI, so it
-   cannot be broken by a version change.
+   first. Sort order lives in data logic, not UI.
 
 7. The beta banner lives in the root layout and is immune to all
    version changes. Its markup and position never move.
 
 8. A VERSION is a new overall concept — a new named aesthetic
    direction, layout structure, or design constraint. Versions are
-   fully isolated route groups with a changelog entry, a name,
-   a date, and a screenshot.
+   fully isolated route groups built from scratch. They get a
+   changelog entry, a name, a date, and a screenshot.
 
 9. A PATCH is a small refinement within the current version —
    font tweaks, color adjustments, spacing fixes, style changes.
    Patches do not create a new version. They are logged in the
-   patches[] array of the current version with a date and a
-   short note. The version timeline stays clean.
+   patches[] array of the current version with a date and note.
 
 10. The changelog page has its own permanent visual identity.
-    changelog.module.css is a locked file — never modified as
-    part of a version update or cleanup pass.
+    changelog.module.css is a locked file — never modified.
 
 11. Each version loads in its entirety when selected. No styles,
     fonts, or components are shared between version route groups.
@@ -249,49 +299,47 @@ These apply to every session, every version, forever.
 12. New projects are always added via the /inbox workflow — never
     by directly editing projects.json with raw unprocessed assets.
 
-13. Source assets are never cropped or resized during ingestion.
-    Every image and video carries its intrinsic { w, h } in the
-    schema, and every UI version must render at that native aspect
-    ratio. Cover-cropping to a layout grid is a banned pattern.
+13. Past version route groups are sealed once merged to main.
+    They are never opened, referenced, or used as patterns for
+    new version builds. Every new version is built from scratch.
+    The only shared references are /data, /types, and the active
+    design brief.
+
+14. At the start of every new version session, Claude Code reads
+    only: CLAUDE.md, the active design brief in /inspiration/,
+    and the content schema in /data. Past version code is not
+    consulted for any reason.
+
+15. All image and video entries in projects.json use the shape
+    { "src", "w", "h" } exclusively. Never use "file", "width",
+    or "height" as field names. Sentinel w: 0, h: 0 is reserved
+    for placeholders only.
+
+16. ffmpeg is located at /opt/homebrew/bin/ffmpeg — always use
+    the full path for all ffmpeg commands.
 
 ---
 
 ## Locked Files
 
-The following files are permanently locked. They are never modified,
-refactored, or deleted for any reason including version updates,
-patch updates, or cleanup passes. If uncertain whether something
-touches a locked file, ask before proceeding.
+The following are permanently locked. Never modified, refactored,
+or deleted for any reason including version updates, patches, or
+cleanup passes. If uncertain whether something touches a locked
+file — stop and ask before proceeding.
 
 - /app/layout.tsx — root layout, beta banner, version switcher
-- /app/components/BetaBanner.tsx — beta banner markup, never changes
-- /app/components/BetaBanner.module.css — beta banner styles, never changes
-- /app/components/VersionSwitcher.tsx — version switcher logic, never changes
-- /app/components/VersionSwitcher.module.css — version switcher styles, never changes
+- /app/components/Preloader/ — all files, permanently locked
+- /app/components/Preloader/Preloader.module.css — locked
+- /changelog — entire route and all files
 - changelog.module.css — changelog styles, permanent
-- /changelog — all files within this route
 - /types — all shared TypeScript interfaces
-- /data — all JSON files and every field within them, including
-  empty fields. Empty fields are intentional placeholders.
+- /data — all JSON files and every field, including empty fields
 - /public/images — processed project assets, never deleted
+- /public/videos — processed project videos, never deleted
 - /prompts — reference files, never modified by Claude Code
-- Any past version route group (e.g. /(v0-blueprint)) once a
-  newer version exists — preserved as archive
-- Any version.config.ts file within any version route group
-- /app/components/Preloader/ — all files within this directory
-  are permanently locked
-- /app/components/Preloader/Preloader.module.css — visual
-  identity locked, never modified by version updates, patches,
-  or cleanup passes
-
-## Chrome z-index convention
-
-The beta banner (z-index 100) and version switcher (z-index 99) are
-position:fixed and must always be visible above all version UI. Version
-UI elements — panels, overlays, modals — must never exceed z-index 90.
-The --chrome-height CSS variable (88px, defined in globals.css) is the
-combined height of both bars. All version layouts must offset their
-content by this amount.
+- /scripts/compress-images.js — reusable compression script
+- Any past version route group once a newer version exists
+- Any version.config.ts within any version route group
 
 ---
 
@@ -302,69 +350,131 @@ Framework: Next.js (App Router)
 - Route groups for version isolation
 - next/image for all image handling
 - next/font for font loading, per version independently
+- images.formats: ['image/webp'] in next.config.js — never avif
 
 Content: Local JSON + TypeScript types
 - All content in /data as JSON files
 - Shared TypeScript interfaces in /types
-- No CMS — JSON is portable, AI-friendly, and directly editable
+- No CMS — JSON is portable, AI-friendly, directly editable
 
 Animation: GSAP
-- GSAP for all meaningful motion — page transitions, project
-  reveals, changelog timeline, version transition moments
+- GSAP for all meaningful motion
 - ScrollTrigger for scroll-based animations
-- useGSAP() hook from @gsap/react for React-safe cleanup
-- Each version defines its own GSAP animation personality as
-  part of its design brief — animations are version-specific
+- useGSAP() from @gsap/react for React-safe cleanup
+- next-transition-router for page transitions between routes
+- Each version defines its own GSAP animation personality
+- Animations are version-specific and never shared
+
+Preloader: Permanent infrastructure
+- Tiered loading strategy:
+  Tier 1 — hero images only, loaded before site is shown
+  Tier 2 — supplementary images and first 5s of video,
+           loaded silently after site becomes visible
+           using requestIdleCallback
+  Tier 3 — full videos loaded on demand when project opens
+- Videos stored as blob object URLs in module-level Map
+  to prevent re-fetching on navigation
+- Preloader visual identity is fixed and version-agnostic
 
 Styling: CSS Modules + CSS custom properties
 - CSS Modules for all component-scoped styles
-- Each version manages its own CSS custom properties internally
+- Each version manages its own CSS custom properties
 - No global theme variables shared between versions
 - No Tailwind
-- changelog.module.css is locked and never modified
+- changelog.module.css and Preloader.module.css are locked
 
 Fonts: Variable fonts where possible
 - Loaded via next/font/local or next/font/google
 - Each version loads its own fonts via its own root layout
-- The changelog loads its own fixed font independently
+- Changelog and Preloader load their own fixed fonts
 
 Version switcher
 - Lives in root layout
 - Reads versions array from changelog.json — no hardcoded list
-- New versions surface automatically when added to the schema
+- New versions surface automatically when added to schema
 
 Version config
 - Each version route group has its own version.config.ts
-- Contains: name, aesthetic direction, design constraint,
-  font pairings, and any version-specific metadata
-- No shared config file — each version knows only itself
+- Contains: name, aesthetic, constraint, font pairings,
+  patch history
+- No shared config — each version knows only itself
+
+Asset compression
+- sharp for image compression (dev dependency)
+- ffmpeg at /opt/homebrew/bin/ffmpeg for video compression
+- All compression scripts saved in /scripts/
 
 Deployment: Vercel
 - Zero-config Next.js deployment
-- Every version preserved as an accessible route group in
-  production — not just a branch or preview URL
+- images.formats: ['image/webp'] prevents avif conversion
+- Every version preserved as route group in production
 
 ---
 
 ## Build Order
 
-Follow this sequence exactly when starting the project from scratch:
+Follow this sequence when starting the project from scratch:
 
-1. Scaffold the Next.js project with TypeScript
-2. Set up /data JSON files and /types interfaces
-3. Build root layout — beta banner and version switcher only
-4. Set up /inbox folder and add it to .gitignore
-5. Build v0 route group — Blueprint
-6. Build changelog page — style it once, lock it
-7. Verify all content renders correctly across v0
-8. Do not proceed to v1 until v0 is complete and verified
+1. Scaffold Next.js project with TypeScript
+2. Configure next.config.js — set formats: ['image/webp']
+3. Set up /data JSON files and /types interfaces
+4. Build root layout — beta banner and version switcher only
+5. Build Preloader — permanent infrastructure, locked on creation
+6. Set up /inbox folder and add to .gitignore
+7. Set up /inspiration folder structure
+8. Build v0 route group — Blueprint (editorial, catalogue layout)
+9. Build changelog page — style once, lock permanently
+10. Verify all content renders correctly across v0
+11. Do not proceed to v1 until v0 is complete and verified
+
+---
+
+## Git Workflow
+
+Each new version is built on its own Git branch:
+  git checkout -b v[number]-[name]
+
+Never build a new version on main. The pre-build-check.md
+prompt enforces this — run it before every new version session.
+
+Branch naming convention:
+  v0-blueprint
+  v1-archive
+  v2-terminal
+  etc.
+
+When a version is complete and verified, merge to main:
+  git merge v[number]-[name]
+
+Main always reflects the full working project with all versions
+intact and accessible.
+
+---
+
+## Prompt Toolkit
+
+All prompts live in /prompts/ and are invoked by telling
+Claude Code: "Follow the instructions in prompts/[name].md"
+
+pre-build-check.md  — run before every new version build
+inbox.md            — bulk asset ingestion for existing work
+process-inbox.md    — add new projects via /inbox folder
+cleanup.md          — periodic maintenance between versions
+inspiration.md      — read inspiration folder, generate brief
+preloader.md        — build the permanent preloader (run once)
+page-transitions.md — homepage → PDP transition per version
 
 ---
 
 ## Current State
 
-Version: v0 — not yet started.
-Last patch: none.
+Version: v0 — Blueprint complete.
+Preloader: built and live.
+Last patch: [update this when patches are applied]
 Inbox: empty.
+Git branch: [update this each session]
 
-Start here: "Let's start with Phase 1 — scaffold the content schema."
+Next: define constraint and inspiration for v1 before building.
+
+Update this block at the end of every session to reflect
+the current state of the project accurately.

@@ -1,3 +1,12 @@
+@media (max-width: 767px) {
+  .pageLabel,
+  .statement,
+  .lower {
+    padding-left: var(--gutter, 20px);
+    padding-right: var(--gutter, 20px);
+  }
+}
+
 .pageLabel {
   border-bottom: 1px solid var(--rule-heavy);
   border-top: 1px solid var(--rule-heavy);

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
 import gsap from 'gsap'
 import type { Project } from '@/types'
 import ProjectList from './projects/ProjectList'
@@ -37,12 +37,19 @@ export default function V0App({
   const detailRef   = useRef<HTMLDivElement>(null)
   const isAnimating = useRef(false)
   const tlRef       = useRef<gsap.core.Timeline | null>(null)
+  // Track whether this is the initial mount (hard refresh to a project URL)
+  // so we skip the entrance animation and show the PDP immediately.
+  const isInitialMount = useRef(true)
+  // Track previous active state so we only run the open transition when
+  // going from null → project, not project → project (prev/next nav).
+  const prevActiveRef = useRef<ActiveState | null>(null)
 
-  // Open the correct panel on hard refresh to a project URL — runs after
-  // hydration so server and client start from the same null state.
+  // Open the correct panel on hard refresh to a project URL
   useEffect(() => {
     const initial = getInitialActive(projects)
     if (initial) setActive(initial)
+    // Mark initial mount complete after first render cycle
+    requestAnimationFrame(() => { isInitialMount.current = false })
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Browser back / forward — instant, no animation
@@ -52,13 +59,13 @@ export default function V0App({
       if (match) {
         const index = projects.findIndex(p => p.id === match[1])
         if (index !== -1) {
-          if (listRef.current) gsap.set(listRef.current, { clearProps: 'opacity,visibility' })
+          if (listRef.current) gsap.set(listRef.current, { clearProps: 'opacity,visibility,scale,filter,willChange' })
           setActive({ project: projects[index], index })
         }
       } else {
         tlRef.current?.kill()
         isAnimating.current = false
-        if (listRef.current) gsap.set(listRef.current, { clearProps: 'opacity,visibility' })
+        if (listRef.current) gsap.set(listRef.current, { clearProps: 'opacity,visibility,scale,filter,willChange' })
         setActive(null)
       }
     }
@@ -66,14 +73,83 @@ export default function V0App({
     return () => window.removeEventListener('popstate', handlePop)
   }, [projects])
 
+  // ── Coordinated open transition ────────────────────────────────
+  // Runs after the PDP mounts into the DOM (active changes from null to non-null).
+  // Drives both the homepage recession and PDP emergence on a single timeline.
+  useLayoutEffect(() => {
+    const wasNull = prevActiveRef.current === null
+    prevActiveRef.current = active
+
+    // Only run the open transition when going from no project to a project
+    if (!active || !wasNull || !detailRef.current || !listRef.current) return
+    // Skip animation on hard-refresh (PDP should just appear)
+    if (isInitialMount.current) {
+      isAnimating.current = false
+      return
+    }
+
+    const panelEl  = detailRef.current.querySelector<HTMLElement>('[data-panel]')
+    const panelBg  = detailRef.current.querySelector<HTMLElement>('[data-panel-bg]')
+    const headerEl = detailRef.current.querySelector<HTMLElement>('[data-detail-header]')
+    const titleEl  = detailRef.current.querySelector<HTMLElement>('[data-detail-title]')
+    const scrollEl = detailRef.current.querySelector<HTMLElement>('[data-scroll-img]')?.parentElement
+    const imgEls   = scrollEl
+      ? Array.from(scrollEl.querySelectorAll<HTMLElement>('[data-scroll-img]'))
+      : []
+
+    if (!panelEl) return
+
+    // Set initial states
+    gsap.set(panelEl,  { scale: 1.015, autoAlpha: 0 })
+    if (panelBg)  gsap.set(panelBg,  { autoAlpha: 0 })
+    if (headerEl) gsap.set(headerEl, { autoAlpha: 0, y: 8 })
+    if (titleEl)  gsap.set(titleEl,  { autoAlpha: 0, y: 8 })
+    gsap.set(imgEls, { autoAlpha: 0, y: 6 })
+
+    tlRef.current?.kill()
+    const tl = gsap.timeline({
+      onComplete: () => { isAnimating.current = false },
+    })
+    tlRef.current = tl
+
+    // Phase 1: Homepage recedes
+    tl.to(listRef.current, {
+      scale: 0.97,
+      autoAlpha: 0,
+      filter: 'blur(6px)',
+      duration: 0.4,
+      ease: 'power2.in',
+    }, 0)
+
+    // Phase 2: PDP emerges (overlapping)
+    tl.to(panelEl, {
+      scale: 1,
+      autoAlpha: 1,
+      duration: 0.5,
+      ease: 'power2.out',
+    }, 0.12)
+
+    if (panelBg) {
+      tl.to(panelBg, { autoAlpha: 1, duration: 0.35, ease: 'power2.out' }, 0.12)
+    }
+    if (headerEl) {
+      tl.to(headerEl, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.28)
+    }
+    if (titleEl) {
+      tl.to(titleEl, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.34)
+    }
+    if (imgEls.length > 0) {
+      tl.to(imgEls, { autoAlpha: 1, y: 0, duration: 0.3, stagger: 0.02, ease: 'power2.out' }, 0.4)
+    }
+  }, [active]) // eslint-disable-line react-hooks/exhaustive-deps
+
   const openProject = useCallback((project: Project) => {
     if (isAnimating.current) return
     isAnimating.current = true
     const index = projects.findIndex(p => p.id === project.id)
     setActive({ project, index })
     history.pushState({}, '', `/v0/projects/${project.id}`)
-    // Fade list out while panel animates in
-    if (listRef.current) gsap.to(listRef.current, { autoAlpha: 0, duration: 0.25, ease: 'power2.out' })
+    // The useLayoutEffect above handles the animation once the PDP mounts
   }, [projects])
 
   const goToPrev = useCallback(() => {
@@ -107,8 +183,7 @@ export default function V0App({
     isAnimating.current = false
   }, [])
 
-  // Pause smooth scroll while the panel is open so Lenis doesn't
-  // accumulate vertical scroll velocity and fight the horizontal redirect.
+  // Pause smooth scroll while the panel is open
   useEffect(() => {
     const lenis = getLenisInstance()
     if (!lenis) return
@@ -116,19 +191,15 @@ export default function V0App({
       lenis.stop()
     } else {
       lenis.start()
-      // Reset target to current position — prevents any drift accumulated
-      // from wheel events that fired while the panel was covering the page.
       lenis.scrollTo(window.scrollY, { immediate: true })
     }
   }, [active])
 
-  // Close: slide panel down + fade out, then restore list
+  // ── Coordinated close transition ───────────────────────────────
   const closeProject = useCallback(() => {
     if (isAnimating.current || !active) return
     isAnimating.current = true
 
-    // Update URL while panel is still covering the screen so any Next.js
-    // usePathname() watchers (e.g. ScrollReset) fire before the list is visible.
     history.replaceState({}, '', '/v0')
 
     tlRef.current?.kill()
@@ -136,23 +207,41 @@ export default function V0App({
       onComplete: () => {
         setActive(null)
         isAnimating.current = false
+        if (listRef.current) {
+          gsap.set(listRef.current, { clearProps: 'scale,filter,willChange,opacity,visibility' })
+        }
       },
     })
     tlRef.current = tl
 
-    // Target the fixed panel element directly — animating the wrapper div with `y`
-    // would create a new containing block and break position:fixed on the child.
+    // Phase 1: PDP recedes
     const panelEl = detailRef.current?.querySelector<HTMLElement>('[data-panel]')
-    if (panelEl) tl.to(panelEl, { autoAlpha: 0, y: 20, duration: 0.3, ease: 'power3.in' }, 0)
-    tl.to(listRef.current, { autoAlpha: 1, duration: 0.3, ease: 'power2.out' }, 0.1)
+    if (panelEl) {
+      tl.to(panelEl, {
+        scale: 1.015,
+        autoAlpha: 0,
+        duration: 0.35,
+        ease: 'power2.in',
+      }, 0)
+    }
+
+    // Phase 2: Homepage returns (overlapping)
+    // Clear transform before fading in so sticky elements work correctly
+    tl.call(() => {
+      if (listRef.current) {
+        gsap.set(listRef.current, { clearProps: 'scale,filter' })
+      }
+    }, [], 0.1)
+
+    tl.to(listRef.current, {
+      autoAlpha: 1,
+      duration: 0.4,
+      ease: 'power2.out',
+    }, 0.1)
   }, [active])
 
   return (
     <>
-      {/* Solid strip behind the transparent version switcher so the scrolling
-          project list doesn't peek through between the beta banner and the
-          sticky filter bar. z-index: 30 keeps it below the PDP panel (40)
-          so opening a project hides it automatically. */}
       <div aria-hidden="true" className={styles.chromeVeil} />
 
       <div ref={listRef}>

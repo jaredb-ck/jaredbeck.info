@@ -6,41 +6,26 @@
   background: #0a0a0a;
   bottom: 0;
   display: flex;
+  flex-direction: column;
+  gap: 24px;
   justify-content: center;
   left: 0;
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 200;
+  z-index: 98;
 }
 
-.rule {
-  background: #f0f0f0;
-  height: 1px;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 50%;
+.progressRing {
+  transform: rotate(-90deg);
+  transform-origin: 100px 100px;
+  transition: stroke-dashoffset 0.3s ease-out;
 }
 
-.progressBar {
-  background: #f0f0f0;
-  height: 1px;
-  left: 0;
-  position: absolute;
-  top: calc(50% + 1px);
-  width: calc(var(--progress, 0) * 1%);
-}
-
-.percentage {
-  bottom: 50%;
-  color: #f0f0f0;
+.versionLabel {
+  color: rgba(240, 240, 240, 0.4);
   font-family: 'Courier New', Courier, monospace;
-  font-size: clamp(4rem, 10vw, 8rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  padding: 0 40px 24px 0;
-  position: absolute;
-  right: 0;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
