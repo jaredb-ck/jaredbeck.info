@@ -25,10 +25,14 @@ export default function VersionSwitcher() {
     const href = `/${entry.version}`
     return pathname === href || pathname.startsWith(`${href}/`)
   })
-  const activeLabel = activeEntry
-    ? `${activeEntry.version}/${activeEntry.name.toLowerCase()}`
-    : `${versions[0]?.version ?? ''}/${versions[0]?.name.toLowerCase() ?? ''}`
-  const logoHref = activeEntry ? `/${activeEntry.version}` : `/${versions[0]?.version ?? ''}`
+
+  // On non-version pages (e.g. /changelog), remember the last active version
+  const lastVersionRef = useRef(activeEntry ?? versions[versions.length - 1])
+  if (activeEntry) lastVersionRef.current = activeEntry
+  const displayEntry = activeEntry ?? lastVersionRef.current
+
+  const activeLabel = `${displayEntry.version}/${displayEntry.name.toLowerCase()}`
+  const logoHref = `/${displayEntry.version}`
 
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
