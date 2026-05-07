@@ -1,0 +1,1727 @@
+{
+  "disciplineTags": [
+    {
+      "tag": "activation",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "app-design",
+      "count": 2,
+      "projects": [
+        "ping",
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "apparel",
+      "count": 6,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "speed-shapes-branding",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "aunties-marketing",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "art-direction",
+      "count": 3,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "bandupgotti-branding",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "arts",
+      "count": 2,
+      "projects": [
+        "rockhall",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "billboard",
+      "count": 1,
+      "projects": [
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "brand-guidelines",
+      "count": 4,
+      "projects": [
+        "color-study-branding",
+        "bandupgotti-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "brand-identity",
+      "count": 5,
+      "projects": [
+        "color-study-branding",
+        "speed-shapes-branding",
+        "bandupgotti-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "campaign",
+      "count": 2,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "civic",
+      "count": 2,
+      "projects": [
+        "norfolkcurrents-branding",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "culture",
+      "count": 3,
+      "projects": [
+        "rockhall",
+        "aunties-marketing",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "digital",
+      "count": 6,
+      "projects": [
+        "ping",
+        "rockhall",
+        "project-fiorina-genai-app",
+        "creatorlabs-platform",
+        "talisker-interactive-video",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "editorial",
+      "count": 3,
+      "projects": [
+        "rockhall",
+        "norfolkcurrents-branding",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "education",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "entertainment",
+      "count": 3,
+      "projects": [
+        "rockhall",
+        "color-study-branding",
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "environmental",
+      "count": 3,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "aunties-marketing",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "experiential",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "fashion",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "flyer",
+      "count": 2,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "food-and-beverage",
+      "count": 3,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "aunties-marketing",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "hat",
+      "count": 2,
+      "projects": [
+        "color-study-branding",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "hospitality",
+      "count": 3,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "identity-system",
+      "count": 5,
+      "projects": [
+        "color-study-branding",
+        "speed-shapes-branding",
+        "bandupgotti-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "illustration",
+      "count": 4,
+      "projects": [
+        "speed-shapes-branding",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "installation",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "label",
+      "count": 2,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "logo-design",
+      "count": 5,
+      "projects": [
+        "color-study-branding",
+        "speed-shapes-branding",
+        "bandupgotti-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "merchandise",
+      "count": 8,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "color-study-branding",
+        "speed-shapes-branding",
+        "bandupgotti-branding",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "aunties-marketing",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "mockup",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "motion",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "music",
+      "count": 3,
+      "projects": [
+        "rockhall",
+        "bandupgotti-branding",
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "nonprofit",
+      "count": 2,
+      "projects": [
+        "norfolkcurrents-branding",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "out-of-home",
+      "count": 1,
+      "projects": [
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "packaging",
+      "count": 4,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "bandupgotti-branding",
+        "frank-and-pattys-marketing",
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "photography",
+      "count": 7,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "bandupgotti-branding",
+        "frank-and-pattys-marketing",
+        "aunties-marketing",
+        "visit-virginiabeach-campaign",
+        "creatorlabs-platform",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "poster",
+      "count": 1,
+      "projects": [
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "print",
+      "count": 5,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "aunties-marketing",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "prototype",
+      "count": 1,
+      "projects": [
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "retail",
+      "count": 2,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "ping"
+      ]
+    },
+    {
+      "tag": "signage",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "social-media",
+      "count": 9,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "rockhall",
+        "speed-shapes-branding",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "symmetry-glassing-branding",
+        "aunties-marketing",
+        "norfolkcurrents-branding",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "sports",
+      "count": 3,
+      "projects": [
+        "ping",
+        "speed-shapes-branding",
+        "symmetry-glassing-branding"
+      ]
+    },
+    {
+      "tag": "tech",
+      "count": 2,
+      "projects": [
+        "project-fiorina-genai-app",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "tote",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "travel",
+      "count": 1,
+      "projects": [
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "type-design",
+      "count": 1,
+      "projects": [
+        "speed-shapes-branding"
+      ]
+    },
+    {
+      "tag": "typography",
+      "count": 5,
+      "projects": [
+        "color-study-branding",
+        "speed-shapes-branding",
+        "bandupgotti-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "ui-ux",
+      "count": 6,
+      "projects": [
+        "ping",
+        "rockhall",
+        "project-fiorina-genai-app",
+        "creatorlabs-platform",
+        "talisker-interactive-video",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "video",
+      "count": 1,
+      "projects": [
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "web-design",
+      "count": 4,
+      "projects": [
+        "ping",
+        "rockhall",
+        "creatorlabs-platform",
+        "talisker-interactive-video"
+      ]
+    }
+  ],
+  "visualTags": [
+    {
+      "tag": "3d",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "aerial",
+      "count": 1,
+      "projects": [
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "ai-generated",
+      "count": 1,
+      "projects": [
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "bar",
+      "count": 2,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "beach",
+      "count": 3,
+      "projects": [
+        "speed-shapes-branding",
+        "symmetry-glassing-branding",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "beer-can",
+      "count": 1,
+      "projects": [
+        "frank-and-pattys-marketing"
+      ]
+    },
+    {
+      "tag": "bilingual",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "black-and-white",
+      "count": 5,
+      "projects": [
+        "rockhall",
+        "color-study-branding",
+        "bandupgotti-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "bold",
+      "count": 10,
+      "projects": [
+        "rockhall",
+        "speed-shapes-branding",
+        "bandupgotti-branding",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "symmetry-glassing-branding",
+        "aunties-marketing",
+        "norfolkcurrents-branding",
+        "visit-virginiabeach-campaign",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "boombox",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "botanical",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "bottle",
+      "count": 1,
+      "projects": [
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "burger",
+      "count": 1,
+      "projects": [
+        "frank-and-pattys-marketing"
+      ]
+    },
+    {
+      "tag": "bus",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "buttons",
+      "count": 1,
+      "projects": [
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "cap",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "cards",
+      "count": 2,
+      "projects": [
+        "project-fiorina-genai-app",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "carousel",
+      "count": 2,
+      "projects": [
+        "ping",
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "cd",
+      "count": 1,
+      "projects": [
+        "bandupgotti-branding"
+      ]
+    },
+    {
+      "tag": "checkered",
+      "count": 1,
+      "projects": [
+        "frank-and-pattys-marketing"
+      ]
+    },
+    {
+      "tag": "chrome",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "cinematic",
+      "count": 2,
+      "projects": [
+        "color-study-branding",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "cityscape",
+      "count": 1,
+      "projects": [
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "cliffs",
+      "count": 1,
+      "projects": [
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "close-up",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "clothing",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "compass",
+      "count": 1,
+      "projects": [
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "concert",
+      "count": 1,
+      "projects": [
+        "rockhall"
+      ]
+    },
+    {
+      "tag": "crowd",
+      "count": 5,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "rockhall",
+        "onlyyou-marketing",
+        "norfolkcurrents-branding",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "crt-monitor",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "dark-background",
+      "count": 9,
+      "projects": [
+        "ping",
+        "rockhall",
+        "color-study-branding",
+        "bandupgotti-branding",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "norfolkcurrents-branding",
+        "project-fiorina-genai-app",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "design-system",
+      "count": 1,
+      "projects": [
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "directors-chair",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "dj",
+      "count": 1,
+      "projects": [
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "dramatic",
+      "count": 2,
+      "projects": [
+        "rockhall",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "drink",
+      "count": 4,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "aunties-marketing",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "e-commerce",
+      "count": 1,
+      "projects": [
+        "ping"
+      ]
+    },
+    {
+      "tag": "editorial",
+      "count": 2,
+      "projects": [
+        "rockhall",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "energetic",
+      "count": 4,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "speed-shapes-branding",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "face",
+      "count": 1,
+      "projects": [
+        "bandupgotti-branding"
+      ]
+    },
+    {
+      "tag": "family-photo",
+      "count": 1,
+      "projects": [
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "fashion",
+      "count": 1,
+      "projects": [
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "fiberglass",
+      "count": 1,
+      "projects": [
+        "symmetry-glassing-branding"
+      ]
+    },
+    {
+      "tag": "flatlay",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "flooding",
+      "count": 1,
+      "projects": [
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "flowers",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "foliage",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "food",
+      "count": 3,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "aunties-marketing",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "full-color",
+      "count": 13,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "ping",
+        "rockhall",
+        "speed-shapes-branding",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "aunties-marketing",
+        "norfolkcurrents-branding",
+        "visit-virginiabeach-campaign",
+        "project-fiorina-genai-app",
+        "creatorlabs-platform",
+        "talisker-interactive-video",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "gallery",
+      "count": 1,
+      "projects": [
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "geometric",
+      "count": 2,
+      "projects": [
+        "color-study-branding",
+        "bandupgotti-branding"
+      ]
+    },
+    {
+      "tag": "globe",
+      "count": 1,
+      "projects": [
+        "bandupgotti-branding"
+      ]
+    },
+    {
+      "tag": "golden-hour",
+      "count": 2,
+      "projects": [
+        "color-study-branding",
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "golf-bag",
+      "count": 1,
+      "projects": [
+        "ping"
+      ]
+    },
+    {
+      "tag": "golf-clubs",
+      "count": 1,
+      "projects": [
+        "ping"
+      ]
+    },
+    {
+      "tag": "gradient",
+      "count": 1,
+      "projects": [
+        "speed-shapes-branding"
+      ]
+    },
+    {
+      "tag": "grain",
+      "count": 1,
+      "projects": [
+        "bandupgotti-branding"
+      ]
+    },
+    {
+      "tag": "green",
+      "count": 3,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "talisker-interactive-video",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "grid",
+      "count": 3,
+      "projects": [
+        "ping",
+        "color-study-branding",
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "group-portrait",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "halftone",
+      "count": 2,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "hand-drawn",
+      "count": 1,
+      "projects": [
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "hands",
+      "count": 4,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "symmetry-glassing-branding"
+      ]
+    },
+    {
+      "tag": "handwritten",
+      "count": 2,
+      "projects": [
+        "visit-virginiabeach-campaign",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "high-contrast",
+      "count": 4,
+      "projects": [
+        "ping",
+        "rockhall",
+        "speed-shapes-branding",
+        "bandupgotti-branding"
+      ]
+    },
+    {
+      "tag": "hotdog",
+      "count": 1,
+      "projects": [
+        "frank-and-pattys-marketing"
+      ]
+    },
+    {
+      "tag": "illustration",
+      "count": 3,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "indoor",
+      "count": 6,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "aunties-marketing",
+        "creatorlabs-platform",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "italic",
+      "count": 1,
+      "projects": [
+        "symmetry-glassing-branding"
+      ]
+    },
+    {
+      "tag": "keyboard",
+      "count": 1,
+      "projects": [
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "kiosk",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "label",
+      "count": 1,
+      "projects": [
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "landscape",
+      "count": 2,
+      "projects": [
+        "visit-virginiabeach-campaign",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "leaves",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "lifestyle",
+      "count": 6,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "speed-shapes-branding",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "visit-virginiabeach-campaign",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "lobby",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "logo",
+      "count": 4,
+      "projects": [
+        "color-study-branding",
+        "bandupgotti-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "magenta",
+      "count": 1,
+      "projects": [
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "man",
+      "count": 4,
+      "projects": [
+        "bandupgotti-branding",
+        "frank-and-pattys-marketing",
+        "symmetry-glassing-branding",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "metallic",
+      "count": 1,
+      "projects": [
+        "ping"
+      ]
+    },
+    {
+      "tag": "minimal",
+      "count": 2,
+      "projects": [
+        "ping",
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "mobile-screen",
+      "count": 5,
+      "projects": [
+        "ping",
+        "rockhall",
+        "norfolkcurrents-branding",
+        "project-fiorina-genai-app",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "monochrome",
+      "count": 4,
+      "projects": [
+        "color-study-branding",
+        "bandupgotti-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "mountain",
+      "count": 1,
+      "projects": [
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "mural",
+      "count": 1,
+      "projects": [
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "musician",
+      "count": 1,
+      "projects": [
+        "rockhall"
+      ]
+    },
+    {
+      "tag": "muted",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "nature",
+      "count": 2,
+      "projects": [
+        "talisker-interactive-video",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "navigation",
+      "count": 1,
+      "projects": [
+        "ping"
+      ]
+    },
+    {
+      "tag": "neon",
+      "count": 1,
+      "projects": [
+        "speed-shapes-branding"
+      ]
+    },
+    {
+      "tag": "neon-green",
+      "count": 1,
+      "projects": [
+        "rockhall"
+      ]
+    },
+    {
+      "tag": "nightlife",
+      "count": 2,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "ocean",
+      "count": 5,
+      "projects": [
+        "speed-shapes-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding",
+        "visit-virginiabeach-campaign",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "off-white",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "orange",
+      "count": 1,
+      "projects": [
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "outdoor",
+      "count": 8,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "speed-shapes-branding",
+        "onlyyou-marketing",
+        "symmetry-glassing-branding",
+        "aunties-marketing",
+        "norfolkcurrents-branding",
+        "visit-virginiabeach-campaign",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "pattern",
+      "count": 1,
+      "projects": [
+        "speed-shapes-branding"
+      ]
+    },
+    {
+      "tag": "performer",
+      "count": 1,
+      "projects": [
+        "rockhall"
+      ]
+    },
+    {
+      "tag": "person",
+      "count": 8,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "speed-shapes-branding",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "symmetry-glassing-branding",
+        "aunties-marketing",
+        "visit-virginiabeach-campaign",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "pink",
+      "count": 2,
+      "projects": [
+        "rockhall",
+        "speed-shapes-branding"
+      ]
+    },
+    {
+      "tag": "pixel-art",
+      "count": 1,
+      "projects": [
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "plant",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "plant-shadow",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "portrait",
+      "count": 4,
+      "projects": [
+        "rockhall",
+        "bandupgotti-branding",
+        "visit-virginiabeach-campaign",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "poster",
+      "count": 1,
+      "projects": [
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "product",
+      "count": 3,
+      "projects": [
+        "ping",
+        "speed-shapes-branding",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "purple",
+      "count": 1,
+      "projects": [
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "rainforest",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "record",
+      "count": 1,
+      "projects": [
+        "onlyyou-marketing"
+      ]
+    },
+    {
+      "tag": "red-berries",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "retro",
+      "count": 4,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "frank-and-pattys-marketing",
+        "onlyyou-marketing",
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "rock",
+      "count": 1,
+      "projects": [
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "rounded",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "runner",
+      "count": 1,
+      "projects": [
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "sans-serif",
+      "count": 11,
+      "projects": [
+        "ping",
+        "color-study-branding",
+        "speed-shapes-branding",
+        "bandupgotti-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding",
+        "visit-virginiabeach-campaign",
+        "project-fiorina-genai-app",
+        "creatorlabs-platform",
+        "talisker-interactive-video",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "saturated",
+      "count": 2,
+      "projects": [
+        "speed-shapes-branding",
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "scotland",
+      "count": 1,
+      "projects": [
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "screen",
+      "count": 7,
+      "projects": [
+        "ping",
+        "rockhall",
+        "speed-shapes-branding",
+        "norfolkcurrents-branding",
+        "project-fiorina-genai-app",
+        "creatorlabs-platform",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "script",
+      "count": 4,
+      "projects": [
+        "frank-and-pattys-marketing",
+        "aunties-marketing",
+        "visit-virginiabeach-campaign",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "sea-kelp",
+      "count": 1,
+      "projects": [
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "serif",
+      "count": 4,
+      "projects": [
+        "rockhall",
+        "norfolkcurrents-branding",
+        "visit-virginiabeach-campaign",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "shadow",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "shopping-bags",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "silver",
+      "count": 1,
+      "projects": [
+        "ping"
+      ]
+    },
+    {
+      "tag": "sky",
+      "count": 1,
+      "projects": [
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "slider",
+      "count": 1,
+      "projects": [
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "smoke",
+      "count": 1,
+      "projects": [
+        "bandupgotti-branding"
+      ]
+    },
+    {
+      "tag": "sneakers",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "stage",
+      "count": 1,
+      "projects": [
+        "rockhall"
+      ]
+    },
+    {
+      "tag": "stickers",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "storefront",
+      "count": 1,
+      "projects": [
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "storyboard",
+      "count": 1,
+      "projects": [
+        "color-study-branding"
+      ]
+    },
+    {
+      "tag": "street",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "studio",
+      "count": 2,
+      "projects": [
+        "ping",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "sunlight",
+      "count": 2,
+      "projects": [
+        "color-study-branding",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "surfboard",
+      "count": 2,
+      "projects": [
+        "speed-shapes-branding",
+        "symmetry-glassing-branding"
+      ]
+    },
+    {
+      "tag": "surfer",
+      "count": 1,
+      "projects": [
+        "symmetry-glassing-branding"
+      ]
+    },
+    {
+      "tag": "surfing",
+      "count": 1,
+      "projects": [
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "teal",
+      "count": 3,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "norfolkcurrents-branding",
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "touchscreen",
+      "count": 1,
+      "projects": [
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "tribal",
+      "count": 1,
+      "projects": [
+        "speed-shapes-branding"
+      ]
+    },
+    {
+      "tag": "tropical",
+      "count": 2,
+      "projects": [
+        "aunties-marketing",
+        "norfolk-botanical-garden-signage"
+      ]
+    },
+    {
+      "tag": "typographic",
+      "count": 7,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "rockhall",
+        "bandupgotti-branding",
+        "onlyyou-marketing",
+        "norfolkcurrents-branding",
+        "project-fiorina-genai-app",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "underwater",
+      "count": 1,
+      "projects": [
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "urban",
+      "count": 3,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "onlyyou-marketing",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "ux-flow",
+      "count": 1,
+      "projects": [
+        "project-fiorina-genai-app"
+      ]
+    },
+    {
+      "tag": "vintage",
+      "count": 1,
+      "projects": [
+        "adidas-thrift-and-ride"
+      ]
+    },
+    {
+      "tag": "vintage-photo",
+      "count": 1,
+      "projects": [
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "warm-tone",
+      "count": 5,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "color-study-branding",
+        "frank-and-pattys-marketing",
+        "aunties-marketing",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "water",
+      "count": 1,
+      "projects": [
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "wave",
+      "count": 4,
+      "projects": [
+        "speed-shapes-branding",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding",
+        "visit-virginiabeach-campaign"
+      ]
+    },
+    {
+      "tag": "whisky",
+      "count": 1,
+      "projects": [
+        "talisker-interactive-video"
+      ]
+    },
+    {
+      "tag": "white-background",
+      "count": 4,
+      "projects": [
+        "ping",
+        "frank-and-pattys-marketing",
+        "symmetry-glassing-branding",
+        "norfolkcurrents-branding"
+      ]
+    },
+    {
+      "tag": "woman",
+      "count": 6,
+      "projects": [
+        "adidas-thrift-and-ride",
+        "speed-shapes-branding",
+        "onlyyou-marketing",
+        "aunties-marketing",
+        "visit-virginiabeach-campaign",
+        "creatorlabs-platform"
+      ]
+    },
+    {
+      "tag": "workshop",
+      "count": 1,
+      "projects": [
+        "symmetry-glassing-branding"
+      ]
+    },
+    {
+      "tag": "yellow",
+      "count": 2,
+      "projects": [
+        "rockhall",
+        "aunties-marketing"
+      ]
+    },
+    {
+      "tag": "yellow-green",
+      "count": 1,
+      "projects": [
+        "speed-shapes-branding"
+      ]
+    }
+  ]
+}

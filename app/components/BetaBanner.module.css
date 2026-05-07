@@ -4,7 +4,8 @@
 
 .banner {
   align-items: center;
-  background: #f9b700;
+  background: #F9B700;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.10) inset, 0 -6px 16px 0 rgba(0, 0, 0, 0.10) inset;
   display: flex;
   left: 0;
   overflow: hidden;

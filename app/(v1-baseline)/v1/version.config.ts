@@ -1,9 +1,9 @@
-// Version config for v0 — Baseline.
+// Version config for v1 — Baseline.
 // This file is locked once a newer version exists.
-// Never modify after v1 ships.
+// Never modify after v2 ships.
 
 export const versionConfig = {
-  version: 'v0',
+  version: 'v1',
   name: 'Baseline',
   aesthetic: 'Light document/archive aesthetic. Cream background, near-black ink. Sparse whitespace, typographic hero, numbered catalogue structure. Inspired by design studio sites, printed catalogues, and receipt/form design.',
   constraint: 'Monospace type only. Two colors maximum. Single scrolling column. No decorative elements.',

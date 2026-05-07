@@ -41,7 +41,8 @@ export interface Project {
   title: string;
   dateAdded: string; // ISO 8601 date string
   year: number;
-  tags: string[];
+  disciplineTags: string[];
+  visualTags: string[];
   medium: string;
   client: string; // the entity the work was done for
   url?: string; // live project URL, rendered as a link on the PDP

@@ -1,6 +1,6 @@
 import type Lenis from 'lenis'
 
-// Module-level singleton so V0App can pause/resume without prop drilling.
+// Module-level singleton so V1App can pause/resume without prop drilling.
 // Only exists client-side — always null on the server.
 let instance: Lenis | null = null
 

@@ -1,0 +1,43 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--beta-banner-height, 32px));
+  height: calc(100dvh - var(--beta-banner-height, 32px));
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.emptyState {
+  position: fixed;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono), monospace;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: #999;
+  pointer-events: none;
+  z-index: 51;
+}
+
+.versionBadge {
+  position: fixed;
+  bottom: 20px;
+  left: 24px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #bbb;
+  pointer-events: none;
+  user-select: none;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .versionBadge {
+    bottom: 12px;
+    left: 16px;
+    font-size: 9px;
+  }
+}

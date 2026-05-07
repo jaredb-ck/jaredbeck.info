@@ -334,7 +334,7 @@ export default function ProjectList({ projects, title, onProjectClick }: Props) 
                   <a
                     data-project-row
                     key={project.id}
-                    href={`/v0/projects/${project.id}`}
+                    href={`/v1/projects/${project.id}`}
                     className={styles.projectRow}
                     // border-box: total row box must include the padding so the
                     // image area = rowHeight and there's still ROW_PADDING_BOTTOM

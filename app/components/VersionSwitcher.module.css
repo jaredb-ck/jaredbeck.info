@@ -11,9 +11,6 @@
   display: flex;
   gap: 6px;
   left: 0;
-  /* mix-blend-mode on the fixed-position container itself — the entire
-     switcher (logo, label, pills) composites against the page content
-     behind it using the difference operator. */
   mix-blend-mode: difference;
   padding: 12px 40px;
   position: fixed;
@@ -84,13 +81,16 @@
 .pill {
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
+  border: none;
   border-radius: 100px;
   color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
   display: inline-flex;
   font-family: 'DM Mono', ui-monospace, monospace;
   font-size: 12px;
   gap: 4px;
   letter-spacing: 0.08em;
+  outline: none;
   padding: 3px 8px 3px 12px;
   text-transform: uppercase;
   transition: background 0.12s ease, color 0.12s ease;
@@ -109,4 +109,44 @@
 .icon {
   flex-shrink: 0;
   opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+
+.iconFlipped {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown tray — rendered outside the blend-mode context
+   via a portal, so it's always solid regardless of page bg. ── */
+
+.dropdownTray {
+  position: fixed;
+  background: #333333;
+  border-radius: 14px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  z-index: 200;
+}
+
+.dropdownItem {
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.dropdownItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.dropdownItemActive {
+  color: #ffffff;
 }

@@ -1,7 +1,7 @@
 import projectsData from '@/data/projects.json'
 import aboutData from '@/data/about.json'
 import type { Project, About } from '@/types'
-import V0App from './V0App'
+import V1App from './V1App'
 
 const projects = (projectsData as Project[]).sort((a, b) => {
   // Primary: newest-added first.
@@ -14,7 +14,7 @@ const about = aboutData as About
 
 export default function Home() {
   return (
-    <V0App
+    <V1App
       projects={projects}
       aboutSkillsCount={about.skills.length}
     />

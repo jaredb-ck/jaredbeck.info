@@ -4,12 +4,6 @@
     "title": "Thrift & Ride",
     "dateAdded": "2021-06-28",
     "year": 2021,
-    "tags": [
-      "art direction",
-      "campaign",
-      "photography",
-      "experiential"
-    ],
     "medium": "campaign, art direction, experiential",
     "description": "Campaign concept and art direction for the launch of the adidas Forum '84 'Forum by New York City' colorway. A repurposed vintage NYC transit bus, wrapped in a custom Forum livery and outfitted as a mobile thrift shop, served as the campaign's hero environment — connecting the silhouette's basketball-court heritage to a contemporary NYC street and secondhand-style culture. Photography captured the bus exterior, styled interior, product, packaging, and a cast of New York creatives shopping the rolling thrift floor. [NEEDS REVIEW]",
     "role": "Art Director, Designer",
@@ -103,18 +97,56 @@
       "outcome": "[NEEDS REVIEW] Confirm launch metrics, press coverage, awards, and any retail/sell-through outcomes. Two finished video edits exist (16:9 30MB and 16:9 YouTube cuts) — flag for inclusion once schema supports video."
     },
     "client": "Adidas",
-    "credits": []
+    "credits": [],
+    "disciplineTags": [
+      "activation",
+      "apparel",
+      "art-direction",
+      "campaign",
+      "environmental",
+      "experiential",
+      "fashion",
+      "merchandise",
+      "packaging",
+      "photography",
+      "print",
+      "retail",
+      "social-media",
+      "tote"
+    ],
+    "visualTags": [
+      "boombox",
+      "bus",
+      "clothing",
+      "crowd",
+      "energetic",
+      "flatlay",
+      "full-color",
+      "group-portrait",
+      "hands",
+      "indoor",
+      "lifestyle",
+      "muted",
+      "outdoor",
+      "person",
+      "retro",
+      "shopping-bags",
+      "sneakers",
+      "stickers",
+      "street",
+      "teal",
+      "typographic",
+      "urban",
+      "vintage",
+      "warm-tone",
+      "woman"
+    ]
   },
   {
     "id": "ping",
     "title": "ping.com",
     "dateAdded": "2023-06-01",
     "year": 2023,
-    "tags": [
-      "ui/ux",
-      "digital",
-      "web"
-    ],
     "medium": "digital, ui/ux",
     "description": "Complete website design for PING, the premium golf equipment manufacturer. A product-first commerce platform structured around the Clubs, Accessories, and Juniors categories, with detailed PDPs surfacing technical specifications, shaft and grip configuration, and customer reviews. Editorial hero moments feature PING's tour professional roster. Fully responsive across desktop and mobile.",
     "role": "Art Director, Designer, UI/UX",
@@ -196,19 +228,41 @@
         "name": "Joe Branton"
       }
     ],
-    "url": "https://ping.com/en-us"
+    "url": "https://ping.com/en-us",
+    "disciplineTags": [
+      "app-design",
+      "digital",
+      "retail",
+      "sports",
+      "ui-ux",
+      "web-design"
+    ],
+    "visualTags": [
+      "carousel",
+      "dark-background",
+      "e-commerce",
+      "full-color",
+      "golf-bag",
+      "golf-clubs",
+      "grid",
+      "high-contrast",
+      "metallic",
+      "minimal",
+      "mobile-screen",
+      "navigation",
+      "product",
+      "sans-serif",
+      "screen",
+      "silver",
+      "studio",
+      "white-background"
+    ]
   },
   {
     "id": "rockhall",
     "title": "rockhall.com",
     "dateAdded": "2025-01-01",
     "year": 2025,
-    "tags": [
-      "ui/ux",
-      "digital",
-      "web",
-      "editorial"
-    ],
     "medium": "digital, ui/ux",
     "description": "Full website redesign for the Rock & Roll Hall of Fame — the inductees Hall-of-Fame universe, the Cleveland museum's visitor experience, and the editorial content program. The system centers on the 2025 induction class and the Watch-The-Induction livestream, with sub-systems for A–Z and Class-of inductee browsing, long-form story pages, and an RRTV motion identity that threads video reels across the site. Bold yellow-on-black display typography pairs with archival rock photography; the museum sub-brand carries a distinct blue accent system.",
     "role": "Art Director, Designer",
@@ -339,18 +393,46 @@
         "name": "Joe Branton"
       }
     ],
-    "url": "https://rockhall.com/"
+    "url": "https://rockhall.com/",
+    "disciplineTags": [
+      "arts",
+      "culture",
+      "digital",
+      "editorial",
+      "entertainment",
+      "music",
+      "social-media",
+      "ui-ux",
+      "web-design"
+    ],
+    "visualTags": [
+      "black-and-white",
+      "bold",
+      "concert",
+      "crowd",
+      "dark-background",
+      "dramatic",
+      "editorial",
+      "full-color",
+      "high-contrast",
+      "mobile-screen",
+      "musician",
+      "neon-green",
+      "performer",
+      "pink",
+      "portrait",
+      "screen",
+      "serif",
+      "stage",
+      "typographic",
+      "yellow"
+    ]
   },
   {
     "id": "color-study-branding",
     "title": "Color Study Branding",
     "dateAdded": "2025-11-01",
     "year": 2025,
-    "tags": [
-      "branding",
-      "logo",
-      "motion"
-    ],
     "medium": "identity, branding",
     "description": "Brand identity system for Color Study Film Studio, a production house with the tagline 'A Window on the World.' The identity centers on a geometric 'CS' monogram — two rounded pill forms arranged to suggest a film frame or window — paired with a bold sans-serif 'Color Study.' wordmark. The system includes logo construction guidelines, lockup variations, a 3D chrome logo rendering, branded merchandise (five-panel cap, director's chair), a retro CRT manifesto screen, a cinematic credits sequence, and atmospheric shadow-study photography that reinforces the studio's focus on light and color in filmmaking.",
     "role": "Art Director, Designer",
@@ -459,19 +541,49 @@
       "outcome": ""
     },
     "client": "Color Study Film Studio",
-    "credits": []
+    "credits": [],
+    "disciplineTags": [
+      "brand-guidelines",
+      "brand-identity",
+      "entertainment",
+      "hat",
+      "identity-system",
+      "logo-design",
+      "merchandise",
+      "mockup",
+      "motion",
+      "typography"
+    ],
+    "visualTags": [
+      "3d",
+      "black-and-white",
+      "cap",
+      "chrome",
+      "cinematic",
+      "crt-monitor",
+      "dark-background",
+      "directors-chair",
+      "geometric",
+      "golden-hour",
+      "grid",
+      "logo",
+      "minimal",
+      "monochrome",
+      "off-white",
+      "plant-shadow",
+      "rounded",
+      "sans-serif",
+      "shadow",
+      "storyboard",
+      "sunlight",
+      "warm-tone"
+    ]
   },
   {
     "id": "speed-shapes-branding",
     "title": "Speed Shapes Branding",
     "dateAdded": "2025-10-01",
     "year": 2025,
-    "tags": [
-      "branding",
-      "logo",
-      "surf",
-      "merch"
-    ],
     "medium": "identity, branding",
     "description": "Brand identity system for Speed Shapes Manufacturing, a surfboard shaper based in Virginia Beach, VA. The identity is built around a dynamic flame-inspired 'S' mark enclosed in a circle, paired with bold graffiti-style 'SPEEDSHAPES' lettering. The visual language draws from surf culture, psychedelic color palettes (neon pinks, greens, yellows), and organic flame and wave patterns. The system spans logo variations, custom wordmark treatments, surf photography, surfboard graphics applied to shaped boards, branded apparel (tees, hoodies, long-sleeves), and social media assets.",
     "role": "Art Director, Designer",
@@ -560,19 +672,49 @@
       "outcome": ""
     },
     "client": "Speed Shapes Manufacturing",
-    "credits": []
+    "credits": [],
+    "disciplineTags": [
+      "apparel",
+      "brand-identity",
+      "identity-system",
+      "illustration",
+      "logo-design",
+      "merchandise",
+      "social-media",
+      "sports",
+      "type-design",
+      "typography"
+    ],
+    "visualTags": [
+      "beach",
+      "bold",
+      "energetic",
+      "full-color",
+      "gradient",
+      "high-contrast",
+      "lifestyle",
+      "neon",
+      "ocean",
+      "outdoor",
+      "pattern",
+      "person",
+      "pink",
+      "product",
+      "saturated",
+      "sans-serif",
+      "screen",
+      "surfboard",
+      "tribal",
+      "wave",
+      "woman",
+      "yellow-green"
+    ]
   },
   {
     "id": "bandupgotti-branding",
     "title": "BandUp Gotti Branding",
     "dateAdded": "2025-05-01",
     "year": 2025,
-    "tags": [
-      "branding",
-      "logo",
-      "music",
-      "merch"
-    ],
     "medium": "branding, art direction",
     "description": "Brand and logo design for rapper and musician BandUp Gotti. The identity is built around a custom icon that fuses a globe, bull horns, and the omega symbol — evoking world domination and seizing the day. The mark is paired with 'BANDUP GOTTI' set in Goldman, a sans-serif with subtle tapering and spur details. The system includes an icon characteristics breakdown, typography specimen, logo lockup variations (horizontal and stacked), CD packaging with blurred black-and-white artist photography, a branded pattern used as a photo frame, and a merch tee mockup.",
     "role": "Designer",
@@ -645,6 +787,36 @@
       {
         "name": "Create with the Perfect Play"
       }
+    ],
+    "disciplineTags": [
+      "art-direction",
+      "brand-guidelines",
+      "brand-identity",
+      "identity-system",
+      "logo-design",
+      "merchandise",
+      "music",
+      "packaging",
+      "photography",
+      "typography"
+    ],
+    "visualTags": [
+      "black-and-white",
+      "bold",
+      "cd",
+      "dark-background",
+      "face",
+      "geometric",
+      "globe",
+      "grain",
+      "high-contrast",
+      "logo",
+      "man",
+      "monochrome",
+      "portrait",
+      "sans-serif",
+      "smoke",
+      "typographic"
     ]
   },
   {
@@ -652,11 +824,6 @@
     "title": "Frank & Patty's Marketing",
     "dateAdded": "2025-06-01",
     "year": 2025,
-    "tags": [
-      "design",
-      "marketing",
-      "merch"
-    ],
     "medium": "design, marketing",
     "description": "Design and graphic art for Frank & Patty's, a bar and grill in Virginia Beach, VA ('Not a Bar & Grill — Burgers, Hotdogs, Cocktails, Beer' at 510 17th 1/2 St A). The work spans illustrated merchandise — a black hoodie featuring a character graphic with the tagline 'Get Full at the 1/2,' white tees with 'Roll Through!' and 'Pull Up!' bar-stool illustrations in a red-and-green checkerboard palette — newspaper-style flyer art ('For a Good Time Call'), retro diner-inspired poster graphics ('Get Stuffed!'), Patty's Pilsner beer can label design, and social media photography capturing the bar's community and launch events.",
     "role": "Designer",
@@ -714,18 +881,52 @@
       "outcome": ""
     },
     "client": "Frank & Patty's",
-    "credits": []
+    "credits": [],
+    "disciplineTags": [
+      "apparel",
+      "flyer",
+      "food-and-beverage",
+      "hospitality",
+      "illustration",
+      "label",
+      "merchandise",
+      "packaging",
+      "photography",
+      "print",
+      "social-media"
+    ],
+    "visualTags": [
+      "bar",
+      "beer-can",
+      "bold",
+      "burger",
+      "checkered",
+      "dark-background",
+      "drink",
+      "energetic",
+      "food",
+      "full-color",
+      "green",
+      "halftone",
+      "hands",
+      "hotdog",
+      "illustration",
+      "indoor",
+      "lifestyle",
+      "man",
+      "nightlife",
+      "person",
+      "retro",
+      "script",
+      "warm-tone",
+      "white-background"
+    ]
   },
   {
     "id": "onlyyou-marketing",
     "title": "Only You Marketing",
     "dateAdded": "2024-04-01",
     "year": 2024,
-    "tags": [
-      "design",
-      "marketing",
-      "merch"
-    ],
     "medium": "design, marketing",
     "description": "Design and graphic art for Only You Bar & Lounge, a bar, lounge, cafe, record shop, and wine bar at Park Place in Norfolk, VA. The work includes a wide range of illustrated event posters for live music nights — hand-drawn and digitally composed flyers for acts including Cosmo Baker, Matthew Law, Esentrik, No Visa & Friends, Funk Freaks, Sasha Marie, and Hakana. Branded merchandise spans a black tee with pixel-art retro graphics, a black hoodie with a vinyl-record swirl motif, and white tees with hand-illustrated floral and character art. Additional deliverables include ASCII-style weekly event schedule graphics, a wheatpaste street flyer campaign ('For a Good Time Call 888-80-ONLY YOU'), and social media photography documenting the venue's community events, staff, and atmosphere.",
     "role": "Designer",
@@ -819,18 +1020,52 @@
       "outcome": ""
     },
     "client": "Only You Bar & Lounge",
-    "credits": []
+    "credits": [],
+    "disciplineTags": [
+      "apparel",
+      "entertainment",
+      "flyer",
+      "hospitality",
+      "illustration",
+      "merchandise",
+      "music",
+      "poster",
+      "print",
+      "social-media"
+    ],
+    "visualTags": [
+      "bar",
+      "bold",
+      "crowd",
+      "dark-background",
+      "dj",
+      "drink",
+      "energetic",
+      "full-color",
+      "halftone",
+      "hand-drawn",
+      "hands",
+      "illustration",
+      "indoor",
+      "lifestyle",
+      "magenta",
+      "nightlife",
+      "outdoor",
+      "person",
+      "pixel-art",
+      "poster",
+      "record",
+      "retro",
+      "typographic",
+      "urban",
+      "woman"
+    ]
   },
   {
     "id": "symmetry-glassing-branding",
     "title": "Symmetry Glassing Branding",
     "dateAdded": "2026-03-01",
     "year": 2026,
-    "tags": [
-      "branding",
-      "logo",
-      "surf"
-    ],
     "medium": "branding, identity",
     "description": "Brand and identity design for Symmetry Glassing, a surfboard glassing and finishing service based in Portland, ME. The identity centers on a dynamic swirl mark — an abstract 'S' form evoking water, wave energy, and the rotational motion of the glassing process. The system includes a standalone logo mark, two logo lockup arrangements with the 'SYMMETRY' wordmark set in Tay Basal (slanted and upright), four makers-mark variations for board stamps and trade use, a typography specimen (Tay Basal display and Akkurat-Bold secondary), Instagram icon variations in positive and negative, workshop photography of the finishing process, and a surfer-lifestyle image composited with the logo.",
     "role": "Designer",
@@ -898,6 +1133,35 @@
       {
         "name": "Aidan Molloy"
       }
+    ],
+    "disciplineTags": [
+      "brand-guidelines",
+      "brand-identity",
+      "identity-system",
+      "logo-design",
+      "social-media",
+      "sports",
+      "typography"
+    ],
+    "visualTags": [
+      "beach",
+      "black-and-white",
+      "bold",
+      "fiberglass",
+      "hands",
+      "italic",
+      "logo",
+      "man",
+      "monochrome",
+      "ocean",
+      "outdoor",
+      "person",
+      "sans-serif",
+      "surfboard",
+      "surfer",
+      "wave",
+      "white-background",
+      "workshop"
     ]
   },
   {
@@ -905,12 +1169,6 @@
     "title": "Aunties Marketing",
     "dateAdded": "2021-03-01",
     "year": 2021,
-    "tags": [
-      "design",
-      "branding",
-      "marketing",
-      "merch"
-    ],
     "medium": "design, branding",
     "description": "Various design and graphic art assets for Auntie's Tiki, a Filipino tiki bar and sari-sari at 4314 Colley Avenue in Norfolk, VA. The work includes illustrated cocktail-to-go labels (Mai Tai, Hurricane, Jungle Bird, Pain Killer) in bold neon colorways, a 'Nieves Fernandez' commemorative tee design with archival imagery, a sari-sari tee with illustrated goddess figure and Filipino iconography, a 'Banana Sauce' banana ketchup label, social media graphics layered over vintage family photography (soft open announcements, help wanted, Mother's Day), a wall mural for the restaurant interior, and food and product photography.",
     "role": "Designer, Graphic Artist",
@@ -1004,19 +1262,51 @@
       "outcome": ""
     },
     "client": "Auntie's Tiki",
-    "credits": []
+    "credits": [],
+    "disciplineTags": [
+      "apparel",
+      "culture",
+      "environmental",
+      "food-and-beverage",
+      "hospitality",
+      "illustration",
+      "label",
+      "merchandise",
+      "packaging",
+      "photography",
+      "print",
+      "social-media"
+    ],
+    "visualTags": [
+      "bold",
+      "drink",
+      "family-photo",
+      "food",
+      "full-color",
+      "golden-hour",
+      "illustration",
+      "indoor",
+      "label",
+      "mural",
+      "orange",
+      "outdoor",
+      "person",
+      "retro",
+      "saturated",
+      "script",
+      "storefront",
+      "tropical",
+      "vintage-photo",
+      "warm-tone",
+      "woman",
+      "yellow"
+    ]
   },
   {
     "id": "norfolkcurrents-branding",
     "title": "Norfolk Currents Branding",
     "dateAdded": "2022-10-01",
     "year": 2022,
-    "tags": [
-      "branding",
-      "design",
-      "logo",
-      "editorial"
-    ],
     "medium": "branding, identity",
     "description": "Branding, design, and strategy for Norfolk Currents, a community-driven media publication covering Norfolk, VA. The identity pairs a bold condensed sans-serif 'NORFOLK' with a custom blackletter-inflected 'Currents' wordmark featuring wave-form letterforms and a teal accent palette (Ever Green, Tidal Teal, Sea Foam). The system includes a logo construction breakdown, multiple lockup arrangements (main, horizontal, abbreviated NFK), an NFK logo mark, color palette specification (Wet Ink, White, Notebook, three greens), logo variations across light, dark, and colored backgrounds, editorial article cards with teal overlays on documentary photography, social media presence (Instagram grid, story highlights), and branded merchandise (dark and white tees, five-panel cap).",
     "role": "Designer",
@@ -1089,18 +1379,51 @@
       "outcome": ""
     },
     "client": "Norfolk Currents",
-    "credits": []
+    "credits": [],
+    "disciplineTags": [
+      "apparel",
+      "brand-guidelines",
+      "brand-identity",
+      "civic",
+      "editorial",
+      "hat",
+      "identity-system",
+      "logo-design",
+      "merchandise",
+      "nonprofit",
+      "social-media",
+      "typography"
+    ],
+    "visualTags": [
+      "aerial",
+      "black-and-white",
+      "bold",
+      "cityscape",
+      "crowd",
+      "dark-background",
+      "flooding",
+      "full-color",
+      "logo",
+      "mobile-screen",
+      "monochrome",
+      "ocean",
+      "outdoor",
+      "sans-serif",
+      "screen",
+      "serif",
+      "teal",
+      "typographic",
+      "urban",
+      "water",
+      "wave",
+      "white-background"
+    ]
   },
   {
     "id": "visit-virginiabeach-campaign",
     "title": "Visit Virginia Beach Campaign",
     "dateAdded": "2022-02-01",
     "year": 2022,
-    "tags": [
-      "design",
-      "campaign",
-      "art direction"
-    ],
     "medium": "design, campaign",
     "description": "Design and motion work for the City of Virginia Beach spring and summer tourism campaign. The campaign centers on handwritten personal invitations from local Virginia Beach figures — restaurant owners, run club founders, performance artists, surfers, and shop owners — paired with documentary-style photography of their spaces and communities. The tagline structure follows an 'Open ___' format (Open Arms / Open Tables, Open Stages / Open Minds, Open Trails / Open Hearts, Open Waves / Open Hearts) with the Virginia Beach 'Live the Life' mark. Deliverables include billboard designs (Lamar outdoor), social media cards for Instagram, a beach-themed outdoor print ad ('An Invitation to Make a Splash'), and billboard photo mockups.",
     "role": "Designer",
@@ -1184,6 +1507,42 @@
       {
         "name": "City of Virginia Beach"
       }
+    ],
+    "disciplineTags": [
+      "art-direction",
+      "billboard",
+      "campaign",
+      "civic",
+      "out-of-home",
+      "photography",
+      "print",
+      "social-media",
+      "travel"
+    ],
+    "visualTags": [
+      "beach",
+      "bold",
+      "crowd",
+      "food",
+      "full-color",
+      "handwritten",
+      "landscape",
+      "lifestyle",
+      "man",
+      "ocean",
+      "outdoor",
+      "person",
+      "portrait",
+      "runner",
+      "sans-serif",
+      "script",
+      "serif",
+      "sky",
+      "sunlight",
+      "surfing",
+      "warm-tone",
+      "wave",
+      "woman"
     ]
   },
   {
@@ -1191,11 +1550,6 @@
     "title": "Project Fiorina",
     "dateAdded": "2024-01-01",
     "year": 2024,
-    "tags": [
-      "ui/ux",
-      "digital",
-      "design"
-    ],
     "medium": "ui/ux, digital",
     "description": "Gen AI product exploration for Google AI/UX. A generative image creation and editing app featuring text-to-image prompting, style exploration (trending categories, recently used, top categories), area selection and object removal tools, stylize controls with intensity sliders (Realistic, Charcoal, Pixar), color and lighting adjustments, a project history timeline with restore and export actions, and a Material Design 3 theming system built with Material Theme Builder. The UI follows a dark mode-first approach with purple accent tones across the full creation-to-export workflow.",
     "role": "Designer, UI/UX",
@@ -1270,6 +1624,32 @@
       {
         "name": "Jax Jackson"
       }
+    ],
+    "disciplineTags": [
+      "app-design",
+      "digital",
+      "prototype",
+      "tech",
+      "ui-ux"
+    ],
+    "visualTags": [
+      "ai-generated",
+      "buttons",
+      "cards",
+      "carousel",
+      "dark-background",
+      "design-system",
+      "full-color",
+      "gallery",
+      "grid",
+      "keyboard",
+      "mobile-screen",
+      "purple",
+      "sans-serif",
+      "screen",
+      "slider",
+      "typographic",
+      "ux-flow"
     ]
   },
   {
@@ -1277,12 +1657,6 @@
     "title": "Creator Labs",
     "dateAdded": "2023-02-01",
     "year": 2023,
-    "tags": [
-      "ui/ux",
-      "digital",
-      "web",
-      "editorial"
-    ],
     "medium": "ui/ux, digital",
     "description": "Website design for Creator Labs, a visual arts incubator by Google Pixel and SN37 that supports rising talents in the creation of new work about important cultural narratives. The platform showcases seasonal cohorts of photographers and filmmakers — all work captured, documented, and created on Pixel. The site features artist profile pages with editorial photography, season archives with artist rosters and curatorial statements, and a responsive mobile experience. Featured artists include Mayan Toledano documenting LGBTQ+ communities in Mexico City.",
     "role": "Designer [NEEDS REVIEW]",
@@ -1372,18 +1746,40 @@
     },
     "client": "Google Pixel",
     "credits": [],
-    "url": "https://creatorlabs.google"
+    "url": "https://creatorlabs.google",
+    "disciplineTags": [
+      "arts",
+      "culture",
+      "digital",
+      "editorial",
+      "photography",
+      "tech",
+      "ui-ux",
+      "web-design"
+    ],
+    "visualTags": [
+      "bold",
+      "dark-background",
+      "editorial",
+      "fashion",
+      "full-color",
+      "indoor",
+      "lifestyle",
+      "mobile-screen",
+      "person",
+      "portrait",
+      "sans-serif",
+      "screen",
+      "studio",
+      "typographic",
+      "woman"
+    ]
   },
   {
     "id": "talisker-interactive-video",
     "title": "Talisker Interactive Experience",
     "dateAdded": "2024-01-01",
     "year": 2024,
-    "tags": [
-      "ui/ux",
-      "digital",
-      "web"
-    ],
     "medium": "ui/ux, digital",
     "description": "Interactive video experience for Talisker single malt Scotch whisky. An immersive web platform that lets users explore the Isle of Skye through interactive panoramic landscapes — each whisky expression (Talisker Skye, Talisker Storm, Talisker 10 Year Old, Talisker x Parley Wilder Seas) is tied to a distinct location on the island with GPS coordinates, clickable discovery points, tasting notes, photographer quotes, recipes, and field guides. The Wilder Seas section highlights the Parley partnership protecting wild sea forests, with links to Scotland, Chile, and Africa documentary films. Typography pairs a hand-drawn script display with bold condensed sans-serif caps.",
     "role": "Designer [NEEDS REVIEW]",
@@ -1442,18 +1838,46 @@
     },
     "client": "Talisker",
     "credits": [],
-    "url": "https://player.vimeo.com/video/808722797?h=1d37f755b8"
+    "url": "https://player.vimeo.com/video/808722797?h=1d37f755b8",
+    "disciplineTags": [
+      "digital",
+      "food-and-beverage",
+      "photography",
+      "ui-ux",
+      "video",
+      "web-design"
+    ],
+    "visualTags": [
+      "bottle",
+      "cinematic",
+      "cliffs",
+      "compass",
+      "dramatic",
+      "drink",
+      "full-color",
+      "green",
+      "handwritten",
+      "landscape",
+      "mountain",
+      "nature",
+      "ocean",
+      "outdoor",
+      "product",
+      "rock",
+      "sans-serif",
+      "scotland",
+      "script",
+      "sea-kelp",
+      "teal",
+      "underwater",
+      "whisky"
+    ]
   },
   {
     "id": "norfolk-botanical-garden-signage",
     "title": "NBG Digital Signage",
     "dateAdded": "2024-04-01",
     "year": 2024,
-    "tags": [
-      "ui/ux",
-      "digital",
-      "design"
-    ],
     "medium": "digital, ui/ux",
     "description": "Digital signage system for Norfolk Botanical Gardens. Interactive touchscreen kiosks placed throughout the park for wayfinding, experiential learning, and education. The Rainforest Biome (The Verdant Vault) experience lets visitors explore plant species like Jade Vine, Ant Plant, and Vanilla Orchid through tap-to-discover interactions, photo carousels, and bilingual content (English/Espanol). Plant detail screens cover overview, characteristics, animal encounters, super powers, conservation status, and actionable steps. Lobby displays show park conditions including weather, trolley schedules, and upcoming events.",
     "role": "Designer, UI/UX",
@@ -1513,6 +1937,38 @@
       {
         "name": "Aidan Molloy"
       }
+    ],
+    "disciplineTags": [
+      "digital",
+      "education",
+      "environmental",
+      "installation",
+      "nonprofit",
+      "signage",
+      "ui-ux"
+    ],
+    "visualTags": [
+      "bilingual",
+      "botanical",
+      "cards",
+      "close-up",
+      "flowers",
+      "foliage",
+      "full-color",
+      "green",
+      "indoor",
+      "kiosk",
+      "leaves",
+      "lobby",
+      "nature",
+      "plant",
+      "rainforest",
+      "red-berries",
+      "sans-serif",
+      "screen",
+      "serif",
+      "touchscreen",
+      "tropical"
     ]
   }
 ]

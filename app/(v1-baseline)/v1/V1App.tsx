@@ -17,13 +17,13 @@ interface ActiveState {
 
 function getInitialActive(projects: Project[]): ActiveState | null {
   if (typeof window === 'undefined') return null
-  const match = window.location.pathname.match(/\/v0\/projects\/([^/]+)$/)
+  const match = window.location.pathname.match(/\/v1\/projects\/([^/]+)$/)
   if (!match) return null
   const index = projects.findIndex(p => p.id === match[1])
   return index !== -1 ? { project: projects[index], index } : null
 }
 
-export default function V0App({
+export default function V1App({
   projects,
   aboutSkillsCount,
 }: {
@@ -55,7 +55,7 @@ export default function V0App({
   // Browser back / forward — instant, no animation
   useEffect(() => {
     const handlePop = () => {
-      const match = location.pathname.match(/\/v0\/projects\/([^/]+)$/)
+      const match = location.pathname.match(/\/v1\/projects\/([^/]+)$/)
       if (match) {
         const index = projects.findIndex(p => p.id === match[1])
         if (index !== -1) {
@@ -148,7 +148,7 @@ export default function V0App({
     isAnimating.current = true
     const index = projects.findIndex(p => p.id === project.id)
     setActive({ project, index })
-    history.pushState({}, '', `/v0/projects/${project.id}`)
+    history.pushState({}, '', `/v1/projects/${project.id}`)
     // The useLayoutEffect above handles the animation once the PDP mounts
   }, [projects])
 
@@ -156,7 +156,7 @@ export default function V0App({
     if (!active || active.index === 0) return
     const newIndex = active.index - 1
     const project = projects[newIndex]
-    history.replaceState({}, '', `/v0/projects/${project.id}`)
+    history.replaceState({}, '', `/v1/projects/${project.id}`)
     setNavDirection('prev')
     setActive({ project, index: newIndex })
   }, [active, projects])
@@ -165,7 +165,7 @@ export default function V0App({
     if (!active || active.index === projects.length - 1) return
     const newIndex = active.index + 1
     const project = projects[newIndex]
-    history.replaceState({}, '', `/v0/projects/${project.id}`)
+    history.replaceState({}, '', `/v1/projects/${project.id}`)
     setNavDirection('next')
     setActive({ project, index: newIndex })
   }, [active, projects])
@@ -174,7 +174,7 @@ export default function V0App({
     if (!active || targetIndex === active.index) return
     if (targetIndex < 0 || targetIndex >= projects.length) return
     const project = projects[targetIndex]
-    history.replaceState({}, '', `/v0/projects/${project.id}`)
+    history.replaceState({}, '', `/v1/projects/${project.id}`)
     setNavDirection(targetIndex < active.index ? 'prev' : 'next')
     setActive({ project, index: targetIndex })
   }, [active, projects])
@@ -200,7 +200,7 @@ export default function V0App({
     if (isAnimating.current || !active) return
     isAnimating.current = true
 
-    history.replaceState({}, '', '/v0')
+    history.replaceState({}, '', '/v1')
 
     tlRef.current?.kill()
     const tl = gsap.timeline({

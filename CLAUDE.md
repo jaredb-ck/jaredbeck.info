@@ -317,6 +317,12 @@ These apply to every session, every version, forever.
 
 16. ffmpeg is located at /opt/homebrew/bin/ffmpeg — always use
     the full path for all ffmpeg commands.
+    
+17. disciplineTags[] and visualTags[] are search index
+    data only — never rendered in any UI. No component
+    in any version displays these fields. They exist
+    solely to power search in v2 and future versions.
+
 
 ---
 
@@ -468,13 +474,27 @@ page-transitions.md — homepage → PDP transition per version
 
 ## Current State
 
-Version: v0 — Blueprint complete.
+Version: v1 — Baseline complete (renamed from v0).
 Preloader: built and live.
 Last patch: [update this when patches are applied]
 Inbox: empty.
-Git branch: [update this each session]
-
-Next: define constraint and inspiration for v1 before building.
+Git branch: v2-cloud
+Tags: tags[] replaced with disciplineTags[] and visualTags[].
+  /data/tags.json exists (50 discipline, 157 visual unique tags).
+  Tags are search-only — never rendered in any UI.
+  v2 search index updated to index both arrays.
 
 Update this block at the end of every session to reflect
 the current state of the project accurately.
+
+---
+
+## Active Build — v2 Cloud
+Currently building: /(v2-cloud)/ route group only.
+Constraint: Search as navigation — no traditional nav, no project list. The search bar is the only entry point into the work.
+Do not touch any other version route group.
+Do not touch /data, /types, or /app/layout.tsx.
+Do not touch changelog.module.css or /changelog.
+All new components, styles, and config go in
+/(v2-cloud)/ exclusively.
+When in doubt — stop and ask before proceeding.
