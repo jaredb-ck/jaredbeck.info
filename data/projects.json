@@ -140,7 +140,8 @@
       "vintage",
       "warm-tone",
       "woman"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "ping",
@@ -256,7 +257,8 @@
       "silver",
       "studio",
       "white-background"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "rockhall",
@@ -426,7 +428,8 @@
       "stage",
       "typographic",
       "yellow"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "color-study-branding",
@@ -577,7 +580,8 @@
       "storyboard",
       "sunlight",
       "warm-tone"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "speed-shapes-branding",
@@ -708,7 +712,8 @@
       "wave",
       "woman",
       "yellow-green"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "bandupgotti-branding",
@@ -817,7 +822,8 @@
       "sans-serif",
       "smoke",
       "typographic"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "frank-and-pattys-marketing",
@@ -920,7 +926,8 @@
       "script",
       "warm-tone",
       "white-background"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "onlyyou-marketing",
@@ -1059,7 +1066,8 @@
       "typographic",
       "urban",
       "woman"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "symmetry-glassing-branding",
@@ -1162,7 +1170,8 @@
       "wave",
       "white-background",
       "workshop"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "aunties-marketing",
@@ -1300,7 +1309,8 @@
       "warm-tone",
       "woman",
       "yellow"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "norfolkcurrents-branding",
@@ -1417,7 +1427,8 @@
       "water",
       "wave",
       "white-background"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "visit-virginiabeach-campaign",
@@ -1543,7 +1554,8 @@
       "warm-tone",
       "wave",
       "woman"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "project-fiorina-genai-app",
@@ -1650,7 +1662,8 @@
       "slider",
       "typographic",
       "ux-flow"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "creatorlabs-platform",
@@ -1773,7 +1786,8 @@
       "studio",
       "typographic",
       "woman"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "talisker-interactive-video",
@@ -1871,7 +1885,8 @@
       "teal",
       "underwater",
       "whisky"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "norfolk-botanical-garden-signage",
@@ -1969,6 +1984,7 @@
       "serif",
       "touchscreen",
       "tropical"
-    ]
+    ],
+    "featured": true
   }
 ]

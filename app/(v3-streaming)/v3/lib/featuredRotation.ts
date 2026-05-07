@@ -1,0 +1,43 @@
+import { Project } from '@/types'
+
+const HERO_IDS = [
+  'adidas-thrift-and-ride',
+  'project-fiorina-genai-app',
+  'color-study-branding',
+  'rockhall',
+]
+
+export const HERO_DESCRIPTORS: Record<string, string> = {
+  'adidas-thrift-and-ride': 'Campaign concept and art direction for the launch of the adidas Forum \'84 \'Forum by New York City\' colorway.',
+  'project-fiorina-genai-app': 'A generative AI image creation and editing app designed for Google AI/UX. Dark-mode interface with full creation-to-export workflow.',
+  'color-study-branding': 'Brand identity system for Color Study Film Studio. A geometric monogram, chrome renders, and cinematic credits sequence.',
+  'rockhall': 'Full website redesign for the Rock & Roll Hall of Fame. Inductee browsing, editorial content, and the RRTV motion identity.',
+}
+
+export function getFeaturedProjects(projects: Project[]): Project[] {
+  return HERO_IDS
+    .map(id => projects.find(p => p.id === id))
+    .filter((p): p is Project => p !== undefined && p.images.length > 0)
+}
+
+export function getNextProject(
+  featured: Project[],
+  currentId: string | null
+): Project {
+  if (featured.length === 0) {
+    throw new Error('No featured projects available')
+  }
+  if (featured.length === 1) return featured[0]
+
+  // Never repeat the same project twice in a row
+  const candidates = currentId
+    ? featured.filter(p => p.id !== currentId)
+    : featured
+
+  const idx = Math.floor(Math.random() * candidates.length)
+  return candidates[idx]
+}
+
+export function getRandomFeatured(featured: Project[]): Project {
+  return getNextProject(featured, null)
+}

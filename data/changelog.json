@@ -275,5 +275,15 @@
     "promptSummary": "A searchable asset cloud. All project images float freely in a large canvas viewport. A search bar anchors the center. By default the cloud displays a randomized selection of assets. When a search query is made, the cloud filters to show only relevant assets. Any asset can be clicked to open a lightbox.",
     "screenshot": "",
     "patches": []
+  },
+  {
+    "version": "v3",
+    "name": "Streaming",
+    "date": "2026-05-07",
+    "aesthetic": "Premium dark-mode streaming UI. Full-bleed hero rotation, horizontal carousels, DM Sans titles against DM Mono labels. Content-first.",
+    "constraint": "Content platform logic applied to design work — browse not search. Carousels as primary navigation metaphor.",
+    "promptSummary": "A streaming service UI applied to a graphic design portfolio. One hero featured project at the top with full-bleed imagery. Horizontal carousels below grouped by discipline and abstract categories. Clicking a project opens a full-screen detail view. No search, no project list — browse is the only mode.",
+    "screenshot": "",
+    "patches": []
   }
 ]

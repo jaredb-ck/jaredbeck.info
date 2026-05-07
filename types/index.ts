@@ -43,6 +43,7 @@ export interface Project {
   year: number;
   disciplineTags: string[];
   visualTags: string[];
+  featured: boolean;
   medium: string;
   client: string; // the entity the work was done for
   url?: string; // live project URL, rendered as a link on the PDP
