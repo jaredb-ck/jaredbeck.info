@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import gsap from 'gsap'
 import changelogData from '@/data/changelog.json'
 import type { ChangelogEntry } from '@/types'
@@ -8,10 +9,6 @@ import { usePreloader } from './usePreloader'
 import styles from './Preloader.module.css'
 
 const versions = changelogData as ChangelogEntry[]
-const currentEntry = versions[0]
-const currentVersionLabel = currentEntry
-  ? `${currentEntry.version}/${currentEntry.name.toLowerCase()}`
-  : 'v0'
 
 const CIRCUMFERENCE = 2 * Math.PI * 75 // ~471
 
@@ -41,10 +38,21 @@ function LogoProgress({ progress }: { progress: number }) {
 }
 
 export default function Preloader() {
+  const pathname = usePathname()
   const { progress, isComplete } = usePreloader()
   const [visible, setVisible] = useState(true)
   const containerRef = useRef<HTMLDivElement>(null)
   const hasExited = useRef(false)
+
+  const activeEntry = versions.find(entry => {
+    const href = `/${entry.version}`
+    return pathname === href || pathname.startsWith(`${href}/`)
+  })
+  const versionLabel = activeEntry
+    ? `${activeEntry.version}/${activeEntry.name.toLowerCase()}`
+    : versions[versions.length - 1]
+      ? `${versions[versions.length - 1].version}/${versions[versions.length - 1].name.toLowerCase()}`
+      : 'v1'
 
   useEffect(() => {
     if (!isComplete || hasExited.current) return
@@ -81,7 +89,7 @@ export default function Preloader() {
     <div ref={containerRef} className={styles.preloader}>
       <LogoProgress progress={progress} />
       <span className={styles.versionLabel}>
-        loading {currentVersionLabel}
+        loading {versionLabel}
       </span>
     </div>
   )

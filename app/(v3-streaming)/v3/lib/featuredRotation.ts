@@ -7,6 +7,13 @@ const HERO_IDS = [
   'rockhall',
 ]
 
+// Preferred 16:9 hero video per featured project (when available)
+export const HERO_VIDEOS: Record<string, string> = {
+  'adidas-thrift-and-ride': 'forum-45-16x9-30mb.mp4',
+  'color-study-branding': 'showreel.mp4',
+  'rockhall': 'homepage.mp4',
+}
+
 export const HERO_DESCRIPTORS: Record<string, string> = {
   'adidas-thrift-and-ride': 'Campaign concept and art direction for the launch of the adidas Forum \'84 \'Forum by New York City\' colorway.',
   'project-fiorina-genai-app': 'A generative AI image creation and editing app designed for Google AI/UX. Dark-mode interface with full creation-to-export workflow.',

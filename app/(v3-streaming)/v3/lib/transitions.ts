@@ -17,11 +17,11 @@ export const carousel = {
 }
 
 export const detail = {
-  open: { duration: 0.5, ease: 'power3.inOut' },
-  close: { duration: 0.4, ease: 'power3.inOut' },
+  open: { duration: 0.35, ease: 'power2.out' },
+  close: { duration: 0.3, ease: 'power2.in' },
   imageCrossfade: { duration: 0.25, ease: 'power1.inOut' },
-  uiFadeIn: { duration: 0.3, delay: 0.4 },
-  overlayFade: { duration: 0.4 },
+  uiFadeIn: { duration: 0.3, delay: 0.25 },
+  overlayFade: { duration: 0.3 },
 }
 
 export const pageEnter = {

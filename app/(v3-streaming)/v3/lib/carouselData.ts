@@ -25,16 +25,15 @@ export function buildCarousels(projects: Project[]): CarouselDef[] {
     // Tier 1
     {
       title: 'Recently Added',
-      filter: () => true,
-      limit: 10,
-    },
-    {
-      title: 'Branding',
-      filter: p => hasAnyDisciplineTag(p, ['brand-identity', 'logo-design', 'identity-system', 'brand-guidelines', 'wordmark']),
+      filter: p => p.year >= 2025,
     },
     {
       title: 'Digital & UI',
       filter: p => hasAnyDisciplineTag(p, ['ui-ux', 'web-design', 'app-design', 'digital', 'screen', 'prototype']),
+    },
+    {
+      title: 'Branding',
+      filter: p => hasAnyDisciplineTag(p, ['brand-identity', 'logo-design', 'identity-system', 'brand-guidelines', 'wordmark']),
     },
     {
       title: 'Print & Editorial',

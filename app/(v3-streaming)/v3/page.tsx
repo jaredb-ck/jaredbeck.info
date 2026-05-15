@@ -6,6 +6,7 @@ import gsap from 'gsap'
 import { Project } from '@/types'
 import projectsData from '@/data/projects.json'
 import { buildCarousels } from './lib/carouselData'
+import { getFeaturedProjects, getRandomFeatured } from './lib/featuredRotation'
 import { pageEnter } from './lib/transitions'
 import HeroFeature from './components/HeroFeature'
 import CarouselSection from './components/CarouselSection'
@@ -14,6 +15,7 @@ import styles from './v3.module.css'
 
 const projects = projectsData as Project[]
 const carousels = buildCarousels(projects)
+const featured = getFeaturedProjects(projects)
 
 interface DetailState {
   project: Project
@@ -27,6 +29,31 @@ export default function V3Page() {
   const carouselsRef = useRef<HTMLDivElement>(null)
   const [detail, setDetail] = useState<DetailState | null>(null)
   const [isReady, setIsReady] = useState(false)
+
+  // Single source of truth for the current featured project
+  const [currentFeatured, setCurrentFeatured] = useState<Project | null>(
+    () => featured.length > 0 ? getRandomFeatured(featured) : null
+  )
+
+  const featuredIndex = currentFeatured
+    ? featured.findIndex(p => p.id === currentFeatured.id)
+    : 0
+
+  // Blur hero on scroll
+  useEffect(() => {
+    const heroEl = pageRef.current?.querySelector('[class*="hero"]') as HTMLElement | null
+    if (!heroEl) return
+    const onScroll = () => {
+      const scrollY = window.scrollY
+      const maxBlur = 20
+      const blurStart = window.innerHeight * 0.2
+      const blurEnd = window.innerHeight * 0.8
+      const progress = Math.min(1, Math.max(0, (scrollY - blurStart) / (blurEnd - blurStart)))
+      heroEl.style.filter = `blur(${progress * maxBlur}px)`
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useEffect(() => {
     const handler = () => setIsReady(true)
@@ -43,14 +70,14 @@ export default function V3Page() {
   useGSAP(() => {
     if (!isReady || !pageRef.current) return
 
-    const content = contentRef.current
+    const heroMeta = contentRef.current?.querySelector('[class*="heroContent"]')
     const carouselEls = carouselsRef.current?.children
 
     const tl = gsap.timeline()
 
-    if (content) {
-      gsap.set(content, { opacity: 0 })
-      tl.to(content, {
+    if (heroMeta) {
+      gsap.set(heroMeta, { opacity: 0 })
+      tl.to(heroMeta, {
         opacity: 1,
         duration: pageEnter.heroFade.duration,
         ease: pageEnter.heroFade.ease,
@@ -80,7 +107,7 @@ export default function V3Page() {
       window.innerWidth * 0.8,
       window.innerHeight * 0.8
     )
-    setDetail({ project, sourceRect: rect, carouselProjects: projects.filter(p => p.featured) })
+    setDetail({ project, sourceRect: rect, carouselProjects: featured })
   }, [])
 
   const handleCloseDetail = useCallback(() => {
@@ -94,13 +121,17 @@ export default function V3Page() {
 
   return (
     <div ref={pageRef} className={styles.page}>
-      {/* Fixed hero image behind everything */}
-      <HeroFeature projects={projects} />
+      <HeroFeature
+        projects={projects}
+        currentProject={currentFeatured}
+        onProjectChange={setCurrentFeatured}
+      />
 
-      {/* Scrollable content on top */}
       <div ref={contentRef} className={styles.content}>
         <HeroFeature.Content
-          projects={projects}
+          currentProject={currentFeatured}
+          featuredCount={featured.length}
+          featuredIndex={featuredIndex >= 0 ? featuredIndex : 0}
           onViewProject={handleViewProject}
         />
         <div ref={carouselsRef}>

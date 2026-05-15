@@ -5,45 +5,28 @@ import Image from 'next/image'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { Project } from '@/types'
-import { getFeaturedProjects, getNextProject, getRandomFeatured, HERO_DESCRIPTORS } from '../lib/featuredRotation'
+import { getFeaturedProjects, getNextProject, getRandomFeatured, HERO_DESCRIPTORS, HERO_VIDEOS } from '../lib/featuredRotation'
 import { hero as heroTransitions } from '../lib/transitions'
 import HeroProgress from './HeroProgress'
 import styles from '../v3.module.css'
 
-interface HeroFeatureProps {
+interface HeroBackgroundProps {
   projects: Project[]
+  currentProject: Project | null
+  onProjectChange: (project: Project) => void
 }
 
 interface HeroContentProps {
-  projects: Project[]
+  currentProject: Project | null
+  featuredCount: number
+  featuredIndex: number
   onViewProject: (project: Project) => void
-}
-
-// Shared state between Background and Content via module-level store
-let sharedCurrent: Project | null = null
-let sharedListeners: Array<(p: Project) => void> = []
-
-function notifyListeners(p: Project) {
-  sharedCurrent = p
-  sharedListeners.forEach(fn => fn(p))
-}
-
-function useSharedProject(initial: Project | null) {
-  const [project, setProject] = useState<Project | null>(initial)
-  useEffect(() => {
-    sharedListeners.push(setProject)
-    if (sharedCurrent) setProject(sharedCurrent)
-    return () => {
-      sharedListeners = sharedListeners.filter(fn => fn !== setProject)
-    }
-  }, [])
-  return project
 }
 
 /**
  * Fixed background — renders the hero images behind everything.
  */
-function HeroBackground({ projects }: HeroFeatureProps) {
+function HeroBackground({ projects, currentProject, onProjectChange }: HeroBackgroundProps) {
   const featured = getFeaturedProjects(projects)
   const containerRef = useRef<HTMLDivElement>(null)
   const imageARef = useRef<HTMLDivElement>(null)
@@ -52,18 +35,9 @@ function HeroBackground({ projects }: HeroFeatureProps) {
   const isTransitioning = useRef(false)
   const activeSlot = useRef<'a' | 'b'>('a')
 
-  const [slotA, setSlotA] = useState<Project | null>(() => {
-    const p = featured.length > 0 ? getRandomFeatured(featured) : null
-    if (p) sharedCurrent = p
-    return p
-  })
+  const [slotA, setSlotA] = useState<Project | null>(currentProject)
   const [slotB, setSlotB] = useState<Project | null>(null)
   const [isReady, setIsReady] = useState(false)
-
-  // Notify content of initial project
-  useEffect(() => {
-    if (slotA) notifyListeners(slotA)
-  }, [])
 
   const transitionTo = useCallback((next: Project) => {
     if (isTransitioning.current) return
@@ -76,8 +50,6 @@ function HeroBackground({ projects }: HeroFeatureProps) {
     if (isSlotA) setSlotB(next)
     else setSlotA(next)
     activeSlot.current = isSlotA ? 'b' : 'a'
-
-    notifyListeners(next)
 
     requestAnimationFrame(() => {
       const tl = gsap.timeline({
@@ -93,8 +65,10 @@ function HeroBackground({ projects }: HeroFeatureProps) {
         duration: heroTransitions.crossfade.duration,
         ease: heroTransitions.crossfade.ease,
       }, '<')
+      // Update text at crossfade midpoint
+      tl.call(() => onProjectChange(next), [], heroTransitions.crossfade.duration * 0.5)
     })
-  }, [featured])
+  }, [onProjectChange])
 
   useEffect(() => {
     if (!isReady || featured.length <= 1) return
@@ -126,35 +100,40 @@ function HeroBackground({ projects }: HeroFeatureProps) {
 
   if (featured.length === 0) return null
 
-  const getImgSrc = (project: Project | null) => {
-    if (!project) return ''
-    return `/images/${project.id}/${project.images[0].src}`
+  const renderMedia = (project: Project | null, priority: boolean) => {
+    if (!project) return null
+    const videoFile = HERO_VIDEOS[project.id]
+    if (videoFile) {
+      return (
+        <video
+          src={`/videos/${project.id}/${videoFile}`}
+          className={styles.heroImage}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      )
+    }
+    return (
+      <Image
+        src={`/images/${project.id}/${project.images[0].src}`}
+        alt={project.title}
+        fill
+        className={styles.heroImage}
+        priority={priority}
+        sizes="100vw"
+      />
+    )
   }
 
   return (
     <div ref={containerRef} className={styles.hero}>
       <div ref={imageARef} className={styles.heroImageWrap} style={{ opacity: activeSlot.current === 'a' ? 1 : 0 }}>
-        {slotA && (
-          <Image
-            src={getImgSrc(slotA)}
-            alt={slotA.title}
-            fill
-            className={styles.heroImage}
-            priority
-            sizes="100vw"
-          />
-        )}
+        {renderMedia(slotA, true)}
       </div>
       <div ref={imageBRef} className={styles.heroImageWrap} style={{ opacity: activeSlot.current === 'b' ? 1 : 0 }}>
-        {slotB && (
-          <Image
-            src={getImgSrc(slotB)}
-            alt={slotB.title}
-            fill
-            className={styles.heroImage}
-            sizes="100vw"
-          />
-        )}
+        {renderMedia(slotB, false)}
       </div>
     </div>
   )
@@ -163,22 +142,11 @@ function HeroBackground({ projects }: HeroFeatureProps) {
 /**
  * Scrollable content overlay — featured project info with gradient.
  */
-function HeroContent({ projects, onViewProject }: HeroContentProps) {
-  const featured = getFeaturedProjects(projects)
+function HeroContent({ currentProject, featuredCount, featuredIndex, onViewProject }: HeroContentProps) {
   const contentRef = useRef<HTMLDivElement>(null)
-  const current = useSharedProject(featured[0] ?? null)
-  const [progressIndex, setProgressIndex] = useState(0)
 
-  // Track progress changes
-  useEffect(() => {
-    if (!current) return
-    const idx = featured.findIndex(p => p.id === current.id)
-    if (idx !== -1) setProgressIndex(idx)
-  }, [current, featured])
-
-  // Text entrance animation on project change
   useGSAP(() => {
-    if (!contentRef.current || !current) return
+    if (!contentRef.current || !currentProject) return
     const els = contentRef.current.children
     gsap.fromTo(els,
       { y: heroTransitions.textEntrance.y, opacity: 0 },
@@ -189,9 +157,12 @@ function HeroContent({ projects, onViewProject }: HeroContentProps) {
         stagger: heroTransitions.textEntrance.stagger,
       }
     )
-  }, { scope: contentRef, dependencies: [current?.id] })
+  }, { scope: contentRef, dependencies: [currentProject?.id] })
 
-  if (!current) return null
+  if (!currentProject) return null
+
+  const desc = HERO_DESCRIPTORS[currentProject.id]
+    || currentProject.description.split(/\.(?:\s|$)/)[0] + '.'
 
   return (
     <>
@@ -199,22 +170,21 @@ function HeroContent({ projects, onViewProject }: HeroContentProps) {
         <div className={styles.heroContent}>
           <div ref={contentRef} className={styles.heroMeta}>
             <div className={styles.heroLabel}>featured project:</div>
-            <h1 className={styles.heroTitle}>{current.title}</h1>
-            <p className={styles.heroDescription}>{HERO_DESCRIPTORS[current.id] || current.description.split(/\.(?:\s|$)/)[0] + '.'}</p>
+            <h1 className={styles.heroTitle}>{currentProject.title}</h1>
+            <p className={styles.heroDescription}>{desc}</p>
           </div>
           <button
             className={styles.heroAction}
-            onClick={() => onViewProject(current)}
+            onClick={() => onViewProject(currentProject)}
           >
             view project
           </button>
         </div>
       </div>
-      <HeroProgress total={featured.length} activeIndex={progressIndex} />
+      <HeroProgress total={featuredCount} activeIndex={featuredIndex} />
     </>
   )
 }
 
-// Compound component pattern
 HeroBackground.Content = HeroContent
 export default HeroBackground

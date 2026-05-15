@@ -1,7 +1,7 @@
 /* V3: Streaming — Premium dark-mode streaming UI */
 
 .page {
-  --v3-bg: rgba(0, 0, 0, 0.9);
+  --v3-bg: rgba(0, 0, 0, 0.85);
   --v3-surface: #141414;
   --v3-text: #ffffff;
   --v3-text-secondary: #a0a0a0;
@@ -18,13 +18,9 @@
   overflow-x: hidden;
 }
 
-.page button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
+.page button,
 .page a {
-  cursor: pointer;
+  font-family: inherit;
 }
 
 /* ─── Hero ─────────────────────────────────── */
@@ -54,14 +50,15 @@
   position: relative;
   z-index: 1;
   padding-top: 48vh;
+  background: linear-gradient(
+    to top,
+    var(--v3-bg) 0%,
+    var(--v3-bg) calc(100% - 52vh),
+    transparent 100%
+  );
 }
 
 .heroGradient {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.9) 20%,
-    transparent 100%
-  );
   padding: 73px 48px 48px;
 }
 
@@ -97,7 +94,7 @@
 
 .heroDescription {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--v3-text);
@@ -122,7 +119,8 @@
 }
 
 .heroAction:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: white;
+  color: black;
 }
 
 /* ─── Hero Progress ────────────────────────── */
@@ -169,7 +167,6 @@
 /* ─── Carousels ────────────────────────────── */
 
 .carousels {
-  background: var(--v3-bg);
   padding: 48px 0 80px;
 }
 
@@ -191,7 +188,7 @@
 
 .carouselTitle {
   font-family: var(--font-display);
-  font-size: 32px;
+  font-size: 22px;
   font-weight: 400;
   color: var(--v3-text);
 }
@@ -215,7 +212,8 @@
 }
 
 .carouselArrow:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: white;
+  color: black;
 }
 
 .carouselArrow:disabled {
@@ -262,6 +260,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
 }
 
 .cardShine {
@@ -303,6 +302,7 @@
   align-items: flex-end;
   padding: 24px;
   pointer-events: none;
+  cursor: pointer;
 }
 
 .cardMeta {
@@ -351,6 +351,28 @@
   overflow: hidden;
 }
 
+.detailClose {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 3;
+  background: none;
+  border: 0.5px solid var(--v3-border);
+  border-radius: 100px;
+  color: var(--v3-text);
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.detailClose:hover {
+  background: white;
+  color: black;
+}
+
 .detailImageWrap {
   position: absolute;
   inset: 0;
@@ -366,14 +388,17 @@
 }
 
 .imageContain {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
 .detailGradient {
   position: absolute;
-  inset: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.9) 20%,
@@ -382,32 +407,28 @@
   pointer-events: none;
 }
 
-.detailCategory {
-  position: absolute;
-  top: 24px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-family: var(--font-ui);
-  font-size: 14px;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: var(--v3-text-secondary);
-  z-index: 2;
-}
-
 .detailContent {
   position: absolute;
-  bottom: 48px;
-  left: 48px;
-  right: 48px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
+  padding: 0 48px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.detailBottom {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 
 .detailMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   max-width: 438px;
 }
 
@@ -417,7 +438,6 @@
   font-weight: 400;
   text-transform: uppercase;
   color: var(--v3-text);
-  margin-bottom: 12px;
 }
 
 .detailTitle {
@@ -426,54 +446,64 @@
   font-weight: 400;
   line-height: 1.1;
   color: var(--v3-text);
-  margin: 0 0 12px;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .detailDescription {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--v3-text);
-  max-width: 438px;
 }
 
-.detailNav {
+.detailActions {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 16px;
+  gap: 12px;
+  align-items: center;
   flex-shrink: 0;
 }
 
-.detailNextProject {
+.detailPill {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--v3-text);
   cursor: pointer;
   background: none;
   border: 0.5px solid var(--v3-border);
   border-radius: 100px;
-  padding: 12px 24px;
+  padding: 8px 20px;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  transition: background 0.15s;
+  gap: 8px;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
 }
 
-.detailNextProject:hover {
-  background: rgba(255, 255, 255, 0.08);
+.detailPill:hover {
+  background: white;
+  color: black;
 }
+
+/* ─── Detail Image Nav (left/right arrows) ─── */
 
 .detailImageNav {
+  position: absolute;
+  top: 50%;
+  left: 48px;
+  right: 48px;
+  transform: translateY(-50%);
   display: flex;
-  gap: 12px;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .detailArrow {
-  border: 0.5px solid var(--v3-border);
+  border: 0.5px solid rgba(255, 255, 255, 0.5);
   border-radius: 100px;
   background: none;
   color: var(--v3-text);
@@ -483,33 +513,34 @@
   cursor: pointer;
   padding: 8px 16px;
   transition: background 0.15s;
+  pointer-events: auto;
 }
 
 .detailArrow:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: white;
+  color: black;
 }
 
-.detailArrow svg {
-  width: 20px;
-  height: 20px;
+.detailArrow:disabled {
+  opacity: 0.2;
+  cursor: default;
 }
 
 /* ─── Detail Progress ──────────────────────── */
 
 .detailProgress {
-  display: flex;
-  gap: 2px;
-  height: 3px;
-  flex-shrink: 0;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  width: 100%;
 }
 
-.detailProgressSegment {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.detailProgressSegmentActive {
-  background: var(--v3-text);
+.detailProgressFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: white;
 }
 
 /* ─── Page enter initial states ────────────── */
