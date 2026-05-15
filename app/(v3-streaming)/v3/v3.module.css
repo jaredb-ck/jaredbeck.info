@@ -59,6 +59,7 @@
 }
 
 .heroGradient {
+  position: relative;
   padding: 73px 48px 48px;
 }
 
@@ -102,19 +103,19 @@
 
 .heroAction {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--v3-text);
   cursor: pointer;
   background: none;
   border: 0.5px solid var(--v3-border);
   border-radius: 100px;
-  padding: 12px 24px;
+  padding: 8px 20px;
   white-space: nowrap;
-  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  margin-top: 16px;
   transition: background 0.15s;
 }
 
@@ -123,43 +124,48 @@
   color: black;
 }
 
-/* ─── Hero Progress ────────────────────────── */
+/* ─── Hero Indicator ───────────────────────── */
 
-.heroProgress {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.heroIndicator {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 48px;
   display: flex;
-  gap: 2px;
-  height: 3px;
+  gap: 4px;
   z-index: 2;
 }
 
-.heroProgressSegment {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.15);
+.heroIndicatorSegment {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 3px;
   position: relative;
   overflow: hidden;
+  transition: width 0.4s ease, background 0.4s ease;
 }
 
-.heroProgressFill {
+.heroIndicatorSegmentActive {
+  width: 48px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.heroIndicatorFill {
   position: absolute;
   inset: 0;
   background: var(--v3-text);
+  border-radius: 3px;
   transform-origin: left;
   transform: scaleX(0);
 }
 
-.heroProgressFillActive {
-  animation: progressFill 12s linear forwards;
+.heroIndicatorFillActive {
+  animation: indicatorFill 12s linear forwards;
 }
 
-.heroProgressFillDone {
-  transform: scaleX(1);
-}
-
-@keyframes progressFill {
+@keyframes indicatorFill {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }

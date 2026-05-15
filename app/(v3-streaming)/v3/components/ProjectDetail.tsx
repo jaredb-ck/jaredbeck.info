@@ -59,18 +59,81 @@ export default function ProjectDetail({
   const overlayRef = useRef<HTMLDivElement>(null)
   const imageAreaRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
+  const bottomRef = useRef<HTMLDivElement>(null)
+  const gradientRef = useRef<HTMLDivElement>(null)
   const currentImageRef = useRef<HTMLDivElement>(null)
   const mediaIndexRef = useRef(mediaIndex)
   mediaIndexRef.current = mediaIndex
 
   useEffect(() => {
     setMediaIndex(0)
+    // Reset progress bar for new project
+    progressStarted.current = false
+    if (progressTweenRef.current) progressTweenRef.current.kill()
+    if (progressFillRef.current) gsap.set(progressFillRef.current, { width: '0%' })
   }, [project.id])
 
   const currentMedia = media[mediaIndex]
   const isPortrait = currentMedia ? currentMedia.w / currentMedia.h < 1.0 : false
   const progressFillRef = useRef<HTMLDivElement>(null)
   const progressTweenRef = useRef<gsap.core.Tween | null>(null)
+
+  // Total project duration for linear progress bar
+  const IMAGE_HOLD = 5
+  const VIDEO_FALLBACK = 30
+  const totalDurationRef = useRef(0)
+  const progressStarted = useRef(false)
+
+  // Pre-fetch video durations, then calculate total and start one continuous tween
+  useEffect(() => {
+    progressStarted.current = false
+    totalDurationRef.current = 0
+
+    const durations = media.map(m => m.type === 'image' ? IMAGE_HOLD : 0)
+    const videoIndices = media
+      .map((m, i) => m.type === 'video' ? i : -1)
+      .filter(i => i >= 0)
+
+    if (videoIndices.length === 0) {
+      totalDurationRef.current = durations.reduce((s, d) => s + d, 0)
+      return
+    }
+
+    let pending = videoIndices.length
+    videoIndices.forEach(i => {
+      const vid = document.createElement('video')
+      vid.preload = 'metadata'
+      vid.src = media[i].src
+      vid.onloadedmetadata = () => {
+        durations[i] = vid.duration || VIDEO_FALLBACK
+        pending--
+        if (pending === 0) {
+          totalDurationRef.current = durations.reduce((s, d) => s + d, 0)
+        }
+      }
+      vid.onerror = () => {
+        durations[i] = VIDEO_FALLBACK
+        pending--
+        if (pending === 0) {
+          totalDurationRef.current = durations.reduce((s, d) => s + d, 0)
+        }
+      }
+    })
+  }, [project.id])
+
+  const startContinuousProgress = useCallback(() => {
+    if (!progressFillRef.current || media.length <= 1 || progressStarted.current) return
+    const total = totalDurationRef.current
+    if (total === 0) return
+    progressStarted.current = true
+    if (progressTweenRef.current) progressTweenRef.current.kill()
+    gsap.set(progressFillRef.current, { width: '0%' })
+    progressTweenRef.current = gsap.to(progressFillRef.current, {
+      width: '100%',
+      duration: total,
+      ease: 'none',
+    })
+  }, [media.length])
 
   // Open animation
   useGSAP(() => {
@@ -176,35 +239,17 @@ export default function ProjectDetail({
     advanceNext()
   }, [advanceNext])
 
-  // Animate progress bar from current segment start to end
-  const animateProgress = useCallback((duration: number) => {
-    if (!progressFillRef.current || media.length <= 1) return
-    if (progressTweenRef.current) progressTweenRef.current.kill()
-    const startPct = (mediaIndex / media.length) * 100
-    const endPct = ((mediaIndex + 1) / media.length) * 100
-    gsap.set(progressFillRef.current, { width: `${startPct}%` })
-    progressTweenRef.current = gsap.to(progressFillRef.current, {
-      width: `${endPct}%`,
-      duration,
-      ease: 'none',
-    })
-  }, [mediaIndex, media.length])
-
-  // On media change, set up auto-advance based on type
+  // On media change, set up auto-advance (progress bar runs independently)
   useEffect(() => {
     clearAutoAdvance()
     isVideoPlaying.current = false
     const cur = media[mediaIndex]
     if (cur && cur.type === 'image') {
       scheduleImageAdvance()
-      animateProgress(5)
     }
-    // For videos, progress is driven by onLoadedMetadata
-    return () => {
-      clearAutoAdvance()
-      if (progressTweenRef.current) progressTweenRef.current.kill()
-    }
-  }, [mediaIndex, media, clearAutoAdvance, scheduleImageAdvance, animateProgress])
+    return () => { clearAutoAdvance() }
+  }, [mediaIndex, media, clearAutoAdvance, scheduleImageAdvance])
+
 
   // Hide UI after 3s of idle, show on any interaction
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -213,7 +258,8 @@ export default function ProjectDetail({
   const hideUI = useCallback(() => {
     if (!uiVisible.current) return
     uiVisible.current = false
-    gsap.to(contentRef.current, { opacity: 0, duration: 0.4, ease: 'power2.out' })
+    gsap.to(bottomRef.current, { opacity: 0, duration: 0.4, ease: 'power2.out' })
+    gsap.to(gradientRef.current, { opacity: 0, duration: 0.4, ease: 'power2.out' })
   }, [])
 
   const showUI = useCallback(() => {
@@ -224,7 +270,8 @@ export default function ProjectDetail({
       return
     }
     uiVisible.current = true
-    gsap.to(contentRef.current, { opacity: 1, duration: 0.3, ease: 'power2.out' })
+    gsap.to(bottomRef.current, { opacity: 1, duration: 0.3, ease: 'power2.out' })
+    gsap.to(gradientRef.current, { opacity: 1, duration: 0.3, ease: 'power2.out' })
     if (idleTimer.current) clearTimeout(idleTimer.current)
     idleTimer.current = setTimeout(hideUI, 4000)
   }, [hideUI])
@@ -294,6 +341,7 @@ export default function ProjectDetail({
               sizes={isPortrait ? '50vw' : '100vw'}
               priority
               onLoad={() => {
+                startContinuousProgress()
                 gsap.fromTo(currentImageRef.current,
                   { opacity: 0 },
                   { opacity: 1, duration: 0.5, ease: 'power2.out' }
@@ -309,10 +357,9 @@ export default function ProjectDetail({
               autoPlay
               muted
               playsInline
-              onLoadedData={(e) => {
+              onLoadedData={() => {
                 isVideoPlaying.current = true
-                const vid = e.currentTarget
-                animateProgress(vid.duration || 30)
+                startContinuousProgress()
                 gsap.fromTo(currentImageRef.current,
                   { opacity: 0 },
                   { opacity: 1, duration: 0.5, ease: 'power2.out' }
@@ -323,7 +370,7 @@ export default function ProjectDetail({
           )}
         </div>
 
-        <div className={styles.detailGradient} />
+        <div ref={gradientRef} className={styles.detailGradient} />
 
         {/* Left/right image navigation */}
         <div className={styles.detailImageNav}>
@@ -347,7 +394,7 @@ export default function ProjectDetail({
 
         {/* Bottom content */}
         <div ref={contentRef} className={styles.detailContent}>
-          <div className={styles.detailBottom}>
+          <div ref={bottomRef} className={styles.detailBottom}>
             <div className={styles.detailMeta}>
               <div className={styles.detailLabel}>featured project:</div>
               <h2 className={styles.detailTitle}>{project.title}</h2>

@@ -36,13 +36,10 @@ export function getNextProject(
   }
   if (featured.length === 1) return featured[0]
 
-  // Never repeat the same project twice in a row
-  const candidates = currentId
-    ? featured.filter(p => p.id !== currentId)
-    : featured
-
-  const idx = Math.floor(Math.random() * candidates.length)
-  return candidates[idx]
+  const currentIdx = currentId
+    ? featured.findIndex(p => p.id === currentId)
+    : -1
+  return featured[(currentIdx + 1) % featured.length]
 }
 
 export function getRandomFeatured(featured: Project[]): Project {

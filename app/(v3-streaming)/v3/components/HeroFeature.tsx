@@ -165,14 +165,13 @@ function HeroContent({ currentProject, featuredCount, featuredIndex, onViewProje
     || currentProject.description.split(/\.(?:\s|$)/)[0] + '.'
 
   return (
-    <>
-      <div className={styles.heroGradient}>
-        <div className={styles.heroContent}>
-          <div ref={contentRef} className={styles.heroMeta}>
-            <div className={styles.heroLabel}>featured project:</div>
-            <h1 className={styles.heroTitle}>{currentProject.title}</h1>
-            <p className={styles.heroDescription}>{desc}</p>
-          </div>
+    <div className={styles.heroGradient}>
+      <HeroProgress total={featuredCount} activeIndex={featuredIndex} />
+      <div className={styles.heroContent}>
+        <div ref={contentRef} className={styles.heroMeta}>
+          <div className={styles.heroLabel}>featured project:</div>
+          <h1 className={styles.heroTitle}>{currentProject.title}</h1>
+          <p className={styles.heroDescription}>{desc}</p>
           <button
             className={styles.heroAction}
             onClick={() => onViewProject(currentProject)}
@@ -181,8 +180,7 @@ function HeroContent({ currentProject, featuredCount, featuredIndex, onViewProje
           </button>
         </div>
       </div>
-      <HeroProgress total={featuredCount} activeIndex={featuredIndex} />
-    </>
+    </div>
   )
 }
 
