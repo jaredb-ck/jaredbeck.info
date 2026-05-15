@@ -554,3 +554,130 @@
 .pageHidden {
   opacity: 0;
 }
+
+/* ─── Mobile ──────────────────────────────── */
+
+@media (max-width: 768px) {
+  /* Hero */
+  .heroGradient {
+    padding: 48px 20px 32px;
+  }
+
+  .heroMeta {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .heroTitle {
+    font-size: 28px;
+    white-space: normal;
+  }
+
+  .heroLabel {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  .heroDescription {
+    font-size: 14px;
+  }
+
+  .heroAction {
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+
+  .heroIndicator {
+    bottom: 32px;
+  }
+
+  /* Carousels */
+  .carousels {
+    padding: 32px 0 60px;
+  }
+
+  .carousel {
+    margin-bottom: 32px;
+  }
+
+  .carouselHeader {
+    padding: 0 20px;
+    margin-bottom: 16px;
+  }
+
+  .carouselTitle {
+    font-size: 18px;
+  }
+
+  .carouselTrack {
+    gap: 16px;
+    padding: 12px 20px;
+  }
+
+  .card {
+    width: 280px;
+    height: 170px;
+    border-radius: 16px;
+  }
+
+  .cardOverlay {
+    padding: 16px;
+  }
+
+  .cardTitle {
+    font-size: 16px;
+  }
+
+  .cardDescription {
+    font-size: 12px;
+  }
+
+  /* Detail (PDP) */
+  .detailContent {
+    padding: 0 20px 20px;
+    gap: 24px;
+  }
+
+  .detailBottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .detailTitle {
+    font-size: 24px;
+    white-space: normal;
+  }
+
+  .detailLabel {
+    font-size: 11px;
+  }
+
+  .detailDescription {
+    font-size: 13px;
+  }
+
+  .detailClose {
+    top: 16px;
+    right: 16px;
+    padding: 8px;
+  }
+
+  .detailImageNav {
+    left: 16px;
+    right: 16px;
+  }
+
+  .detailArrow {
+    padding: 6px 12px;
+  }
+
+  .detailProgress {
+    height: 4px;
+  }
+
+  .imageCover,
+  .imageContain {
+    object-fit: contain;
+  }
+}
