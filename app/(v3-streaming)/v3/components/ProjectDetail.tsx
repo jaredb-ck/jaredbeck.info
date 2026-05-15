@@ -95,7 +95,7 @@ export default function ProjectDetail({
       .filter(i => i >= 0)
 
     if (videoIndices.length === 0) {
-      totalDurationRef.current = durations.reduce((s, d) => s + d, 0)
+      totalDurationRef.current = durations.reduce<number>((s, d) => s + d, 0)
       return
     }
 
@@ -108,14 +108,14 @@ export default function ProjectDetail({
         durations[i] = vid.duration || VIDEO_FALLBACK
         pending--
         if (pending === 0) {
-          totalDurationRef.current = durations.reduce((s, d) => s + d, 0)
+          totalDurationRef.current = durations.reduce<number>((s, d) => s + d, 0)
         }
       }
       vid.onerror = () => {
         durations[i] = VIDEO_FALLBACK
         pending--
         if (pending === 0) {
-          totalDurationRef.current = durations.reduce((s, d) => s + d, 0)
+          totalDurationRef.current = durations.reduce<number>((s, d) => s + d, 0)
         }
       }
     })
