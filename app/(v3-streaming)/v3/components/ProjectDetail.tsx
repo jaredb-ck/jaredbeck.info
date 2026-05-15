@@ -89,7 +89,7 @@ export default function ProjectDetail({
     progressStarted.current = false
     totalDurationRef.current = 0
 
-    const durations = media.map(m => m.type === 'image' ? IMAGE_HOLD : 0)
+    const durations: number[] = media.map(m => m.type === 'image' ? IMAGE_HOLD : 0)
     const videoIndices = media
       .map((m, i) => m.type === 'video' ? i : -1)
       .filter(i => i >= 0)
